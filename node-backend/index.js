@@ -20,13 +20,16 @@ connection.connect(err => {
         console.log(err);
         return err;
     } else {
-        console.log("Success");
+        console.log("Successfully connected to the database");
     }
 });
 
-
 app.use(cors());
 app.use(bodyParser.json());
+
+app.get('/', (req, res, next) => {
+    res.send("Server is live");
+});
 
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
