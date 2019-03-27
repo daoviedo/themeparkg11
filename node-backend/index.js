@@ -31,6 +31,18 @@ app.get('/', (req, res, next) => {
     res.send("Server is live");
 });
 
+app.get('/purchase', (req, res, next) => {
+    const command = `INSERT INTO ticket VALUES(null, null, "2019-03-26", null, "2019-04-26")`;
+    connection.query(command, (err, result) => {
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.send("success");
+        }
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
