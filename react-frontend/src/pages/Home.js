@@ -4,7 +4,7 @@ class Home extends Component {
     render() {
         return (
             <div style={{textAlign: "center"}}>
-                <h1>This is The Home Page</h1>
+                <h1>This is The Home Page11</h1>
             </div>
         );
     }
