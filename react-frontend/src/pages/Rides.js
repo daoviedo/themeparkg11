@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
 
-class Home extends Component {
+class Rides extends Component {
     render() {
         return (
             <React.Fragment>
                 <TopBar/>
                 <div style={{textAlign: "center"}}>
-                    <h1>This is The Home Page</h1>
+                    <h1>This is The Rides Page</h1>
                 </div>
             </React.Fragment>
         );
     }
 }
-export default Home;
+
+export default Rides;
