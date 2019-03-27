@@ -14,8 +14,8 @@ class TopBar extends Component {
                 <Navbar variant="dark" expand="lg" style={{backgroundColor: "#2A2A31"}}>
                         <Nav className="mr-auto" style={{marginLeft: '20%'}}>
                         <Navbar.Brand href="/">ThemePark</Navbar.Brand>
-                        <Nav.Link href="/park-tickets">Buy Tickets</Nav.Link>
-                        <Nav.Link href="/rides">Rides</Nav.Link>
+                        <Nav.Link href="/park-tickets" style={{paddingRight: 30, paddingLeft: 20}}>Buy Tickets</Nav.Link>
+                        <Nav.Link href="/rides" style={{paddingRight: 30}}>Rides</Nav.Link>
                         <Nav.Link href="/dining">Dining</Nav.Link>
                         </Nav>
                         <Form inline style={{marginRight: '20%'}}>
