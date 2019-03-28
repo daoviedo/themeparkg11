@@ -62,6 +62,11 @@ app.post('/purchase', (req, res, next) => {
 
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
+    initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
+    connection.query(initCommand, (retErr, retOutput) => {
+        console.log(retOutput);
+    });
+    
     let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
     let hour = parseInt(date.split(":")[0]);
     if(date.includes("PM") && hour !== 12){
