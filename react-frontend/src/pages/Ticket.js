@@ -66,7 +66,7 @@ class Ticket extends Component {
         cardExpiration: "",
         cardCVV: "",
         isComplete: false,
-        ticket_ids = []
+        ticket_ids : []
     };
     getStepContent(step) {
         switch (step) {
