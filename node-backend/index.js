@@ -31,9 +31,14 @@ app.get('/', (req, res, next) => {
     res.send("Server is live");
 });
 
-app.get('/purchase', (req, res, next) => {
+app.post('/purchase', (req, res, next) => {
+    const { numberOfTickets, entryDate, email } = req.body;
     const command = `INSERT INTO ticket VALUES ?`;
-    const values = [[null, 35, "2019-03-26", "email", null, "2019-04-26", null],[null, 35, "2019-03-26", "email", null, "2019-04-26", null],[null, 35, "2019-03-26", "email", null, "2019-04-26", null]];
+    let values = [];
+    for(var i = 0; i < numberOfTickets; i++){
+        let val = [null, 35, entryDate, email, null, entryDate, null];
+        values.push(val);
+    }
     connection.query(command, [values], (err, result) => {
         if(err){
             res.send(err);
