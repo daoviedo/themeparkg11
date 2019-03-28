@@ -42,6 +42,9 @@ class EntranceScan extends Component {
             else if(this.state.output === 3){
                 return <Typography style={{color: "green"}}><DoneIcon/>Ticket Scanned Successfully</Typography>
             }
+            else{
+                return <Typography color="error"><ErrorIcon/>Something Went Wrong!</Typography>
+            }
         }
     }
     openWindow(){
