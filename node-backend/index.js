@@ -71,11 +71,7 @@ function fixMonth(date){
 
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
-    let LoadingDate = new Date().toLocaleString({timeZone: "America/Chicago"}).split(", ")[0];
-    let TDate = new Date().toLocaleString("fr-CA", {timeZone: "America/Chicago"});
-    console.log(TDate);
-    //let LoadingDate = new Date();
-    //LoadingDate = LoadingDate.getFullYear() + '-' + (fixMonth(LoadingDate)) + '-' + LoadingDate.getDate();
+    let TDate = new Date().toLocaleString("fr-CA", {timeZone: "America/Chicago"}).split(" ")[0];
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
     connection.query(initCommand, (retErr, retOutput) => {
         if(retOutput.length === 0){
@@ -84,14 +80,12 @@ app.patch('/entrance-scan', (req, res, next) => {
                 status: 0
             });
         }
-        /*
-        else if(retOutput.Ticket_Valid_On.split("T")[0] !== LoadingDate){
+        else if(retOutput.Ticket_Valid_On.split("T")[0] !== TDate){
             return res.json({
                 error: retErr,
                 status: 1
             });
         }
-        */
         else if(retOutput.Entry_Time !== null){
             return res.json({
                 error: retErr,
