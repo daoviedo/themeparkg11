@@ -63,9 +63,12 @@ app.post('/purchase', (req, res, next) => {
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
-
-    if(date.includes("PM")){
-        date = ((parseInt(date.split(":")[0])+ 12) + ":" +date.substring(date.indexOf(':')+1)).split(" ")[0];
+    let hour = parseInt(date.split(":")[0]);
+    if(date.includes("PM") && hour !== 12){
+        date = ((hour + 12) + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
+    }
+    else if(date.includes("AM") && hour === 12){
+        date = (00 + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
     }
     else{
         date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1].split(" ")[0];
