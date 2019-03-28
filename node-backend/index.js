@@ -64,7 +64,7 @@ app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     const date = new Date();
     const testDate = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
-    console.log(testDate);
+    console.log(testDate.split(", ")[1]);
     const hour = date.getHours();
     const mins = date.getMinutes();
     const secs = date.getSeconds();
