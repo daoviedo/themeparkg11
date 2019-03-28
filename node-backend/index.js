@@ -68,16 +68,16 @@ app.patch('/entrance-scan', (req, res, next) => {
     const secs = date.getSeconds();
     const command = `UPDATE ticket SET Entry_Time='${hour}:${mins}:${secs}' WHERE Ticket_ID=${ticketID}`;
     connection.query(command, (err, result) => {
-        if(err1){
+        if(err){
             return res.json({
                 error: err, 
-                status: "failed"
+                status: result
             });
         }
         else{
             return res.json({
                 error: err, 
-                status: "success"
+                status: result
             });
         }
     });
