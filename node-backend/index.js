@@ -65,7 +65,7 @@ app.patch('/entrance-scan', (req, res, next) => {
     let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
 
     let testd = "4:30:45 PM"
-        date1 = (parseInt(testd.split(":")[0])+ 12) + ":" +testd.substring(testd.indexOf(':')+1);
+        date1 = (parseInt(testd.split(":")[0])+ 12) + ":" +testd.substring(testd.indexOf(':')+1).split(", ")[1].split(" ")[0];
         console.log(date1);
 
     if(date.includes("PM")){
