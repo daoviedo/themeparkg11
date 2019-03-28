@@ -36,7 +36,7 @@ app.post('/purchase', (req, res, next) => {
     const command = `INSERT INTO ticket VALUES ?`;
     let values = [];
     for(var i = 0; i < numberOfTickets; i++){
-        let val = [null, 35, entryDate, email, null, entryDate, null];
+        let val = [null, 35, email, entryDate, null, null];
         values.push(val);
     }
     connection.query(command, [values], (err, result) => {
@@ -44,7 +44,7 @@ app.post('/purchase', (req, res, next) => {
             res.send(err);
         }
         else{
-            res.send("success");
+            res.send("success" + result);
         }
     });
 });

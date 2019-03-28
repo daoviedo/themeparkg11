@@ -183,7 +183,7 @@ class Ticket extends Component {
                                         {activeStep === steps.length - 1 ? (<Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={this.handleNext}
+                                        onClick={this.addTickets}
                                         className={classes.button}
                                         >Place Order</Button>) : (<Button
                                         variant="contained"
