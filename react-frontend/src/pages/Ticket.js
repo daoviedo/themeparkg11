@@ -166,7 +166,7 @@ class Ticket extends Component {
                                         </ListItem>)}
                                     </div>
                                     <Typography variant="subtitle1" align="center">
-                                        A copy of this summary has been sent to your email: {this.state.email}
+                                        A copy/receipt has been sent to your email: {this.state.email}
                                     </Typography>
                                 </React.Fragment>
                             ) : (
