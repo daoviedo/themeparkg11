@@ -62,7 +62,20 @@ app.post('/purchase', (req, res, next) => {
 
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
-    const date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1].split(" ")[0];
+    const date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
+
+    let testd = "4:30:45 PM"
+        date1 = (parseInt(testd.split(":")[0])+ 12) + ":" +testd.substring(testd.indexOf(':')+1);
+        console.log(date1);
+        
+    if(date.includes("PM")){
+        let testd = "4:30:45 PM"
+        date1 = (parseInt(testd.split(":")[0])+ 12) + ":" +testd.substring(testd.indexOf(':')+1);
+        console.log(date1);
+    }
+    else{
+        date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1].split(" ")[0];
+    }
     const command = `UPDATE ticket SET Entry_Time='${date}' WHERE Ticket_ID=${ticketID}`;
     connection.query(command, (err, result) => {
         if(err){
