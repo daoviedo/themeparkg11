@@ -42,7 +42,7 @@ class EntranceScan extends Component {
                             variant="outlined"
                             style={{width: "150px", paddingRight: '10px'}}
                         />
-                        <Button size='large' variant="contained" style={{marginBottom: 5}}>
+                        <Button size='large' variant="contained" style={{marginBottom: 5}} onClick={this.scanTicket}>
                         Scan
                         </Button>  
                     </div>
