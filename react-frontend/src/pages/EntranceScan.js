@@ -73,7 +73,7 @@ class EntranceScan extends Component {
                         Scan
                         </Button>  
                     </div>
-                    {()=>this.returnOut()}
+                    {this.returnOut()}
                 </div>
             </React.Fragment>
         );
