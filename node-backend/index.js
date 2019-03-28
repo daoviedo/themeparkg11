@@ -63,6 +63,7 @@ app.post('/purchase', (req, res, next) => {
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     const date = new Date;
+    date.toLocaleTimeString();
     const hour = date.getHours();
     const mins = date.getMinutes();
     const secs = date.getSeconds();
