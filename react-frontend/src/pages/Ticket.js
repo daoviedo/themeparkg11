@@ -65,7 +65,8 @@ class Ticket extends Component {
         cardNumber: "",
         cardExpiration: "",
         cardCVV: "",
-        isComplete: false
+        isComplete: false,
+        ticket_ids = []
     };
     getStepContent(step) {
         switch (step) {
@@ -92,14 +93,6 @@ class Ticket extends Component {
             activeStep: state.activeStep - 1,
         }));
     };
-    redirectUser(){
-        setTimeout(() =>{
-            this.setState({isComplete: true});
-        },4000);
-        if(this.state.isComplete){
-            return <Redirect to={{pathname: '/'}}/>;
-        }
-    }
     validateInput(step){
         if(step === 0){
             return(this.state.email.length > 1 && this.state.numTickets > 0 && this.state.entryDate !== null);
@@ -125,6 +118,8 @@ class Ticket extends Component {
             email: this.state.email
         }),
     })
+    .then(res => res.json())
+    .then(result => this.setState({ ticket_ids: result.results }))
     .then(this.handleNext)
     .catch(err => console.log(err))
     }
@@ -140,6 +135,7 @@ class Ticket extends Component {
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
+        console.log(this.state.ticket_ids);
         return (
             <React.Fragment>
                 <TopBar/>
@@ -165,11 +161,6 @@ class Ticket extends Component {
                                     <Typography variant="subtitle1" align="center">
                                         You will be redirected back to the home page.
                                     </Typography>
-                                    <div style={{textAlign: 'center'}}>
-                                        <CircularProgress/>
-                                    </div>
-                                    
-                                    {this.redirectUser()}
                                 </React.Fragment>
                             ) : (
                                 <React.Fragment>
