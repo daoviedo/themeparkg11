@@ -71,7 +71,7 @@ function fixMonth(date){
 
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
-    let LoadingDate = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[0];
+    let LoadingDate = new Date().toLocaleString({timeZone: "America/Chicago"});
     console.log(LoadingDate);
     //let LoadingDate = new Date();
     //LoadingDate = LoadingDate.getFullYear() + '-' + (fixMonth(LoadingDate)) + '-' + LoadingDate.getDate();
