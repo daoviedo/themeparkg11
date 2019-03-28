@@ -93,8 +93,14 @@ app.patch('/entrance-scan', (req, res, next) => {
                 status: 2
             });
         }
+        else{
+            return res.json({
+                error: retErr,
+                status: 3
+            });
+        }
     });
-    
+    /*
     let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
     let hour = parseInt(date.split(":")[0]);
     if(date.includes("PM") && hour !== 12){
@@ -121,6 +127,7 @@ app.patch('/entrance-scan', (req, res, next) => {
             });
         }
     });
+    */
 });
 
 app.listen(4000, () => {
