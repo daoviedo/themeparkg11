@@ -32,8 +32,9 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/purchase', (req, res, next) => {
-    const command = `INSERT INTO ticket VALUES(null, 35, "2019-03-26", "email", null, "2019-04-26", null) INSERT INTO ticket VALUES(null, 35, "2019-03-26", "email", null, "2019-04-26", null)`;
-    connection.query(command, (err, result) => {
+    const command = `INSERT INTO ticket VALUES ?`;
+    const values = [[null, 35, "2019-03-26", "email", null, "2019-04-26", null],[null, 35, "2019-03-26", "email", null, "2019-04-26", null],[null, 35, "2019-03-26", "email", null, "2019-04-26", null]];
+    connection.query(command, [values], (err, result) => {
         if(err){
             res.send(err);
         }
