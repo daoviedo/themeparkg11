@@ -72,7 +72,8 @@ function fixMonth(date){
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     let LoadingDate = new Date().toLocaleString({timeZone: "America/Chicago"}).split(", ")[0];
-    console.log(moment(LoadingDate, "YYYY-MM-DD"));
+    let TDate = LoadingDate.toLocaleString([], {year:"numeric", month:"2-digit", day:"2-digit"});
+    console.log(TDate);
     //let LoadingDate = new Date();
     //LoadingDate = LoadingDate.getFullYear() + '-' + (fixMonth(LoadingDate)) + '-' + LoadingDate.getDate();
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
