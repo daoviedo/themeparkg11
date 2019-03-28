@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import TicketInfo from './components/TicketInfo';
 import PaymentInfo from './components/PaymentInfo';
 import Review from './components/Review';
-import { Redirect } from "react-router-dom";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = theme => ({
     layout: {
@@ -135,7 +135,7 @@ class Ticket extends Component {
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
-        console.log(this.state.ticket_ids);
+        let countval = 1;
         return (
             <React.Fragment>
                 <TopBar/>
@@ -158,8 +158,15 @@ class Ticket extends Component {
                                     <Typography variant="h5" gutterBottom align="center">
                                         Thank you for Purchasing Tickets!
                                     </Typography>
+                                    <div style={{maxHeight: 330, overflowY: 'auto'}}>
+                                        {this.state.ticket_ids.map(({Ticket_ID}) => 
+                                        <ListItem className={classes.listItem} key={Ticket_ID}>
+                                            <ListItemText primary={"Ticket "+countval++}/>
+                                            <Typography variant="body2">Ticket ID: {Ticket_ID}</Typography>
+                                        </ListItem>)}
+                                    </div>
                                     <Typography variant="subtitle1" align="center">
-                                        You will be redirected back to the home page.
+                                        We have also sent you a copy to your email: {this.state.email}
                                     </Typography>
                                 </React.Fragment>
                             ) : (
