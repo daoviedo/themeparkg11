@@ -75,8 +75,6 @@ app.patch('/entrance-scan', (req, res, next) => {
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
     connection.query(initCommand, (retErr, retOutput) => {
         let TicketDate = retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0];
-        console.log(TicketDate);
-        console.log(TDate);
         if(retOutput.length === 0){
             return res.json({
                 error: retErr,
@@ -96,9 +94,23 @@ app.patch('/entrance-scan', (req, res, next) => {
             });
         }
         else{
-            return res.json({
-                error: retErr,
-                status: 3
+            let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
+            let hour = parseInt(date.split(":")[0]);
+            if(date.includes("PM") && hour !== 12){
+                date = ((hour + 12) + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
+            }
+            else if(date.includes("AM") && hour === 12){
+                date = (00 + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
+            }
+            else{
+                date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1].split(" ")[0];
+            }
+            const command = `UPDATE ticket SET Entry_Time='${date}' WHERE Ticket_ID=${ticketID}`;
+            connection.query(command, (err, result) => {
+                return res.json({
+                    error: err, 
+                    status: 3
+                });
             });
         }
     });
