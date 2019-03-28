@@ -115,7 +115,6 @@ class Ticket extends Component {
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
-        console.log(this.validateInput());
         return (
             <React.Fragment>
                 <TopBar/>
