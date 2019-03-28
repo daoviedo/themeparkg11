@@ -102,13 +102,38 @@ class Ticket extends Component {
     }
     validateInput(step){
         if(step === 0){
-            return(this.state.email.length > 1 && this.state.numTickets.length > 1 && this.state.entryDate !== null);
+            return(this.state.email.length > 1 && this.state.numTickets > 0 && this.state.entryDate !== null);
         }
         else if(step === 1){
             return(this.state.nameOnCard.length > 1 && this.state.cardCVV.length > 1 && this.state.cardExpiration.length > 1 && this.state.cardNumber.length > 1);
         }
         else{
             return false;
+        }
+    }
+    addTickets = () => {
+        let LoadingDate = new Date(this.state.entryDate);
+        LoadingDate = LoadingDate.getFullYear() + '-' + (this.fixMonth(LoadingDate)) + '-' + LoadingDate.getDate();
+        fetch(`http://157.230.172.23:4000/purchase`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            numberOfTickets: this.state.numTickets,
+            entryDate: LoadingDate,
+            email: this.state.email
+        }),
+    })
+    .then(this.handleNext)
+    .catch(err => console.log(err))
+    }
+    fixMonth(date){
+        if(date.getMonth()+1 < 10){
+            return "0" + (date.getMonth() +1);
+        }
+        else{
+            return date.getMonth() + 1;
         }
     }
 

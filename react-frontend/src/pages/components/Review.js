@@ -32,8 +32,8 @@ function Review(props) {
   const totalprice = tprice+tax;
 
   const products = [
-    { name: 'Day Pass Ticket', desc: 'Ticket x ' + props.val.numTickets, price: '$' + tprice.toFixed(2) },
-    { name: 'Tax', desc: '', price: '$' + tax },
+    { name: 'Day Pass Ticket', desc: 'Ticket x ' + props.val.numTickets + " @ $35.00 ea", price: '$' + tprice.toFixed(2) },
+    { name: 'Tax', desc: '', price: '$' + tax.toFixed(2) },
   ];
   return (
     <React.Fragment>
@@ -50,7 +50,7 @@ function Review(props) {
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            ${totalprice}
+            ${totalprice.toFixed(2)}
           </Typography>
         </ListItem>
       </List>

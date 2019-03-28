@@ -45,15 +45,19 @@ function TicketInfo(props) {
                         label="Number of Tickets"
                         type="number"
                         margin="dense"
+                        variant="outlined"
+                        style={{marginTop: '16px'}}
                 />
                 <br/>
                 <MuiThemeProvider theme={TealTheme}>
                     <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
                         <DatePicker
+                            required
                             minDate={minimum}
                             label="Park Entry Date"
                             value={props.val.entryDate}
                             onChange={e => props.handleChange("entryDate", e)}
+                            style={{marginTop: '16px'}}
                         />
                     </MuiPickersUtilsProvider>
                 </MuiThemeProvider>
@@ -64,6 +68,8 @@ function TicketInfo(props) {
                         onChange={e => props.handleChange('email', e.target.value)}
                         label="Email Address"
                         margin="dense"
+                        variant="outlined"
+                        style={{marginTop: '22px'}}
                 />
             </div>      
         </React.Fragment>
