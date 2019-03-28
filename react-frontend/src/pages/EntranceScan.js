@@ -51,8 +51,9 @@ class EntranceScan extends Component {
         this.setState({timer: true});
         setTimeout(() => {
             this.setState({timer: false});
+            this.setState({output: ""});
         }, 2000);
-        this.setState({output: ""});
+        
     }
     render() {
         return (
