@@ -59,7 +59,8 @@ class Ticket extends Component {
     state = {
         activeStep: 0,
         numTickets: "",
-        entryDate: "",
+        entryDate: null,
+        email: "",
         nameOnCard: "",
         cardNumber: "",
         cardExpiration: "",
@@ -99,11 +100,22 @@ class Ticket extends Component {
             return <Redirect to={{pathname: '/'}}/>;
         }
     }
+    validateInput(step){
+        if(step === 0){
+            return(this.state.email.length > 1 && this.state.numTickets.length > 1 && this.state.entryDate !== null);
+        }
+        else if(step === 1){
+            return(this.state.nameOnCard.length > 1 && this.state.cardCVV.length > 1 && this.state.cardExpiration.length > 1 && this.state.cardNumber.length > 1);
+        }
+        else{
+            return false;
+        }
+    }
 
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
-
+        console.log(this.validateInput());
         return (
             <React.Fragment>
                 <TopBar/>
@@ -152,6 +164,7 @@ class Ticket extends Component {
                                         >Place Order</Button>) : (<Button
                                         variant="contained"
                                         color="primary"
+                                        disabled={!this.validateInput(activeStep)}
                                         onClick={this.handleNext}
                                         className={classes.button}
                                         >Next</Button>)}

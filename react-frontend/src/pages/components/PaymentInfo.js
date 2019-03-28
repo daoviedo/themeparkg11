@@ -28,6 +28,7 @@ function PaymentInfo(props) {
             value={props.val.cardCVV}
             onChange={e => props.handleChange('cardCVV', e.target.value)}
             helperText="Last three digits on signature strip"
+            style={{marginBottom: '30px'}}
             fullWidth
           />
         </Grid>
