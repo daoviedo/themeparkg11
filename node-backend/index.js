@@ -41,10 +41,12 @@ app.post('/purchase', (req, res, next) => {
     }
     connection.query(command, [values], (err, result) => {
         if(err){
-            res.send(err);
+            return res.send(err);
         }
         else{
-            res.send("success" + result);
+            return res.json({
+                resu: result
+            });
         }
     });
 });
