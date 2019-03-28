@@ -64,7 +64,7 @@ app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
     connection.query(initCommand, (retErr, retOutput) => {
-        console.log(retOutput);
+        console.log(retOutput.length);
     });
     
     let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
