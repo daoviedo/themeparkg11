@@ -63,7 +63,7 @@ app.post('/purchase', (req, res, next) => {
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     const date = new Date();
-    const testDate = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+    const testDate = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
     console.log(testDate);
     const hour = date.getHours();
     const mins = date.getMinutes();
