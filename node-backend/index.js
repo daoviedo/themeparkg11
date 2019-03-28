@@ -44,8 +44,17 @@ app.post('/purchase', (req, res, next) => {
             return res.send(err);
         }
         else{
-            return res.json({
-                resu: result
+            const idnumlookup = result.insertId - 1;
+            const returnCommand = `SELECT Ticket_ID FROM ticket WHERE Ticket_ID > ${idnumlookup} && Purchase_Email = "${email}"`;
+            connection.query(returnCommand, (err1, result2) => {
+                if(err1){
+                    return res.send(err1);
+                }
+                else{
+                    return res.json({
+                        results: result2
+                    });
+                }
             });
         }
     });
