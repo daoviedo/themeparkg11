@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
-import { Button, TextField} from '@material-ui/core';
+import { Button, TextField, Typography} from '@material-ui/core';
+import DoneIcon from '@material-ui/icons/Done';
+import ErrorIcon from '@material-ui/icons/Error';
 
 class EntranceScan extends Component {
     state = {
         inputScan : "",
-        output : ""
+        output : "",
+        timer: false
     }
     handleChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -21,10 +24,31 @@ class EntranceScan extends Component {
             }),
         })
         .then(res => res.json())
-        .then(result => {
-            console.log(result);
-        })
+        .then(result => this.setState({output: result.status}))
+        .then(this.openWindow())
         .catch(err => console.log(err))
+    }
+    returnOut(){
+        if(this.state.timer){
+            if(this.state.output === 0){
+                return <Typography color="error"><ErrorIcon/>Invalid Ticket ID</Typography>
+            }
+            else if(this.state.output === 1){
+                return <Typography color="error"><ErrorIcon/>Ticket is not Valid for Today - For a Future Date</Typography>
+            }
+            else if(this.state.output === 2){
+                return <Typography color="error"><ErrorIcon/>Ticket has already been used</Typography>
+            }
+            else if(this.state.output === 3){
+                return <Typography style={{color: "green"}}><DoneIcon/>Ticket Scanned Successfully</Typography>
+            }
+        }
+    }
+    openWindow(){
+        this.setState({timer: true});
+        setTimeout(() => {
+            this.setState({timer: false});
+        }, 2000);
     }
     render() {
         return (
@@ -42,11 +66,11 @@ class EntranceScan extends Component {
                             variant="outlined"
                             style={{width: "150px", paddingRight: '10px'}}
                         />
-                        <Button size='large' variant="contained" style={{marginBottom: 5}} onClick={this.scanTicket}>
+                        <Button size='large' variant="contained" onClick={this.scanTicket}>
                         Scan
                         </Button>  
                     </div>
-                           
+                    {()=>this.returnOut()}
                 </div>
             </React.Fragment>
         );

@@ -60,14 +60,6 @@ app.post('/purchase', (req, res, next) => {
     });
 });
 
-function fixMonth(date){
-    if(date.getMonth()+1 < 10){
-        return "0" + (date.getMonth() +1);
-    }
-    else{
-        return date.getMonth() + 1;
-    }
-}
 
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
@@ -81,18 +73,18 @@ app.patch('/entrance-scan', (req, res, next) => {
                 status: 0
             });
         }
-        else if(TicketDate !== TDate){
-            return res.json({
-                error: retErr,
-                status: 1
-            });
-        }
         else if(retOutput[0].Entry_Time !== null){
             return res.json({
                 error: retErr,
                 status: 2
             });
         }
+        else if(TicketDate !== TDate){
+            return res.json({
+                error: retErr,
+                status: 1
+            });
+        }  
         else{
             let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
             let hour = parseInt(date.split(":")[0]);
@@ -114,34 +106,6 @@ app.patch('/entrance-scan', (req, res, next) => {
             });
         }
     });
-    /*
-    let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
-    let hour = parseInt(date.split(":")[0]);
-    if(date.includes("PM") && hour !== 12){
-        date = ((hour + 12) + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
-    }
-    else if(date.includes("AM") && hour === 12){
-        date = (00 + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
-    }
-    else{
-        date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1].split(" ")[0];
-    }
-    const command = `UPDATE ticket SET Entry_Time='${date}' WHERE Ticket_ID=${ticketID}`;
-    connection.query(command, (err, result) => {
-        if(err){
-            return res.json({
-                error: err, 
-                status: result
-            });
-        }
-        else{
-            return res.json({
-                error: err, 
-                status: result
-            });
-        }
-    });
-    */
 });
 
 app.listen(4000, () => {
