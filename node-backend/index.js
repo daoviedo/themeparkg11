@@ -62,13 +62,8 @@ app.post('/purchase', (req, res, next) => {
 
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
-    const date = new Date();
-    const testDate = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
-    console.log(testDate.split(", ")[1]);
-    const hour = date.getHours();
-    const mins = date.getMinutes();
-    const secs = date.getSeconds();
-    const command = `UPDATE ticket SET Entry_Time='${hour}:${mins}:${secs}' WHERE Ticket_ID=${ticketID}`;
+    const date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"});
+    const command = `UPDATE ticket SET Entry_Time='${date}' WHERE Ticket_ID=${ticketID}`;
     connection.query(command, (err, result) => {
         if(err){
             return res.json({
