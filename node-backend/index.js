@@ -89,7 +89,7 @@ app.patch('/entrance-scan', (req, res, next) => {
                 status: 1
             });
         }
-        else if(retOutput.Entry_Time !== null){
+        else if(retOutput[0].Entry_Time !== null){
             return res.json({
                 error: retErr,
                 status: 2
