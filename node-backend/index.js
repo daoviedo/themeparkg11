@@ -60,6 +60,29 @@ app.post('/purchase', (req, res, next) => {
     });
 });
 
+app.patch('/entrance-scan', (req, res, next) => {
+    const { ticketID } = req.body;
+    const date = new Date;
+    const hour = date.getHours();
+    const mins = date.getMinutes();
+    const secs = date.getSeconds();
+    const command = `UPDATE ticket SET Entry_Time='${hour}:${mins}:${secs}' WHERE Ticket_ID=${ticketID}`;
+    connection.query(command, (err, result) => {
+        if(err1){
+            return res.json({
+                error: err, 
+                status: "failed"
+            });
+        }
+        else{
+            return res.json({
+                error: err, 
+                status: "success"
+            });
+        }
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
