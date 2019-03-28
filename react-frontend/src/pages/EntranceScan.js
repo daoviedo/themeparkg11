@@ -24,8 +24,7 @@ class EntranceScan extends Component {
             }),
         })
         .then(res => res.json())
-        .then(result => this.setState({output: result.status}))
-        .then(this.openWindow())
+        .then(result => {this.setState({output: result.status}); this.openWindow()})
         .catch(err => console.log(err))
     }
     returnOut(){
