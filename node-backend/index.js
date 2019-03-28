@@ -66,7 +66,7 @@ app.patch('/entrance-scan', (req, res, next) => {
     let TDate = new Date().toLocaleString("fr-CA", {timeZone: "America/Chicago"}).split(" ")[0];
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
     connection.query(initCommand, (retErr, retOutput) => {
-        let TicketDate = retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0];
+        //let TicketDate = retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0];
         if(retOutput.length === 0){
             return res.json({
                 error: retErr,
@@ -79,7 +79,7 @@ app.patch('/entrance-scan', (req, res, next) => {
                 status: 2
             });
         }
-        else if(TicketDate !== TDate){
+        else if(retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0] !== TDate){
             return res.json({
                 error: retErr,
                 status: 1
