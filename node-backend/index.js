@@ -74,7 +74,7 @@ app.patch('/entrance-scan', (req, res, next) => {
     let TDate = new Date().toLocaleString("fr-CA", {timeZone: "America/Chicago"}).split(" ")[0];
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
     connection.query(initCommand, (retErr, retOutput) => {
-        console.log(retOutput[0].Ticket_Valid_On);
+        console.log(retOutput[0].Ticket_Valid_On).split("T")[0];
         console.log(TDate);
         if(retOutput.length === 0){
             return res.json({
