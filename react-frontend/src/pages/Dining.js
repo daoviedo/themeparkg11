@@ -10,7 +10,9 @@ class Dining extends Component {
                 <div style={{textAlign: "center"}}>
                     <h1>This is The Dining Page</h1>
                 </div>
+                <br/>
                 <Concession/>
+                
             </React.Fragment>
         );
     }
