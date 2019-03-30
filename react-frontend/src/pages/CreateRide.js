@@ -44,6 +44,8 @@ class CreateRide extends Component {
             numSeats: this.state.numSeats
         }),
     })
+    .then(result => result.json())
+    .then(res => console.log(res.status))
   };
 
   handleChange = name => event => {
@@ -87,7 +89,7 @@ class CreateRide extends Component {
       />
       </div>
       <Button
-        disabled={!(this.state.name.length > 1 && this.state.numSeats > 1 && this.state.runsBeforeMaintenance > 1)}
+        disabled={!(this.state.name.length > 1)}
         onClick={() => this.createRide()}
       >
         Submit

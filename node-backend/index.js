@@ -127,7 +127,7 @@ app.get('/ridelist', (req, res, next) => {
 
 app.post('/new-ride', (req, res, next) => {
     const {rideName, runsBeforeMaintenance, numSeats} = req.body;
-    const Qcommand = `INSER INTO ride (RideName, Runsbeforemaintenance, NumSeats) VALUES(${rideName}, ${runsBeforeMaintenance}, ${numSeats})`;
+    const Qcommand = `INSER INTO ride (RideName, Runsbeforemaintenance, NumSeats) VALUES('${rideName}', ${runsBeforeMaintenance}, ${numSeats})`;
     connection.query(Qcommand, (err, result) => {
         if(err){
             return res.json({
