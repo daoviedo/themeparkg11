@@ -28,6 +28,7 @@ const styles = theme => ({
 class Maintenance extends Component {
     state = {
         maintList : [],
+        userID: 1,
     }
 
     componentDidMount(){
@@ -43,15 +44,30 @@ class Maintenance extends Component {
             .catch(err => console.log(err))
     }
 
-    renderMainList = ({ OrderID, DateCreated, Rides_ID, Employee_ID }) =>
+    completeOrder(order_id){
+        fetch(`http://157.230.172.23:4000/fixmaintenance`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                orderID: order_id,
+                completedBy: this.state.userID
+            }),
+        })
+        .then(()=>this.fetchMaintenance())
+        .catch(err => console.log(err))
+    }
+
+    renderMainList = ({ OrderID, DateCreated, Rides_ID, Employee_ID, RideName, FirstName, LastName }) =>
         <TableRow key={OrderID}>
             <TableCell component="th" scope="row">
                 {OrderID}
             </TableCell>
             <TableCell align="right">{DateCreated}</TableCell>
-            <TableCell align="right">{Rides_ID}</TableCell>
-            <TableCell align="right">{Employee_ID}</TableCell>
-            <TableCell align="right"><Button size='sm' variant="outline-danger" >Complete Order</Button></TableCell>
+            <TableCell align="right">{RideName}</TableCell>
+            <TableCell align="right">{FirstName + " " + LastName}</TableCell>
+            <TableCell align="right"><Button size='sm' variant="outline-danger" onClick={() => this.completeOrder(OrderID)}>Complete Order</Button></TableCell>
         </TableRow>
 
     render() {
@@ -67,9 +83,9 @@ class Maintenance extends Component {
                             <TableHead>
                                 <TableRow>
                                     <TableCell className={classes.header}>Order ID</TableCell>
-                                    <TableCell align="right" className={classes.header}>Date Created</TableCell>
-                                    <TableCell align="right" className={classes.header}>Ride ID</TableCell>
-                                    <TableCell align="right" className={classes.header}>Employee ID</TableCell>
+                                    <TableCell align="right" className={classes.header}>Date Submitted</TableCell>
+                                    <TableCell align="right" className={classes.header}>Ride</TableCell>
+                                    <TableCell align="right" className={classes.header}>Issued By</TableCell>
                                     <TableCell align="right" className={classes.header}>Action</TableCell>
                                 </TableRow>
                             </TableHead>
