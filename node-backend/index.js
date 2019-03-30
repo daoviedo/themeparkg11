@@ -124,7 +124,7 @@ app.get('/ridelist', (req, res, next) => {
             rideList: result
         });
     })
-})
+});
 
 app.post('/ridescan', (req, res, next) => {
     const { rideID, ticketID } = req.body;
@@ -141,6 +141,49 @@ app.post('/ridescan', (req, res, next) => {
             });
         }
     })
+});
+
+app.get('/maintenance_needed', (req, res, next) => {
+    const Qcommand = `SELECT * FROM maintenance_order WHERE DateCompleted IS NULL`;
+    connection.query(Qcommand, (err, result) => {
+        return res.json({
+            mainList: result
+        });
+    })
+});
+
+app.post('/newmaintenance', (req, res, next) => {
+    const { rideID, employeeID } = req.body;
+    const Qcommand = `INSERT INTO maintenance_order (OrderID, Rides_ID, Employee_ID) VALUES(null, ${rideID}, ${employeeID})`;
+    connection.query(Qcommand, (err, result) => {
+        if(err){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            return res.json({
+                status: 1
+            });
+        }
+    })
+});
+
+app.patch('/fixmaintenance', (req, res, next) => {
+    const { orderID } = req.body;
+    const Qcommand = `UPDATE maintenance_order SET DateCompleted=CURRENT_TIMESTAMP WHERE OrderID=${orderID}`;
+    connection.query(Qcommand, (err, result) => {
+        if(err){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            return res.json({
+                status: 1
+            });
+        }
+    });
 });
 
 app.listen(4000, () => {
