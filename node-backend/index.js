@@ -117,12 +117,29 @@ app.get('/concessionlist', (req, res, next) => {
     })
 });
 
-app.get('/ticketlist', (req, res, next) => {
-    const Qcommand = `SELECT * FROM ticketscan`;
+app.get('/ridelist', (req, res, next) => {
+    const Qcommand = `SELECT * FROM ride`;
     connection.query(Qcommand, (err, result) => {
         return res.json({
-            diningList: result
+            rideList: result
         });
+    })
+})
+
+app.post('/ridescan', (req, res, next) => {
+    const { rideID, ticketID } = req.body;
+    const Qcommand = `INSERT INTO ticketscan (RideID, TicketID) VALUES(${rideID},${ticketID})`;
+    connection.query(Qcommand, (err, result) => {
+        if(err){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            return res.json({
+                status: 1
+            });
+        }
     })
 });
 
