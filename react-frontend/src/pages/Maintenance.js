@@ -107,7 +107,7 @@ class Maintenance extends Component {
             <TableCell component="th" scope="row">
                 {OrderID}
             </TableCell>
-            <TableCell align="right">{DateCreated}</TableCell>
+            <TableCell align="right">{DateCreated.split(".")[0]}</TableCell>
             <TableCell align="right">{RideName}</TableCell>
             <TableCell align="right">{FirstName + " " + LastName}</TableCell>
             <TableCell align="right"><Button size='sm' variant="outline-danger" onClick={() => this.completeOrder(OrderID)}>Complete Order</Button></TableCell>
