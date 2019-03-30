@@ -7,6 +7,7 @@ import Dining from './pages/Dining';
 import EntranceScan from './pages/EntranceScan';
 import ScanRides from './pages/ScanRides';
 import Maintenance from './pages/Maintenance';
+import CreateRide from './pages/CreateRide';
 
 import { Route } from "react-router-dom";
 
@@ -22,6 +23,7 @@ class App extends Component {
         <Route path="/entrance-scan" exact component={EntranceScan} />
         <Route path="/scan-rides" exact component={ScanRides} />
         <Route path="/maintenance" exact component={Maintenance} />
+        <Route path="/new-ride" exact component={CreateRide} />
       </React.Fragment>
     );
   }

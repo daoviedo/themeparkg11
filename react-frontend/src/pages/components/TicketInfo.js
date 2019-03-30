@@ -34,10 +34,11 @@ function TicketInfo(props) {
     var minimum=new Date();
     return (
         <React.Fragment>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h4" gutterBottom>
             Ticket Info
             </Typography>
             <div style={{textAlign: 'center', marginBottom: '30px'}}>
+            <form>
                 <TextField
                         required
                         value={props.val.numTickets}
@@ -47,6 +48,7 @@ function TicketInfo(props) {
                         margin="dense"
                         variant="outlined"
                         style={{marginTop: '16px'}}
+                        inputProps={{ maxLength: 35}}
                 />
                 <br/>
                 <MuiThemeProvider theme={TealTheme}>
@@ -71,6 +73,7 @@ function TicketInfo(props) {
                         variant="outlined"
                         style={{marginTop: '22px'}}
                 />
+            </form>
             </div>      
         </React.Fragment>
     );

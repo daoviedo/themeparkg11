@@ -60,7 +60,6 @@ app.post('/purchase', (req, res, next) => {
     });
 });
 
-
 app.patch('/entrance-scan', (req, res, next) => {
     const { ticketID } = req.body;
     let TDate = new Date().toLocaleString("fr-CA", {timeZone: "America/Chicago"}).split(" ")[0];
@@ -123,6 +122,23 @@ app.get('/ridelist', (req, res, next) => {
         return res.json({
             rideList: result
         });
+    })
+});
+
+app.post('/new-ride', (req, res, next) => {
+    const {rideName, runsBeforeMaintenance, numSeats} = req.body;
+    const Qcommand = `INSER INTO ride (RideName, Runsbeforemaintenance, NumSeats) VALUES(${rideName}, ${runsBeforeMaintenance}, ${numSeats})`;
+    connection.query(Qcommand, (err, result) => {
+        if(err){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            return res.json({
+                status: 1
+            });
+        }
     })
 });
 
