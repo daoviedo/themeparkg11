@@ -4,6 +4,7 @@ import { Paper, Table, TableHead, TableRow, TableCell,TableBody } from '@materia
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import MaintenanceDialogue from './components/MaintenanceDialogue';
 
 const styles = theme => ({
     root: {
@@ -29,10 +30,15 @@ class Maintenance extends Component {
     state = {
         maintList : [],
         userID: 1,
+        openDialogue: false,
+        listOfRides: [],
+        selectedRide: "",
+        description: ""
     }
 
     componentDidMount(){
         this.fetchMaintenance();
+        this.fetchRides();
     }
 
     fetchMaintenance(){
@@ -41,6 +47,15 @@ class Maintenance extends Component {
         })
             .then(res => res.json())
             .then(result => this.setState({ maintList: result.mainList }))
+            .catch(err => console.log(err))
+    }
+
+    fetchRides(){
+        fetch(`http://157.230.172.23:4000/ridelist`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ listOfRides: result.rideList }))
             .catch(err => console.log(err))
     }
 
@@ -58,6 +73,34 @@ class Maintenance extends Component {
         .then(()=>this.fetchMaintenance())
         .catch(err => console.log(err))
     }
+
+    handleClickOpen = () => {
+        this.setState({ openDialogue: true });
+    };
+    
+    handleClose = () => {
+        this.setState({ openDialogue: false, selectedRide: "", description: "" });
+    };
+
+    submitForm = () => {
+        fetch(`http://157.230.172.23:4000/newmaintenance`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                rideID: this.state.selectedRide,
+                employeeID: this.state.userID
+            }),
+        })
+        .then(()=>this.fetchMaintenance())
+        .then(this.handleClose())
+        .catch(err => console.log(err))
+    };
+
+    handleChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
 
     renderMainList = ({ OrderID, DateCreated, Rides_ID, Employee_ID, RideName, FirstName, LastName }) =>
         <TableRow key={OrderID}>
@@ -94,6 +137,8 @@ class Maintenance extends Component {
                         </TableBody>
                     </Table>
                 </Paper>
+                <br/>
+                <MaintenanceDialogue handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} submitForm={this.submitForm} handleChange={this.handleChange} val={this.state}/>
                 </div>
             </React.Fragment>
         );
