@@ -5,6 +5,8 @@ import Ticket from './pages/Ticket';
 import Rides from './pages/Rides';
 import Dining from './pages/Dining';
 import EntranceScan from './pages/EntranceScan';
+import ScanRides from './pages/ScanRides';
+
 import { Route } from "react-router-dom";
 
 class App extends Component {
@@ -16,6 +18,7 @@ class App extends Component {
         <Route path="/rides" exact component={Rides} />
         <Route path="/dining" exact component={Dining} />
         <Route path="/entrance-scan" exact component={EntranceScan} />
+        <Route path="/scan-rides" exact component={ScanRides} />
       </React.Fragment>
     );
   }

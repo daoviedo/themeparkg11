@@ -117,6 +117,15 @@ app.get('/concessionlist', (req, res, next) => {
     })
 });
 
+app.get('/ticketlist', (req, res, next) => {
+    const Qcommand = `SELECT * FROM ticketscan`;
+    connection.query(Qcommand, (err, result) => {
+        return res.json({
+            diningList: result
+        });
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
