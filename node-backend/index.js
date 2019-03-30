@@ -145,7 +145,8 @@ app.post('/ridescan', (req, res, next) => {
 
 app.get('/maintenance_needed', (req, res, next) => {
     const Qcommand = `SELECT * FROM maintenance_order WHERE DateCompleted IS NULL`;
-    connection.query(Qcommand, (err, result) => {
+    const Ncommand = `SELECT OrderID,DateCreated,DateCompleted,Rides_ID,RideName,Employee_ID,FirstName,LastName FROM employee AS E, maintenance_order AS M, ride AS R WHERE M.Employee_ID=E.EmployeeID AND M.Rides_ID=R.RideID AND DateCompleted IS NULL`;
+    connection.query(Ncommand, (err, result) => {
         return res.json({
             mainList: result
         });
