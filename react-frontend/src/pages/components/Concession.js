@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-//import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 
@@ -23,69 +22,21 @@ const styles = theme => ({
   },
 });
 
-const tileData = [
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-    {
-        img: "https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg",
-        title: 'Image',
-        author: 'author',
-    },
-];
-
 function TitlebarGridList(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} spacing={12} className={classes.gridList}>
-        {tileData.map(tile => (
-          <GridListTile key={tile.img} style={{width: '300px'}}>
-            <img src={tile.img} alt={tile.title} />
+        {props.list.map(tile => (
+          <GridListTile key={tile.Stand_ID} style={{width: '300px'}}>
+            <img src="https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg" alt={tile.Stand_Name} />
             <GridListTileBar
-              title={tile.title}
-              subtitle={<span>by: {tile.author}</span>}
+              title={tile.Stand_Name}
+              subtitle={<span>{tile.Hours_of_operations}</span>}
               actionIcon={
-                <IconButton className={classes.icon}>
-                  <InfoIcon />
+                <IconButton className={classes.icon} style={{textTransform: 'none', outline: 0, border: 'none',}}>
+                  <InfoIcon/>
                 </IconButton>
               }
             />
