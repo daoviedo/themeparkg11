@@ -131,7 +131,7 @@ app.post('/new-ride', (req, res, next) => {
     connection.query(Qcommand, (err, result) => {
         if(err){
             return res.json({
-                status: 0
+                status: err
             });
         }
         else{
