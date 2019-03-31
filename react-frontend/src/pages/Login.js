@@ -10,7 +10,6 @@ class Login extends Component{
           UserID: "",
           Password: "",
           output:"",
-          loginID: ""
       };
       handleUserID = text =>{
           this.setState({ UserID: text.target.value });
@@ -30,33 +29,41 @@ class Login extends Component{
                     password: this.state.Password
                 })
            }).then(res => res.json())
-           .then(result => {this.setState({output: result.status, loginID: result.userID})})
+           .then(result => {
+               this.setState({output: result.status});
+               localStorage.setItem('userID',result.userID);
+        })
            .catch(err => console.log(err))
+           
       }
       
       render() {
-          console.log(this.state);
-          return (
-               <div className= "Login">
-               <TopBar/>
-               <div>
-                  <header className = "Login-header">
-                      <center><h1 className="Login-title">Please login</h1></center>
-                  </header>
-                     <center><FormControl margin="normal" required >
-                       <InputLabel htmlFor="UserID" >User ID</InputLabel>
-                       <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
-                     </FormControl></center>
-                     <center><FormControl margin="normal" required >
-                        <InputLabel htmlFor="Password">Password</InputLabel>
-                         <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
-                     </FormControl></center>
-                 <center><Button onClick={()=>this.Login()}>Login </Button></center>
-               </div>
-               </div>
-          );
+          if(this.state.output === 1){
+              window.location.replace('/');
+          }
+          else{
+            return (
+                <div className= "Login">
+                <TopBar/>
+                <div>
+                   <header className = "Login-header">
+                       <center><h1 className="Login-title">Please login</h1></center>
+                   </header>
+                      <center><FormControl margin="normal" required >
+                        <InputLabel htmlFor="UserID" >User ID</InputLabel>
+                        <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
+                      </FormControl></center>
+                      <center><FormControl margin="normal" required >
+                         <InputLabel htmlFor="Password">Password</InputLabel>
+                          <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
+                      </FormControl></center>
+                  <center><Button onClick={()=>this.Login()}>Login </Button></center>
+                </div>
+                </div>
+           );
+          }
+          
       }
   }
-
   
   export default Login;
