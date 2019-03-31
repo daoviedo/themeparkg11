@@ -116,6 +116,7 @@ app.get('/concessionlist', (req, res, next) => {
     })
 });
 
+
 app.get('/ridelist', (req, res, next) => {
     const Qcommand = `SELECT * FROM ride`;
     connection.query(Qcommand, (err, result) => {
