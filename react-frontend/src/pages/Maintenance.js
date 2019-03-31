@@ -67,7 +67,8 @@ class Maintenance extends Component {
             },
             body: JSON.stringify({
                 orderID: order_id,
-                completedBy: this.state.userID
+                completedBy: this.state.userID,
+                description: this.state.description
             }),
         })
         .then(()=>this.fetchMaintenance())

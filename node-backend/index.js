@@ -160,7 +160,7 @@ app.post('/ridescan', (req, res, next) => {
 });
 
 app.get('/maintenance_needed', (req, res, next) => {
-    const Ncommand = `SELECT OrderID,DateCreated,DateCompleted,Rides_ID,RideName,Employee_ID,FirstName,LastName FROM employee AS E, maintenance_order AS M, ride AS R WHERE M.Employee_ID=E.EmployeeID AND M.Rides_ID=R.RideID AND DateCompleted IS NULL`;
+    const Ncommand = `SELECT OrderID,DateCreated,DateCompleted,Rides_ID,RideName,Employee_ID,FirstName,LastName,Maintenance_Desc,CompletedBy_ID FROM employee AS E, maintenance_order AS M, ride AS R WHERE M.Employee_ID=E.EmployeeID AND M.Rides_ID=R.RideID AND DateCompleted IS NULL`;
     connection.query(Ncommand, (err, result) => {
         return res.json({
             mainList: result
@@ -169,8 +169,8 @@ app.get('/maintenance_needed', (req, res, next) => {
 });
 
 app.post('/newmaintenance', (req, res, next) => {
-    const { rideID, employeeID } = req.body;
-    const Qcommand = `INSERT INTO maintenance_order (OrderID, Rides_ID, Employee_ID) VALUES(null, ${rideID}, ${employeeID})`;
+    const { rideID, employeeID, description } = req.body;
+    const Qcommand = `INSERT INTO maintenance_order (OrderID, Rides_ID, Employee_ID, Maintenance_Desc) VALUES(null, ${rideID}, ${employeeID}, '${description}')`;
     connection.query(Qcommand, (err, result) => {
         if(err){
             return res.json({
