@@ -37,14 +37,13 @@ class Department extends Component{
     }
     componentDidMount(){
         this.fetchDepartments();
-        this.fetchEmployees();
     }
     handleChange = (name, value) => {
         this.setState({[name]: value});
     }
     handleChangeDept = (name, value) => {
         this.setState({[name]: value});
-        this.fetchEmployees();
+        this.fetchEmployees(value);
     }
     handleClickOpen = () => {
         this.setState({ openDialogue: true });
@@ -52,8 +51,8 @@ class Department extends Component{
     handleClose = () => {
         this.setState({ openDialogue: false, firstname: "", lastname: ""});
     };
-    fetchEmployees(){
-        fetch(`http://157.230.172.23:4000/getallemp/${this.state.selectedDept}`, {
+    fetchEmployees(value){
+        fetch(`http://157.230.172.23:4000/getallemp/${value}`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -87,9 +86,20 @@ class Department extends Component{
         .then(this.handleClose())
         .catch(err => console.log(err))
     };
+
+    renderMainList = ({ Name, EmployeeID, FirstName, LastName, MFirstName, MLastName }) =>
+        <TableRow key={EmployeeID}>
+            <TableCell component="th" scope="row">
+                {Name}
+            </TableCell>
+            <TableCell align="right">{EmployeeID}</TableCell>
+            <TableCell align="right">{FirstName + " " + LastName}</TableCell>
+            <TableCell align="right">{MFirstName + " " + MLastName}</TableCell>
+        </TableRow>
+
     render() {
         const { classes } = this.props;
-        console.log(this.state.empList);
+        const { empList } = this.state;
         return (
             <React.Fragment>
                 <TopBar/>
@@ -108,12 +118,13 @@ class Department extends Component{
                             <TableHead>
                                 <TableRow>
                                     <TableCell className={classes.header}>Department</TableCell>
-                                    <TableCell className={classes.header}>Employee ID</TableCell>
-                                    <TableCell className={classes.header}>Name</TableCell>
-                                    <TableCell className={classes.header}>Manager</TableCell>
+                                    <TableCell align="right" className={classes.header}>Employee ID</TableCell>
+                                    <TableCell align="right" className={classes.header}>Name</TableCell>
+                                    <TableCell align="right" className={classes.header}>Manager</TableCell>
                                 </TableRow>
                             </TableHead>
-                        <TableBody >
+                        <TableBody>
+                            {empList.map(this.renderMainList)}
                         </TableBody>
                     </Table>
                 </Paper>

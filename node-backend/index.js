@@ -236,7 +236,7 @@ app.get('/getallemp/:deptID', (req, res, next) => {
         }
         else{
             return res.json({
-                status: result[0]
+                status: result
             });
         }
     });
