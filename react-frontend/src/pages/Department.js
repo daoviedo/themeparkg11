@@ -53,14 +53,8 @@ class Department extends Component{
         this.setState({ openDialogue: false, firstname: "", lastname: ""});
     };
     fetchEmployees(){
-        fetch(`http://157.230.172.23:4000/getallemp`, {
+        fetch(`http://157.230.172.23:4000/getallemp/${this.state.selectedDept}`, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                deptID: this.state.selectedDept,
-            }),
         })
             .then(res => res.json())
             .then(result => this.setState({ empList: result.status }))
@@ -95,6 +89,7 @@ class Department extends Component{
     };
     render() {
         const { classes } = this.props;
+        console.log(this.state.empList);
         return (
             <React.Fragment>
                 <TopBar/>

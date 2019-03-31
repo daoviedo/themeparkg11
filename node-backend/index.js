@@ -226,8 +226,8 @@ app.patch('/fixmaintenance', (req, res, next) => {
     });
 });
 
-app.get('/getallemp', (req, res, next) => {
-    const { deptID } = req.body;
+app.get('/getallemp/:deptID', (req, res, next) => {
+    const deptID = req.params.deptID;
     connection.query(`SELECT * FROM deptEmployeeInfo WHERE DeptID=${deptID}`, (err, result) => {
         if(err){
             return res.json({
