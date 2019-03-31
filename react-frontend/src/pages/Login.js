@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
 import { Button, TextField, Typography} from '@material-ui/core';
-import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class Login extends Component{
-    constructor(){
-      super()
-      this.state = {
+      state = {
           UserID: "",
           Password: "",
           output:""
       };
-    }
-      handleUserID(text){
+      handleUserID = text =>{
           this.setState({ UserID: text.target.value });
       }
-      handlePassword(text){
+      handlePassword = text =>{
           this.setState({ Password: text.target.value });
       }
       Login(){
@@ -27,11 +26,11 @@ class Login extends Component{
               },
               method: 'POST',
               body:JSON.stringify({
-                UserID: this.state.UserID,
-                Password: this.state.Password
+                userID: this.state.UserID,
+                password: this.state.Password
               })
            }).then(res => res.json())
-           .then(result => {this.setState({output: result.status}); this.openWindow()})
+           .then(result => {this.setState({output: result.status})})
            .catch(err => console.log(err))
       }
       returnOut(){
@@ -58,10 +57,15 @@ class Login extends Component{
                   <header className = "Login-header">
                       <center><h1 classname="Login-title">Please login</h1></center>
                   </header>
-                  <center><input type= "text" placeholder= "User ID" onClick = {(text)=>{this.handleUserID(text)}} required autofocus/></center>
-                 <center><input type= "password" placeholder= "Password" onClick = {(text)=>{this.handlePassword(text)}} required /></center>
-                 <br/>
-                 <center><button onClick={this.Login} >Login</button></center>
+                     <center><FormControl margin="normal" required >
+                       <InputLabel htmlFor="UserID" >User ID</InputLabel>
+                       <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
+                     </FormControl></center>
+                     <center><FormControl margin="normal" required >
+                        <InputLabel htmlFor="Password">Password</InputLabel>
+                         <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
+                     </FormControl></center>
+                 <center><Button onClick={()=>this.Login}>Login </Button></center>
                </div>
                {this.returnOut()}
                </div>
