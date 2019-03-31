@@ -26,6 +26,11 @@ const styles = theme => ({
         top: 0,
         backgroundColor: '#2F4F4F',
         color: 'white'
+    },
+    button: {
+        "&:hover": {
+          backgroundColor: "transparent"
+        }
     }
 });
 
@@ -119,7 +124,7 @@ class Maintenance extends Component {
     renderMainList = ({ OrderID, DateCreated, RideName, FirstName, LastName, Maintenance_Desc }) =>
         <TableRow key={OrderID}>
             <TableCell component="th" scope="row">
-                <IconButton onClick={()=>this.handleRightOpen(Maintenance_Desc)} style={{textTransform: 'none', outline: 0, border: 'none',marginBottom: 3, marginLeft: -20, marginRight: -10}}>
+                <IconButton className={this.props.classes.button} onClick={()=>this.handleRightOpen(Maintenance_Desc)} style={{textTransform: 'none', outline: 0, border: 'none',marginBottom: 3, marginLeft: -20, marginRight: -10,}}>
                   <InfoIcon/>
                 </IconButton>
                 {OrderID}
