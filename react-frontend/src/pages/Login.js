@@ -10,7 +10,8 @@ class Login extends Component{
       state = {
           UserID: "",
           Password: "",
-          output:""
+          output:"",
+          loginID: ""
       };
       handleUserID = text =>{
           this.setState({ UserID: text.target.value });
@@ -30,7 +31,7 @@ class Login extends Component{
                     password: this.state.Password
                 })
            }).then(res => res.json())
-           .then(result => {this.setState({output: result.status})})
+           .then(result => {this.setState({output: result.status, loginID: result.userID})})
            .catch(err => console.log(err))
       }
       
