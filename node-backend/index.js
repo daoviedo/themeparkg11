@@ -32,27 +32,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.post('/login', (req, res, next) => {
-    const { UserID, Password } = req.body;
-    const command = `SELECT User_ID FROM login WHERE User_ID=${UserID} & Password=${Password}`;
-    connection.query(command, (retErr, retOutput) => {
-        if(retOutput.length === 0){
-            return res.json({
-                error: retErr,
-                status: 0
-            });
-        }
-        else if(retOutput[0].Entry_Time !== null){
-            return res.json({
-                error: retErr,
-                status: 1
-            });
-        } else{
-            return res.json({
-                error: err,
-                status :2
-            });
-        }
-    });
+    
 });
 
 app.post('/purchase', (req, res, next) => {
@@ -227,8 +207,9 @@ app.patch('/fixmaintenance', (req, res, next) => {
     });
 });
 
-app.get('/testing', (req, res, next) => {
-    connection.query(`CALL getAllEmployeesByDept(1)`, (err, result) => {
+app.get('/getallemp/:deptID', (req, res, next) => {
+    const deptID = req.params.deptID;
+    connection.query(`SELECT * FROM deptEmployeeInfo WHERE DeptID=${deptID}`, (err, result) => {
         if(err){
             return res.json({
                 status: err
@@ -236,7 +217,7 @@ app.get('/testing', (req, res, next) => {
         }
         else{
             return res.json({
-                status: result[0]
+                status: result
             });
         }
     });
