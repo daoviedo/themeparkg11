@@ -10,6 +10,7 @@ import Maintenance from './pages/Maintenance';
 import CreateRide from './pages/CreateRide';
 
 import { Route } from "react-router-dom";
+import Department from './pages/Department';
 
 
 class App extends Component {
@@ -24,6 +25,8 @@ class App extends Component {
         <Route path="/scan-rides" exact component={ScanRides} />
         <Route path="/maintenance" exact component={Maintenance} />
         <Route path="/new-ride" exact component={CreateRide} />
+        <Route path="/department" exact component={Department} />
+
       </React.Fragment>
     );
   }
