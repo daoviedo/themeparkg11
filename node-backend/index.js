@@ -217,6 +217,40 @@ app.get('/testing', (req, res, next) => {
     });
 });
 
+app.get('/departmentlist', (req, res, next) => {
+    const Qcommand = 'Select * FROM department';
+    connection.query(Qcommand, (err,result) => {
+        return res.json({
+            dList: result
+        });
+    })
+});
+app.get('/emplist', (req, res, next) => {
+    const Qcommand = 'Select * FROM deptEmployeeInfo';
+    connection.query(Qcommand, (err,result) => {
+        return res.json({
+            employeeList: result
+        });
+    })
+});
+
+app.post('/newemployee', (req, res, next) => {
+    const{dept, firstname, lastname} = req.body;
+    const Qcommand = `CALL newEmployee(${dept}, '${firstname}', '${lastname}')`;
+    connection.query(Qcommand, (err, result) => {
+        if(err){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            return res.json({
+                status: 1
+            });
+        }
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
