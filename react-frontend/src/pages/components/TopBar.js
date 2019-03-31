@@ -17,14 +17,12 @@ class TopBar extends Component {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto" style={{margin: "0 auto", paddingTop: "0.3125rem"}}>
-                                <Nav.Link className="brandStyle" href="/park-tickets">Theme Park</Nav.Link>
+                                <Nav.Link className="brandStyle" href="/">Theme Park</Nav.Link>
                                 <Nav.Link href="/park-tickets">Buy Tickets</Nav.Link>
                                 <Nav.Link href="/rides" >Rides</Nav.Link>
                                 <Nav.Link href="/dining">Dining</Nav.Link>
+                                <Nav.Link href="/login">Login</Nav.Link>
                             </Nav>
-                            <Form>
-                                <Button variant="outline-success" size="sm" >Login</Button>
-                            </Form>
                         </Navbar.Collapse>
                 </Navbar>
             </React.Fragment>

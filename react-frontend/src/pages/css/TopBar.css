@@ -1,4 +1,4 @@
-.brandStyle {
+#basic-navbar-nav > div > a.brandStyle.nav-link {
     color: #ffffff;
     display: inline-block;
     line-height: inherit;
@@ -18,3 +18,4 @@
         height: 56px;
     }
 }
+
