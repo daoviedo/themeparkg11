@@ -42,7 +42,8 @@ app.post('/login', (req, res, next) => {
         }
         else{
             return res.json({
-                status: 1
+                status: 1,
+                userID: result.userID
             });
         }
     });
