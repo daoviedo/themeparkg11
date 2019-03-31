@@ -5,6 +5,9 @@ import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MaintenanceDialogue from './components/MaintenanceDialogue';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+import MaintDesc from './components/MaintDesc';
 
 const styles = theme => ({
     root: {
@@ -31,6 +34,8 @@ class Maintenance extends Component {
         maintList : [],
         userID: 1,
         openDialogue: false,
+        rightDialogue: false,
+        dialogueDesc: "",
         listOfRides: [],
         selectedRide: "",
         description: ""
@@ -82,6 +87,14 @@ class Maintenance extends Component {
         this.setState({ openDialogue: false, selectedRide: "", description: "" });
     };
 
+    handleRightOpen = (desc) => {
+        this.setState({ dialogueDesc: desc, rightDialogue: true });
+    };
+    
+    handleRightClose = () => {
+        this.setState({ rightDialogue: false, dialogueDesc: "" });
+    };
+
     submitForm = () => {
         fetch(`http://157.230.172.23:4000/newmaintenance`,{
             method: "POST",
@@ -103,9 +116,12 @@ class Maintenance extends Component {
         this.setState({[event.target.name]: event.target.value});
     };
 
-    renderMainList = ({ OrderID, DateCreated, Rides_ID, Employee_ID, RideName, FirstName, LastName }) =>
+    renderMainList = ({ OrderID, DateCreated, RideName, FirstName, LastName, Maintenance_Desc }) =>
         <TableRow key={OrderID}>
             <TableCell component="th" scope="row">
+                <IconButton onClick={()=>this.handleRightOpen(Maintenance_Desc)} style={{textTransform: 'none', outline: 0, border: 'none',marginBottom: 3, marginLeft: -20, marginRight: -10}}>
+                  <InfoIcon/>
+                </IconButton>
                 {OrderID}
             </TableCell>
             <TableCell align="right">{DateCreated.split(".")[0]}</TableCell>
@@ -140,6 +156,7 @@ class Maintenance extends Component {
                 </Paper>
                 <br/>
                 <MaintenanceDialogue handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} submitForm={this.submitForm} handleChange={this.handleChange} val={this.state}/>
+                <MaintDesc handleRightClose={this.handleRightClose} val={this.state}/>
                 </div>
             </React.Fragment>
         );
