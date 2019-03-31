@@ -31,6 +31,30 @@ app.get('/', (req, res, next) => {
     res.send("Server is live");
 });
 
+app.post('/login', (req, res, next) => {
+    const { UserID, Password } = req.body;
+    const command = `SELECT User_ID FROM login WHERE User_ID=${UserID} & Password=${Password}`;
+    connection.query(command, (retErr, retOutput) => {
+        if(retOutput.length === 0){
+            return res.json({
+                error: retErr,
+                status: 0
+            });
+        }
+        else if(retOutput[0].Entry_Time !== null){
+            return res.json({
+                error: retErr,
+                status: 1
+            });
+        } else{
+            return res.json({
+                error: err,
+                status :2
+            });
+        }
+    });
+});
+
 app.post('/purchase', (req, res, next) => {
     const { numberOfTickets, entryDate, email } = req.body;
     const command = `INSERT INTO ticket VALUES ?`;
