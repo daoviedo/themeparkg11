@@ -35,8 +35,6 @@ app.post('/login', (req, res, next) => {
     const {userID, password} = req.body;
     const command = `SELECT * FROM useraccount WHERE username='${userID}' AND password='${password}'`;
     connection.query(command, (err, result) => {
-        console.log(req.body);
-        console.log(result);
         if(result.length === 0){
             return res.json({
                 status: 0

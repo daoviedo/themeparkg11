@@ -21,14 +21,14 @@ class Login extends Component{
       Login(){
 
           fetch('http://157.230.172.23:4000/login',{
-              header:{
-                  "Content-Type" : "application/json"
-              },
-              method: 'POST',
-              body:JSON.stringify({
-                userID: this.state.UserID,
-                password: this.state.Password
-              })
+                method: 'POST',
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                body:JSON.stringify({
+                    userID: this.state.UserID,
+                    password: this.state.Password
+                })
            }).then(res => res.json())
            .then(result => {this.setState({output: result.status})})
            .catch(err => console.log(err))
