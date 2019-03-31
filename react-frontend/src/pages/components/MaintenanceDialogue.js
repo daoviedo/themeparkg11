@@ -55,7 +55,7 @@ function MaintenanceDialogue(props) {
             <Button onClick={props.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={props.submitForm} color="primary" disabled={props.val.selectedRide === ""}>
+            <Button onClick={props.submitForm} color="primary" disabled={props.val.selectedRide === "" || props.val.description === ""}>
               Place Order
             </Button>
           </DialogActions>

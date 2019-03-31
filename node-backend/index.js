@@ -186,8 +186,8 @@ app.post('/newmaintenance', (req, res, next) => {
 });
 
 app.patch('/fixmaintenance', (req, res, next) => {
-    const { orderID } = req.body;
-    const Qcommand = `UPDATE maintenance_order SET DateCompleted=CURRENT_TIMESTAMP WHERE OrderID=${orderID}`;
+    const { orderID, completedBy } = req.body;
+    const Qcommand = `UPDATE maintenance_order SET DateCompleted=CURRENT_TIMESTAMP, CompletedBy_ID=${completedBy} WHERE OrderID=${orderID}`;
     connection.query(Qcommand, (err, result) => {
         if(err){
             return res.json({
