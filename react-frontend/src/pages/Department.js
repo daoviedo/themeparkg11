@@ -82,7 +82,7 @@ class Department extends Component{
                 lastname: this.state.lastname,
             }),
         })
-        .then(()=>this.fetchDepartments())
+        .then(()=>this.fetchEmployees(this.state.selectedDept))
         .then(this.handleClose())
         .catch(err => console.log(err))
     };
