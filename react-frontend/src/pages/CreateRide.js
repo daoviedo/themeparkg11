@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {Button, TextField, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TopBar from './components/TopBar';
 
 
