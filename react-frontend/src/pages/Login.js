@@ -35,7 +35,7 @@ class Login extends Component{
       }
       
       render() {
-          console.log(this.state.output);
+          console.log(this.state);
           return (
                <div className= "Login">
                <TopBar/>
@@ -51,7 +51,7 @@ class Login extends Component{
                         <InputLabel htmlFor="Password">Password</InputLabel>
                          <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
                      </FormControl></center>
-                 <center><Button onClick={()=>this.Login}>Login </Button></center>
+                 <center><Button onClick={()=>this.Login()}>Login </Button></center>
                </div>
                </div>
           );
