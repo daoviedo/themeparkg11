@@ -32,7 +32,21 @@ app.get('/', (req, res, next) => {
 });
 
 app.post('/login', (req, res, next) => {
-    
+    const {userID, password} = req.body;
+    const command = `SELECT * FROM useraccount WHERE username='${userID}' AND password='${password}'`;
+    connection.query(command, (err, result) => {
+        if(result.length === 0){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            return res.json({
+                status: 1,
+                userID: result[0].userID
+            });
+        }
+    });
 });
 
 app.post('/purchase', (req, res, next) => {
