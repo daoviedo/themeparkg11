@@ -202,6 +202,21 @@ app.patch('/fixmaintenance', (req, res, next) => {
     });
 });
 
+app.get('/testing', (req, res, next) => {
+    connection.query(`CALL getAllEmployeesByDept(1)`, (err, result) => {
+        if(err){
+            return res.json({
+                status: err
+            });
+        }
+        else{
+            return res.json({
+                status: result
+            });
+        }
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
