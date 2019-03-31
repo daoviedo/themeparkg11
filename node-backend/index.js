@@ -202,8 +202,9 @@ app.patch('/fixmaintenance', (req, res, next) => {
     });
 });
 
-app.get('/testing', (req, res, next) => {
-    connection.query(`CALL getAllEmployeesByDept(1)`, (err, result) => {
+app.get('/getallemp', (req, res, next) => {
+    const { deptID } = req.body;
+    connection.query(`SELECT * FROM deptEmployeeInfo WHERE DeptID=${deptID}`, (err, result) => {
         if(err){
             return res.json({
                 status: err
