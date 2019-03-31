@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
-import { Button, TextField, Typography} from '@material-ui/core';
-import ErrorIcon from '@material-ui/icons/Error';
+import { Button} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -42,7 +41,7 @@ class Login extends Component{
                <TopBar/>
                <div>
                   <header className = "Login-header">
-                      <center><h1 classname="Login-title">Please login</h1></center>
+                      <center><h1 className="Login-title">Please login</h1></center>
                   </header>
                      <center><FormControl margin="normal" required >
                        <InputLabel htmlFor="UserID" >User ID</InputLabel>
