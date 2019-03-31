@@ -44,8 +44,6 @@ class CreateRide extends Component {
             numSeats: this.state.numSeats
         }),
     })
-    .then(result => result.json())
-    .then(res => console.log(res.status))
   };
 
   handleChange = name => event => {
