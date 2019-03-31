@@ -33,23 +33,9 @@ class Login extends Component{
            .then(result => {this.setState({output: result.status})})
            .catch(err => console.log(err))
       }
-      returnOut(){
-        if(this.state.timer){
-            if(this.state.output === 0){
-                return <Typography color="error"><ErrorIcon/>Invalid UserID or Password</Typography>
-            }
-            else if(this.state.output === 1){
-                return <Typography color="error"><ErrorIcon/>Invalid UserID or Password</Typography>
-            }
-            else if(this.state.output === 2){
-                return <Typography color="error"><ErrorIcon/>This needs to change</Typography>
-            }
-            else{
-                return <Typography color="error"><ErrorIcon/>Something Went Wrong!</Typography>
-            }
-        }
-    }
+      
       render() {
+          console.log(this.state.output);
           return (
                <div className= "Login">
                <TopBar/>
@@ -67,7 +53,6 @@ class Login extends Component{
                      </FormControl></center>
                  <center><Button onClick={()=>this.Login}>Login </Button></center>
                </div>
-               {this.returnOut()}
                </div>
           );
       }
