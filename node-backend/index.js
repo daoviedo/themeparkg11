@@ -211,7 +211,7 @@ app.get('/testing', (req, res, next) => {
         }
         else{
             return res.json({
-                status: result
+                status: result[0]
             });
         }
     });
