@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Home from './pages/Home';
 import Ticket from './pages/Ticket';
-import Rides from './pages/Rides';
+import Rides from './pages/Riding';
 import Dining from './pages/Dining';
 import EntranceScan from './pages/EntranceScan';
 import ScanRides from './pages/ScanRides';
@@ -28,7 +28,7 @@ class App extends Component {
         <Route path="/new-ride" exact component={CreateRide} />
         <Route path="/department" exact component={Department} />
         <Route path="/login" exact component={Login}/>
-
+        <Route path="/riding" exact component={Rides}/>
       </React.Fragment>
     );
   }

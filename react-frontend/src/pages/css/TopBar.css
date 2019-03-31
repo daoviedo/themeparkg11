@@ -1,0 +1,20 @@
+.brandStyle {
+    color: #ffffff;
+    display: inline-block;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+#brandDisappear {
+    display: inline-block;
+}
+
+@media screen and (min-width: 1200px) {
+    #brandDisappear {
+         display: none; 
+         height: 56px;
+        }
+    #navHelper {
+        height: 56px;
+    }
+}
