@@ -12,6 +12,7 @@ import CreateRide from './pages/CreateRide';
 import { Route } from "react-router-dom";
 import Department from './pages/Department';
 import Login from './pages/Login';
+import Analytics from './pages/Analytics';
 
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
         <Route path="/department" exact component={Department} />
         <Route path="/login" exact component={Login}/>
         <Route path="/riding" exact component={Rides}/>
+        <Route path="/analytics" exact component={Analytics}/>
       </React.Fragment>
     );
   }

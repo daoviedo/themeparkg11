@@ -339,7 +339,7 @@ app.get('/monthanalytics/:year', (req, res, next) => {
 app.get('/dayanalytics/:year/:month', (req, res, next) => {
     const year = req.params.year;
     const month = req.params.month;
-    connection.query(`SELECT day,SUM(tickets_sold) tickets_sold FROM analytics WHERE year=${year} AND month=${month} GROUP BY day`, (err, result) => {
+    connection.query(`SELECT day,SUM(tickets_sold) tickets_sold FROM analytics WHERE year=${year} AND month='${month}' GROUP BY day`, (err, result) => {
         return res.json({
             data: result
         });
