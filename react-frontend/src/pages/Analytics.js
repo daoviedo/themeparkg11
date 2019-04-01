@@ -35,6 +35,15 @@ class Analytics extends Component {
             .catch(err => console.log(err))
     }
 
+    fetchDayInfo(month){
+        fetch(`http://157.230.172.23:4000/dayanalytics/${this.state.selectedyear}/${month}`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ data: result.data, dataVal: "day" }))
+            .catch(err => console.log(err))
+    }
+
     fetchYearList(){
         fetch(`http://157.230.172.23:4000/selyear`, {
             method: "GET",
@@ -55,7 +64,7 @@ class Analytics extends Component {
 
     handleChange = event => {
         if(event.target.value===0){
-            this.setState({selectedmonth: 0,[event.target.name]: event.target.value});
+            this.setState({selectedmonth: 0, monthList: [],[event.target.name]: event.target.value});
             this.fetchYearInfo();
         }
         else{
@@ -68,14 +77,15 @@ class Analytics extends Component {
     handleChangemon = event => {
         if(event.target.value===0){
             this.setState({[event.target.name]: event.target.value});
+            this.fetchMonthInfo(this.state.selectedyear);
         }
         else{   
             this.setState({[event.target.name]: event.target.value});
+            this.fetchDayInfo(event.target.value);
         } 
     }
 
     render() {
-        console.log(this.state);
         return (
             <React.Fragment>
                 <TopBar/>
@@ -94,7 +104,7 @@ class Analytics extends Component {
                             )
                         )}
                 </TextField>
-                <TextField select required label="Select a month" name="selectedmonth" onChange={this.handleChangemon} value={this.state.selectedmonth} style={{width: 200, marginBottom: 10}}>
+                <TextField disabled={this.state.selectedyear===0} select required label="Select a month" name="selectedmonth" onChange={this.handleChangemon} value={this.state.selectedmonth} style={{width: 200, marginBottom: 10}}>
                             <MenuItem value={0}>
                             All
                             </MenuItem>
@@ -106,14 +116,14 @@ class Analytics extends Component {
                         )}
                 </TextField>
                     <BarChart
-                width={500}
-                height={400}
+                width={600}
+                height={500}
                 data={this.state.data}
                 style={{margin: 'auto'}}
                 margin={{left: -55}}
                 >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey={this.state.dataVal} onClick={() => console.log("hello")} />
+                <XAxis dataKey={this.state.dataVal}/>
                 <YAxis />
                 <Tooltip />
                 <Legend />
