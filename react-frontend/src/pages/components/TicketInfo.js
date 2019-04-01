@@ -58,11 +58,12 @@ function TicketInfo(props) {
                             minDate={minimum}
                             label="Park Entry Date"
                             value={props.val.entryDate}
-                            onChange={e => props.handleChange("entryDate", e)}
+                            onChange={e => props.handleChangedate("entryDate", e)}
                             style={{marginTop: '16px'}}
                         />
                     </MuiPickersUtilsProvider>
                 </MuiThemeProvider>
+                {props.handleRainOut}
                 <br/>
                 <TextField
                         required

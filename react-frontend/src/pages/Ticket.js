@@ -14,6 +14,7 @@ import PaymentInfo from './components/PaymentInfo';
 import Review from './components/Review';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ErrorIcon from '@material-ui/icons/Error';
 
 const styles = theme => ({
     layout: {
@@ -65,13 +66,17 @@ class Ticket extends Component {
         cardNumber: "",
         cardExpiration: "",
         cardCVV: "",
-        isComplete: false,
-        ticket_ids : []
+        ticket_ids : [],
+        rainout: 0,
+        cancelled: false,
     };
+    componentDidMount(){
+        this.fetchRainout();
+    }
     getStepContent(step) {
         switch (step) {
             case 0:
-                return <TicketInfo handleChange={this.handleChange} val={this.state}/>;
+                return <TicketInfo handleChange={this.handleChange} handleChangedate={this.handleChangedate} val={this.state} handleRainOut={this.handleRainOut()}/>;
             case 1:
                 return <PaymentInfo handleChange={this.handleChange} val={this.state}/>;
             case 2:
@@ -82,6 +87,19 @@ class Ticket extends Component {
     }
     handleChange = (name, value) => {
         this.setState({[name]: value});
+    }
+    handleChangedate = (name, value) => {
+        let LoadingDate1 = new Date(value);
+        LoadingDate1 = LoadingDate1.getFullYear() + '-' + (this.fixMonth(LoadingDate1)) + '-' + LoadingDate1.getDate();
+        let nd = new Date();
+        nd = nd.getFullYear() + '-' + (this.fixMonth(nd)) + '-' + nd.getDate();
+
+        if(this.state.rainout === 0){
+            this.setState({[name]: value});
+        }
+        else{
+            this.setState({[name]: value, cancelled: nd===LoadingDate1});
+        }
     }
     handleNext = () => {
         this.setState(state => ({
@@ -95,7 +113,7 @@ class Ticket extends Component {
     };
     validateInput(step){
         if(step === 0){
-            return(this.state.email.length > 1 && this.state.numTickets > 0 && this.state.entryDate !== null);
+            return(this.state.email.length > 1 && this.state.numTickets > 0 && this.state.entryDate !== null && this.state.cancelled !== true);
         }
         else if(step === 1){
             return(this.state.nameOnCard.length > 1 && this.state.cardCVV.length > 1 && this.state.cardExpiration.length > 1 && this.state.cardNumber.length > 1);
@@ -103,6 +121,14 @@ class Ticket extends Component {
         else{
             return false;
         }
+    }
+    fetchRainout(){
+        fetch(`http://157.230.172.23:4000/rainout`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ rainout: result.rainedOut }))
+            .catch(err => console.log(err))
     }
     addTickets = () => {
         let LoadingDate = new Date(this.state.entryDate);
@@ -132,9 +158,24 @@ class Ticket extends Component {
         }
     }
 
+    handleRainOut(){
+        if(this.state.rainout === 1){
+            if(this.state.cancelled){
+                return <Typography color="error"><ErrorIcon/>Park Is Closed for Today Due to Rainout</Typography>
+            }
+            else{
+                return <div/>
+            }
+        }
+        else{
+            return <div/>
+        }
+    }
+
     render() {
         const { classes } = this.props;
         const { activeStep } = this.state;
+
         let countval = 1;
         return (
             <React.Fragment>
