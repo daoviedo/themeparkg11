@@ -43,12 +43,14 @@ class Maintenance extends Component {
         dialogueDesc: "",
         listOfRides: [],
         selectedRide: "",
-        description: ""
+        description: "",
+        rainout: 0
     }
 
     componentDidMount(){
         this.fetchMaintenance();
         this.fetchRides();
+        this.fetchRainout();
     }
 
     fetchMaintenance(){
@@ -66,6 +68,24 @@ class Maintenance extends Component {
         })
             .then(res => res.json())
             .then(result => this.setState({ listOfRides: result.rideList }))
+            .catch(err => console.log(err))
+    }
+
+    fetchRainout(){
+        fetch(`http://157.230.172.23:4000/rainout`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ rainout: result.rainedOut }))
+            .catch(err => console.log(err))
+    }
+
+    rainoutPark(){
+        fetch(`http://157.230.172.23:4000/nrainout`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ rainout: result.rainedOut }))
             .catch(err => console.log(err))
     }
 
@@ -135,6 +155,15 @@ class Maintenance extends Component {
             <TableCell align="right"><Button size='sm' variant="outline-danger" onClick={() => this.completeOrder(OrderID)}>Complete Order</Button></TableCell>
         </TableRow>
 
+    rainButton(){
+        if(this.state.rainout === 0){
+            return <Button variant="outline-danger" onClick={()=>this.rainoutPark()} style={{marginTop: 10}}>Rainout Park</Button>;
+        }
+        else{
+            return <Button disabled variant="danger" style={{marginTop: 10}}>Park is Rained Out for Today</Button>;
+        }
+    }
+
     render() {
         const { classes } = this.props;
         const { maintList } = this.state;
@@ -162,6 +191,7 @@ class Maintenance extends Component {
                 <br/>
                 <MaintenanceDialogue handleClickOpen={this.handleClickOpen} handleClose={this.handleClose} submitForm={this.submitForm} handleChange={this.handleChange} val={this.state}/>
                 <MaintDesc handleRightClose={this.handleRightClose} val={this.state}/>
+                {this.rainButton()}
                 </div>
             </React.Fragment>
         );
