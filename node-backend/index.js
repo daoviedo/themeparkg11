@@ -288,14 +288,16 @@ app.post('/newemployee', (req, res, next) => {
 app.get('/rainout', (req, res, next)=>{
     const qcommand =`SELECT * FROM rainout WHERE rainoutDate=CURRENT_DATE`;
     connection.query(qcommand, (err, result) => {
-        if(result[0].length === 1){
+        if(result[0].length === 0){
             return res.json({
-                rainedOut: 1
+                rainedOut: 0,
+                result: result
             });
         }
         else{
             return res.json({
-                rainedOut: 0
+                rainedOut: 1,
+                result: result
             });
         }
     })
