@@ -30,8 +30,8 @@ class Login extends Component{
                 })
            }).then(res => res.json())
            .then(result => {
-               this.setState({output: result.status});
-               localStorage.setItem('userID',result.userID);
+                localStorage.setItem('userID',result.userID);
+                this.setState({output: result.status});
         })
            .catch(err => console.log(err))
            
