@@ -99,14 +99,23 @@ class Department extends Component{
         .catch(err => console.log(err))
     };
 
-    renderMainList = ({ Name, EmployeeID, FirstName, LastName, MFirstName, MLastName }) =>
+    fixManager(eid, mid, Mfn, Mln){
+        if(eid === mid){
+            return "MANAGER";
+        }
+        else{
+            return Mfn + " " + Mln;
+        }
+    }
+
+    renderMainList = ({ Name, EmployeeID, FirstName, LastName, MFirstName, MLastName, ManagerID }) =>
         <TableRow key={EmployeeID}>
             <TableCell component="th" scope="row">
                 {Name}
             </TableCell>
             <TableCell align="right">{EmployeeID}</TableCell>
             <TableCell align="right">{FirstName + " " + LastName}</TableCell>
-            <TableCell align="right">{MFirstName + " " + MLastName}</TableCell>
+            <TableCell align="right">{this.fixManager(EmployeeID,ManagerID, MFirstName, MLastName)}</TableCell>
         </TableRow>
 
     render() {
