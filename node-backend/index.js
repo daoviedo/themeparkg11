@@ -285,6 +285,30 @@ app.post('/newemployee', (req, res, next) => {
     })
 });
 
+app.get('/rainout', (req, res, next)=>{
+    const qcommand =`SELECT * FROM rainout WHERE rainoutDate=CURRENT_DATE`;
+    connection.query(qcommand, (err, result) => {
+        if(result[0].length === 1){
+            return res.json({
+                rainedOut: 1
+            });
+        }
+        else{
+            return res.json({
+                rainedOut: 0
+            });
+        }
+    })
+});
+
+app.get('/nrainout', (req, res, next) => {
+    connection.query(`INSERT INTO rainout VALUES(CURRENT_DATE)`, (err1, res2) => {
+        return res.json({
+            rainedOut: 1
+        });
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
