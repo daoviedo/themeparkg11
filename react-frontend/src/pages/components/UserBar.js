@@ -8,10 +8,9 @@ import HomeLogo from '@material-ui/icons/Home';
 import EntLogo from '@material-ui/icons/ConfirmationNumber';
 import RideLogo from '@material-ui/icons/LocalPlay';
 import Dept from '@material-ui/icons/Work';
+import AnalyticsLogo from '@material-ui/icons/Equalizer';
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, Divider, IconButton} from "@material-ui/core";
-
-
 
 function UserBar(props) {
     return (
@@ -50,6 +49,12 @@ function UserBar(props) {
                         <ListItem button>
                             <Warning style={{ color: "#2A2A31" }}/>
                             <ListItemText primary='Maintenance' />
+                        </ListItem>
+                    </Link>
+                    <Link to="/analytics" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <AnalyticsLogo style={{ color: "#2A2A31" }}/>
+                            <ListItemText primary='Analytics' />
                         </ListItem>
                     </Link>
                     <Link to="/department" style={{ textDecoration: 'none' }}>
