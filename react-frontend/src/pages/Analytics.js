@@ -120,7 +120,7 @@ class Analytics extends Component {
                 height={500}
                 data={this.state.data}
                 style={{margin: 'auto'}}
-                margin={{left: -55}}
+                margin={{left: -60}}
                 >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey={this.state.dataVal}/>
