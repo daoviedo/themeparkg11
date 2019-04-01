@@ -289,8 +289,7 @@ app.get('/rainout', (req, res, next)=>{
     const qcommand =`SELECT * FROM rainout WHERE rainoutDate=CURRENT_DATE`;
     connection.query(qcommand, (err, result) => {
         return res.json({
-            rainedOut: 0,
-            result: result.length
+            rainedOut: result.length
         });
     })
 });
