@@ -290,7 +290,7 @@ app.get('/rainout', (req, res, next)=>{
     connection.query(qcommand, (err, result) => {
         return res.json({
             rainedOut: 0,
-            result: result
+            result: result.length
         });
     })
 });
