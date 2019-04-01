@@ -302,6 +302,50 @@ app.get('/nrainout', (req, res, next) => {
     });
 });
 
+
+app.get('/selyear', (req, res, next) => {
+    connection.query(`SELECT year FROM analytics GROUP BY year`, (err, result) => {
+        return res.json({
+            years: result
+        });
+    });
+});
+app.get('/selmonth/:year', (req, res, next) => {
+    const year = req.params.year;
+    connection.query(`SELECT month FROM analytics WHERE year=${year} GROUP BY month`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
+app.get('/yearanalytics', (req, res, next) => {
+    connection.query(`SELECT year,SUM(tickets_sold) tickets_sold FROM analytics GROUP BY year`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
+app.get('/monthanalytics/:year', (req, res, next) => {
+    const year = req.params.year;
+    connection.query(`SELECT month,SUM(tickets_sold) tickets_sold FROM analytics WHERE year=${year} GROUP BY month`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
+app.get('/dayanalytics/:year/:month', (req, res, next) => {
+    const year = req.params.year;
+    const month = req.params.month;
+    connection.query(`SELECT day,SUM(tickets_sold) tickets_sold FROM analytics WHERE year=${year} AND month=${month} GROUP BY day`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
