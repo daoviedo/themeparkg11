@@ -236,6 +236,20 @@ app.get('/getallemp/:deptID', (req, res, next) => {
         }
     });
 });
+app.get('/getallemps', (req, res, next) => {
+    connection.query(`SELECT * FROM deptEmployeeInfo`, (err, result) => {
+        if(err){
+            return res.json({
+                status: err
+            });
+        }
+        else{
+            return res.json({
+                status: result
+            });
+        }
+    });
+});
 
 app.get('/departmentlist', (req, res, next) => {
     const Qcommand = 'Select * FROM department';
