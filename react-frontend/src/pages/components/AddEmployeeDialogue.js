@@ -5,7 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import { TextField } from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -30,6 +30,14 @@ function AddEmployeeDialogue(props) {
             {"New Employee Details"}
           </DialogTitle>
           <DialogContent>
+          <TextField select label="Department" name="dialogueDept" onChange={e=>props.handleChange('dialogueDept',e.target.value)} value={props.val.dialogueDept} style={{width: 200}}>
+            {props.val.deptList.map(option => (
+                    <MenuItem key={option.DeptID} value={option.DeptID}>
+                    {option.Name}
+                    </MenuItem>
+                    )
+                )}
+          </TextField>
           <Grid container spacing={24}>
             <Grid item xs={12} md={6}>
               <TextField required id="firstname" label="First Name" 

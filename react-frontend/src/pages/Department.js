@@ -8,7 +8,7 @@ const styles = theme => ({
     root: {
         width: '70%',
         maxHeight: 500,
-        marginTop: 100,
+        marginTop: 10,
         margin: 'auto',
         overflowX: 'auto',
         overflowY: 'auto'
@@ -31,12 +31,14 @@ class Department extends Component{
         empList: [],
         userID: 1,
         openDialogue: false,
-        selectedDept: "",
+        selectedDept: 0,
+        dialogueDept: "",
         firstname: "",
         lastname: "",
     }
     componentDidMount(){
         this.fetchDepartments();
+        this.fetchEmployees(0);
     }
     handleChange = (name, value) => {
         this.setState({[name]: value});
@@ -49,15 +51,25 @@ class Department extends Component{
         this.setState({ openDialogue: true });
     };
     handleClose = () => {
-        this.setState({ openDialogue: false, firstname: "", lastname: ""});
+        this.setState({ openDialogue: false, firstname: "", lastname: "", dialogueDept: ""});
     };
     fetchEmployees(value){
-        fetch(`http://157.230.172.23:4000/getallemp/${value}`, {
+        if(value === 0){
+            fetch(`http://157.230.172.23:4000/getallemps`, {
             method: "GET",
         })
             .then(res => res.json())
             .then(result => this.setState({ empList: result.status }))
             .catch(err => console.log(err))
+        }
+        else{
+            fetch(`http://157.230.172.23:4000/getallemp/${value}`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ empList: result.status }))
+            .catch(err => console.log(err))
+        }
     }
     fetchDepartments(){
         fetch(`http://157.230.172.23:4000/departmentlist`, {
@@ -77,7 +89,7 @@ class Department extends Component{
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                dept: this.state.selectedDept,
+                dept: this.state.dialogueDept,
                 firstname: this.state.firstname,
                 lastname: this.state.lastname,
             }),
@@ -106,6 +118,9 @@ class Department extends Component{
                 <div style={{textAlign: "center"}}>
                     <h1>This is The Department Page</h1>
                     <TextField select label="Department" name="selectedDept" onChange={e=>this.handleChangeDept('selectedDept',e.target.value)} value={this.state.selectedDept} style={{width: 200}}>
+                        <MenuItem value={0}>
+                            All Employees
+                        </MenuItem>
                     {this.state.deptList.map(option => (
                             <MenuItem key={option.DeptID} value={option.DeptID}>
                             {option.Name}
