@@ -116,11 +116,11 @@ class Analytics extends Component {
                         )}
                 </TextField>
                     <BarChart
-                width={600}
+                width={800}
                 height={500}
                 data={this.state.data}
                 style={{margin: 'auto'}}
-                margin={{left: -60}}
+                margin={{left: 0, right: 60}}
                 >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey={this.state.dataVal}/>
