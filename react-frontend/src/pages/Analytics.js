@@ -40,7 +40,7 @@ class Analytics extends Component {
             method: "GET",
         })
             .then(res => res.json())
-            .then(result => this.setState({ data: result.data, dataVal: "day" }))
+            .then(result => this.setState({ data: result.data, dataVal: "dayname" }))
             .catch(err => console.log(err))
     }
 
