@@ -37,7 +37,7 @@ const styles = theme => ({
 class Maintenance extends Component {
     state = {
         maintList : [],
-        userID: 1,
+        userID: localStorage.getItem('userID'),
         openDialogue: false,
         rightDialogue: false,
         dialogueDesc: "",
