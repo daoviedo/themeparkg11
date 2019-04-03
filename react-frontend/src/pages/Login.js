@@ -10,6 +10,7 @@ class Login extends Component{
           UserID: "",
           Password: "",
           output:"",
+          submited:false
       };
       handleUserID = text =>{
           this.setState({ UserID: text.target.value });
@@ -17,8 +18,12 @@ class Login extends Component{
       handlePassword = text =>{
           this.setState({ Password: text.target.value });
       }
+      checksubmited(){
+        this.setState({submited:true});
+        this.Login()
+      }
       Login(){
-
+          
           fetch('http://157.230.172.23:4000/login',{
                 method: 'POST',
                 headers:{
@@ -40,6 +45,27 @@ class Login extends Component{
       render() {
           if(this.state.output === 1){
               window.location.replace('/');
+          }else if(this.state.submited === true){
+            return (
+                <div className= "Login">
+                <TopBar/>
+                <div>
+                   <header className = "Login-header">
+                       <center><h1 className="Login-title">Please login</h1></center>
+                   </header>
+                      <center><FormControl margin="normal" required >
+                        <InputLabel htmlFor="UserID" >Username</InputLabel>
+                        <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
+                      </FormControl></center>
+                      <center><FormControl margin="normal" required >
+                         <InputLabel htmlFor="Password">Password</InputLabel>
+                          <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
+                      </FormControl></center>
+                  <center><Button onClick={()=>this.checksubmited()}>Login </Button></center>
+                  <center><text><font color="red">Username or Password are incorrect</font></text></center>
+                </div>
+                </div>
+           );
           }
           else{
             return (
@@ -50,14 +76,14 @@ class Login extends Component{
                        <center><h1 className="Login-title">Please login</h1></center>
                    </header>
                       <center><FormControl margin="normal" required >
-                        <InputLabel htmlFor="UserID" >User ID</InputLabel>
+                        <InputLabel htmlFor="UserID" >Username</InputLabel>
                         <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
                       </FormControl></center>
                       <center><FormControl margin="normal" required >
                          <InputLabel htmlFor="Password">Password</InputLabel>
                           <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
                       </FormControl></center>
-                  <center><Button onClick={()=>this.Login()}>Login </Button></center>
+                  <center><Button onClick={()=>this.checksubmited()}>Login </Button></center>
                 </div>
                 </div>
            );
