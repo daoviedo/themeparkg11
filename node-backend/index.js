@@ -312,7 +312,7 @@ app.get('/selyear', (req, res, next) => {
 });
 app.get('/selmonth/:year', (req, res, next) => {
     const year = req.params.year;
-    connection.query(`SELECT month FROM analytics WHERE year=${year} GROUP BY month`, (err, result) => {
+    connection.query(`SELECT MONTH(datetick), month FROM analytics WHERE year=${year} GROUP BY MONTH(datetick),month ORDER BY MONTH(datetick)`, (err, result) => {
         return res.json({
             data: result
         });
