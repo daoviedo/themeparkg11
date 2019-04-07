@@ -376,7 +376,7 @@ app.get('/rideyearanalytics', (req, res, next) => {
 app.get('/rideanalytics/:year/:month', (req, res, next) => {
     const year = req.params.year;
     const month = req.params.year;
-    connection.query(`SELECT RideName, year, month, day, sum(RideCounts) RideCounts FROM ride_analytics WHERE year= ${year} AND month=${month} group by RideName, year, month`, (err, result) => {
+    connection.query(`SELECT RideName, year, month, day, sum(RideCounts) RideCounts FROM ride_analytics WHERE year= ${year} AND month='${month}' group by RideName, year, month`, (err, result) => {
         return res.json({
             data: result
         });
