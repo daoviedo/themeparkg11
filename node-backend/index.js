@@ -349,7 +349,7 @@ app.get('/dayanalytics/:year/:month', (req, res, next) => {
 });
 
 // Gets available year list from server.
-app.get('/rideyearana', (req, res, next) => {
+app.get('/rideyearlist', (req, res, next) => {
     connection.query(`SELECT YEAR(RideTime) FROM ride_analytics GROUP BY YEAR(RideTime) ORDER BY YEAR(RideTime)`, (err, result) => {
         return res.json({
             years: result
@@ -358,7 +358,7 @@ app.get('/rideyearana', (req, res, next) => {
 });
 
 // Gets available month list per year from server.
-app.get('/ridemonthana/:year', (req, res, next) => {
+app.get('/ridemonthlist/:year', (req, res, next) => {
     const year = req.params.year;
     connection.query(`SELECT MONTH(RideTime), month FROM ride_analytics WHERE year=${year} GROUP BY MONTH(RideTime), month ORDER BY MONTH(RideTime)`, (err, result) => {
         return res.json({
@@ -368,7 +368,7 @@ app.get('/ridemonthana/:year', (req, res, next) => {
 });
 
 // Gets total rides per attraction per year.
-app.get('/rideyearanalytics', (req, res, next) => {
+app.get('/ridestotalyear', (req, res, next) => {
     connection.query(`SELECT RideName, year, sum(RideCounts) RideCounts from ride_analytics group by RideName, year`, (err, result) => {
         return res.json({
             data: result
