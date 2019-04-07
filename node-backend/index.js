@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 
 const app = express();
 
-
 const connection = mysql.createConnection({
     host: 'localhost',
     port: '3306',
@@ -310,6 +309,7 @@ app.get('/selyear', (req, res, next) => {
         });
     });
 });
+
 app.get('/selmonth/:year', (req, res, next) => {
     const year = req.params.year;
     connection.query(`SELECT MONTH(datetick), month FROM analytics WHERE year=${year} GROUP BY MONTH(datetick),month ORDER BY MONTH(datetick)`, (err, result) => {
@@ -347,6 +347,37 @@ app.get('/dayanalytics/:year/:month', (req, res, next) => {
         });
     });
 });
+
+app.get('/rideyearana', (req, res, next) => {
+    connection.query(`SELECT year FROM ride_analytics GROUP BY year`, (err, result) => {
+        return res.json({
+            years: result
+        });
+    });
+});
+
+app.get('/ridemonthana/:year', (req, res, next) => {
+    const year = req.params.year;
+    connection.query(`SELECT month FROM ride_analytics WHERE year=${year} GROUP BY month`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
+app.get('/rideyearanalytics', (req, res, next) => {
+    connection.query(`SELECT RideName, year, sum(RideCounts) RideCounts from ride_analytics group by RideName, year`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
+app.get('/rideanalytics/:year/:month', (req, res, next) => {
+    const year = req.params.year;
+    const month = req.params.year;
+    connection.query(`SELECT RideName, year, month, day, sum(RideCounts) RideCounts FROM ride_analytics WHERE year= ${year} AND month=${month} group by RideName, year, month`)
+})
 
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
