@@ -348,23 +348,26 @@ app.get('/dayanalytics/:year/:month', (req, res, next) => {
     });
 });
 
+// Gets available year list from server.
 app.get('/rideyearana', (req, res, next) => {
-    connection.query(`SELECT year FROM ride_analytics GROUP BY year`, (err, result) => {
+    connection.query(`SELECT YEAR(RideTime) FROM ride_analytics GROUP BY YEAR(RideTime) ORDER BY YEAR(RideTime)`, (err, result) => {
         return res.json({
             years: result
         });
     });
 });
 
+// Gets available month list per year from server.
 app.get('/ridemonthana/:year', (req, res, next) => {
     const year = req.params.year;
-    connection.query(`SELECT month FROM ride_analytics WHERE year=${year} GROUP BY month`, (err, result) => {
+    connection.query(`SELECT MONTH(RideTime), month FROM ride_analytics WHERE year=${year} GROUP BY MONTH(RideTime), month ORDER BY MONTH(RideTime)`, (err, result) => {
         return res.json({
             data: result
         });
     });
 });
 
+// Gets total rides per attraction per year.
 app.get('/rideyearanalytics', (req, res, next) => {
     connection.query(`SELECT RideName, year, sum(RideCounts) RideCounts from ride_analytics group by RideName, year`, (err, result) => {
         return res.json({
@@ -373,10 +376,20 @@ app.get('/rideyearanalytics', (req, res, next) => {
     });
 });
 
+// Gets total rides per attraction per months in a year.
+app.get('/ridemonthinyear', (req, res, next) => {
+    connection.query(`SELECT RideName, year, MONTH(RideTime), month, sum(RideCounts) RideCounts from ride_analytics group by RideName, year, MONTH (RideTime), month ORDER BY MONTH(RideTime)`, (err, result) => {
+        return res.json({
+            data: result
+        });
+    });
+});
+
+// Gets total rides per attraction per month and day
 app.get('/rideanalytics/:year/:month', (req, res, next) => {
     const year = req.params.year;
     const month = req.params.month;
-    connection.query(`SELECT RideName, year, month, day, sum(RideCounts) RideCounts FROM ride_analytics WHERE year= ${year} AND month='${month}' group by RideName, year, month, day`, (err, result) => {
+    connection.query(`SELECT RideName, year, month, day, sum(RideCounts) RideCounts FROM ride_analytics WHERE year= ${year} AND month='${month}' group by RideName, year, month, day ORDER BY day asc`, (err, result) => {
         return res.json({
             data: result
         });
