@@ -396,6 +396,15 @@ app.get('/rideanalytics/:year/:month', (req, res, next) => {
     });
 });
 
+app.get('/ridepivot', (req, res, next) => {
+    let rideNames = [];
+    connection.query(`SELECT DISTINCT RideName from ride_analytics` , (err, result) => {
+       result.forEarch(function(element) {
+            console.log(element);
+       });
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
