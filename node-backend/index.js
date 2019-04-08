@@ -401,9 +401,9 @@ app.get('/ridepivot', (req, res, next) => {
     let pivotQ = `SELECT month, MONTH(RideTime) as MonthNumber,`;
     connection.query(`SELECT DISTINCT RideName from ride_analytics` , (err, result) => {
         Object.keys(result).forEach(function(key) {
-            pivotQ = pivotQ + `SUM(RideName='${key}')AS '${key}',`
+        pivotQ = pivotQ + `SUM(RideName='${key}')AS '${key}',`
+        });
     });
-    console.log(pivotQ);
 });
 
 app.listen(4000, () => {
