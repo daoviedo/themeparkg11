@@ -403,6 +403,7 @@ app.get('/ridepivot', (req, res, next) => {
            data: result
        });
     });
+    console.log(data);
 });
 
 app.listen(4000, () => {
