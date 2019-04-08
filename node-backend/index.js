@@ -397,11 +397,10 @@ app.get('/rideanalytics/:year/:month', (req, res, next) => {
 });
 
 app.get('/ridepivot', (req, res, next) => {
-    let rideNames = [];
-    let pivotQ = `SELECT month, MONTH(RideTime) as MonthNumber,`;
-    connection.query(`SELECT DISTINCT RideName from ride_analytics` , (err, result) => {
-        Object.keys(result).forEach(function(key) {
-        pivotQ = pivotQ + `SUM(RideName='${key}')AS '${key}',`
+    connection.query(`SELECT month, MONTH(RideTime) as MonthNumber, SUM(RideName='Big Twister')AS 'Big Twister', SUM(RideName='Zero Fall')AS 'Zero Fall', SUM(RideName='Big Ride')AS 'Big Ride' FROM ride_analytics GROUP BY month, Month(RideTime)
+    order by Month(RideTime) ASC` , (err, result) => {
+        return res.json({
+            data: result
         });
     });
 });
