@@ -8,6 +8,7 @@ import EntranceScan from './pages/EntranceScan';
 import ScanRides from './pages/ScanRides';
 import Maintenance from './pages/Maintenance';
 import CreateRide from './pages/CreateRide';
+import RideAnalytics from './pages/RideAnalytics';
 
 import { Route } from "react-router-dom";
 import Department from './pages/Department';
@@ -31,6 +32,7 @@ class App extends Component {
         <Route path="/login" exact component={Login}/>
         <Route path="/riding" exact component={Rides}/>
         <Route path="/analytics" exact component={Analytics}/>
+        <Route path="/rideanalytics" exact component={RideAnalytics}/>
       </React.Fragment>
     );
   }
