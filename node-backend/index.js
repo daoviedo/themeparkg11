@@ -399,8 +399,8 @@ app.get('/rideanalytics/:year/:month', (req, res, next) => {
 app.get('/ridepivot', (req, res, next) => {
     let rideNames = [];
     connection.query(`SELECT DISTINCT RideName from ride_analytics` , (err, result) => {
-       result.forEarch(function(element) {
-            console.log(element);
+       return res.json ({
+           data: result
        });
     });
 });
