@@ -1,6 +1,5 @@
 import React from 'react';
 import AccIcon from '@material-ui/icons/AccountBox';
-
 import Settings from '@material-ui/icons/Settings';
 import Warning from '@material-ui/icons/Warning';
 import Exit from '@material-ui/icons/ExitToApp';
@@ -54,7 +53,13 @@ function UserBar(props) {
                     <Link to="/analytics" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <AnalyticsLogo style={{ color: "#2A2A31" }}/>
-                            <ListItemText primary='Analytics' />
+                            <ListItemText primary='Ticket Sale Analytics' />
+                        </ListItem>
+                    </Link>
+                    <Link to="/rideanalytics" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <AnalyticsLogo style={{ color: "#2A2A31" }}/>
+                            <ListItemText primary='Ride Analytics' />
                         </ListItem>
                     </Link>
                     <Link to="/department" style={{ textDecoration: 'none' }}>
