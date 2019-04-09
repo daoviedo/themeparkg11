@@ -10,7 +10,6 @@ class Login extends Component{
           UserID: "",
           Password: "",
           output:"",
-          submited:false
       };
       handleUserID = text =>{
           this.setState({ UserID: text.target.value });
@@ -18,10 +17,7 @@ class Login extends Component{
       handlePassword = text =>{
           this.setState({ Password: text.target.value });
       }
-      checksubmited(){
-        this.setState({submited:true});
-        this.Login()
-      }
+     
       Login(){
           
           fetch('http://157.230.172.23:4000/login',{
@@ -45,7 +41,7 @@ class Login extends Component{
       render() {
           if(this.state.output === 1){
               window.location.replace('/');
-          }else if(this.state.submited === true){
+          }else if(this.state.output === 0){
             return (
                 <div className= "Login">
                 <TopBar/>
@@ -61,7 +57,7 @@ class Login extends Component{
                          <InputLabel htmlFor="Password">Password</InputLabel>
                           <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
                       </FormControl></center>
-                  <center><Button onClick={()=>this.checksubmited()}>Login </Button></center>
+                  <center><Button onClick={()=>this.Login()}>Login </Button></center>
                   <center><text><font color="red">Username or Password are incorrect</font></text></center>
                 </div>
                 </div>
@@ -83,7 +79,7 @@ class Login extends Component{
                          <InputLabel htmlFor="Password">Password</InputLabel>
                           <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
                       </FormControl></center>
-                  <center><Button onClick={()=>this.checksubmited()}>Login </Button></center>
+                  <center><Button onClick={()=>this.Login()}>Login </Button></center>
                 </div>
                 </div>
            );
