@@ -1,0 +1,8 @@
+.underMaintenance {
+    position: absolute;
+    top: 0px;
+    width: 180px;
+    height: 180px;
+    background-color: red;
+    opacity: 0.5;
+}

@@ -46,7 +46,7 @@ class RideAnalytics extends Component {
                   width={600} 
                   height={300} 
                   data={this.state.data}
-                  style={{margin: '0 auto'}}
+                  style={{margin: 'auto'}}
                   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
               <XAxis dataKey="month"/>
               <YAxis/>
