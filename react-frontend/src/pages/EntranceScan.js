@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
-import { Button, TextField, Typography} from '@material-ui/core';
+import { Button, TextField, Typography, Paper} from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
+import './css/PageStyles.css';
 
 class EntranceScan extends Component {
     state = {
         inputScan : "",
         output : "",
-        timer: false
+        timer: false,
+        rainout: 0,
+    }
+    componentDidMount(){
+        fetch(`http://157.230.172.23:4000/rainout`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ rainout: result.rainedOut }))
+            .catch(err => console.log(err))
     }
     handleChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -46,6 +56,14 @@ class EntranceScan extends Component {
             }
         }
     }
+    outputRainout(){
+        if(this.state.rainout === 1){
+            return <Typography color="error"><ErrorIcon/>Park Is Closed for Today Due to Rainout</Typography>;
+        }
+        else{
+            return <div/>;
+        }
+    }
     openWindow(){
         this.setState({timer: true});
         setTimeout(() => {
@@ -55,12 +73,16 @@ class EntranceScan extends Component {
     }
     render() {
         return (
-            <React.Fragment>
+            <header className="header5">
                 <TopBar/>
-                <div style={{textAlign: "center"}}>
-                    <h1>This is The Entrance Scan</h1>
+                <div style={{textAlign: "center", paddingTop: 100}}>
+                <h2 style={{color: 'white'}}>Entrance Scan</h2>
+                </div>
+                <Paper style={{margin: 'auto', width: '400px'}}>
+                <div style={{textAlign: "center", paddingTop: '50px', paddingBottom: '50px'}}>
                     <div style={{lineHeight : '56px', textAlign: 'center'}}>
                     <TextField
+                            disabled={this.state.rainout === 1}
                             name="inputScan"
                             value={this.state.inputScan}
                             onChange={this.handleChange}
@@ -69,13 +91,15 @@ class EntranceScan extends Component {
                             variant="outlined"
                             style={{width: "150px", paddingRight: '10px'}}
                         />
-                        <Button size='large' variant="contained" onClick={this.scanTicket}>
+                        <Button disabled={this.state.inputScan < 1} size='large' variant="contained" onClick={this.scanTicket}>
                         Scan
-                        </Button>  
+                        </Button>
                     </div>
                     {this.returnOut()}
+                    {this.outputRainout()}
                 </div>
-            </React.Fragment>
+                </Paper>
+            </header>
         );
     }
 }

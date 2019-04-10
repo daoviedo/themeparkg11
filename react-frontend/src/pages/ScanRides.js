@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
-import { TextField, MenuItem, Button, Typography } from '@material-ui/core';
+import { TextField, MenuItem, Button, Typography, Paper } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
+import './css/PageStyles.css';
 
 class ScanRides extends Component {
     state = {
         listOfRides: [],
         selectedRide: "",
         inputScan: "",
-        output: ""
+        output: "",
+        rainout: 0,
     }
     componentDidMount(){
+        this.fetchRideList();
+        this.fetchRainOut();
+    }
+
+    fetchRideList(){
         fetch(`http://157.230.172.23:4000/ridelist`, {
             method: "GET",
         })
             .then(res => res.json())
             .then(result => this.setState({ listOfRides: result.rideList }))
+            .catch(err => console.log(err))
+    }
+    fetchRainOut(){
+        fetch(`http://157.230.172.23:4000/rainout`, {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(result => this.setState({ rainout: result.rainedOut }))
             .catch(err => console.log(err))
     }
 
@@ -39,6 +54,14 @@ class ScanRides extends Component {
         .then(result => {this.setState({output: result.status}); this.openWindow()})
         .catch(err => console.log(err))
     }
+    outputRainout(){
+        if(this.state.rainout === 1){
+            return <Typography color="error"><ErrorIcon/>Park Is Closed for Today Due to Rainout</Typography>;
+        }
+        else{
+            return <div/>;
+        }
+    }
     returnOut(){
         if(this.state.timer){
             if(this.state.output === 1){
@@ -59,11 +82,14 @@ class ScanRides extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <header className="header5">
                 <TopBar/>
-                <div style={{textAlign: "center"}}>
-                    <h1>Scan Tickets for Rides</h1>
-                    <TextField select required label="Ride" name="selectedRide" onChange={this.handleChange} value={this.state.selectedRide} style={{width: 200}}>
+                <div style={{textAlign: "center", paddingTop: 100}}>
+                <h2 style={{color: 'white'}}>Scan Tickets for Rides</h2>
+                </div>
+                <Paper style={{margin: 'auto', width: '400px'}}>
+                <div style={{textAlign: "center", paddingTop: '50px', paddingBottom: '50px'}}>
+                    <TextField disabled={this.state.rainout === 1} select required label="Ride" name="selectedRide" onChange={this.handleChange} value={this.state.selectedRide} style={{width: 200}}>
                         {this.state.listOfRides.map(option => (
                             <MenuItem disabled={option.NeedMaintenance > 0} key={option.RideID} value={option.RideID}>
                             {option.RideName}
@@ -87,8 +113,10 @@ class ScanRides extends Component {
                         </Button>  
                     </div>
                     {this.returnOut()}
+                    {this.outputRainout()}
                 </div>
-            </React.Fragment>
+                </Paper>
+            </header>
         );
     }
 }

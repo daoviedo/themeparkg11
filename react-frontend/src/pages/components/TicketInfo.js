@@ -2,29 +2,29 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
+import purple from '@material-ui/core/colors/purple';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 const TealTheme = createMuiTheme({
     palette: {
-      primary: {main: teal[600]},
+      primary: {main: purple[900]},
     },
     overrides: {
         MuiPickersDay: {
           day: {
-            color: teal[600],
+            color: purple[900],
           },
           isSelected: {
-            backgroundColor: teal["600"],
+            backgroundColor: purple["900"],
           },
           current: {
-            color: teal["600"],
+            color: purple["900"],
           },
         },
         MuiPickersModal: {
           dialogAction: {
-            color: teal["600"],
+            color: purple["900"],
           },
         },
       },

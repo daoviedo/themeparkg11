@@ -15,8 +15,16 @@ import Review from './components/Review';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ErrorIcon from '@material-ui/icons/Error';
-
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
 import './css/PageStyles.css';
+
+
+const purpleTheme = createMuiTheme({
+    palette: {
+      primary: {main: purple[900]},
+    },
+});
 
 const styles = theme => ({
     layout: {
@@ -183,6 +191,8 @@ class Ticket extends Component {
         return (
             <header className="header1">
                 <TopBar/>
+                <MuiThemeProvider theme={purpleTheme}>
+                
                 <CssBaseline />
                 <main className={classes.layout}>
                     <Paper className={classes.paper}>
@@ -240,6 +250,7 @@ class Ticket extends Component {
                         </React.Fragment>
                     </Paper>
                 </main>
+                </MuiThemeProvider>
             </header>
         );
     }
