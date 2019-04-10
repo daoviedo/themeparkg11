@@ -22,7 +22,7 @@ handleChangedPassword(){
 handleName(){
 
     fetch('http://157.230.172.23:4000/getName',{
-                method: 'POST',
+                method: 'GET',
                 headers:{
                     "Content-Type" : "application/json"
                 },
@@ -31,7 +31,7 @@ handleName(){
                 })
            }).then(res => res.json())
            .then(result => {
-                this.setState({name: result.status});
+                this.setState({name: result.data});
         })
            .catch(err => console.log(err))
 }

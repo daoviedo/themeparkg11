@@ -71,7 +71,7 @@ function UserBar(props) {
                 </List>
                 <Divider />
                 <List>
-                    <Link to="/" style={{ textDecoration: 'none' }}>
+                <Link to="/AccountSettings" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <Settings style={{ color: "#2A2A31" }}/>
                             <ListItemText primary='Account Settings' />

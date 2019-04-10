@@ -14,6 +14,7 @@ import { Route } from "react-router-dom";
 import Department from './pages/Department';
 import Login from './pages/Login';
 import Analytics from './pages/Analytics';
+import AccountSettings from './pages/AccountSettings';
 
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
         <Route path="/riding" exact component={Rides}/>
         <Route path="/analytics" exact component={Analytics}/>
         <Route path="/rideanalytics" exact component={RideAnalytics}/>
+        <Route path="/AccountSettings" extact component={AccountSettings}/>
       </React.Fragment>
     );
   }
