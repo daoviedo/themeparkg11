@@ -65,7 +65,7 @@ class ScanRides extends Component {
                     <h1>Scan Tickets for Rides</h1>
                     <TextField select required label="Ride" name="selectedRide" onChange={this.handleChange} value={this.state.selectedRide} style={{width: 200}}>
                         {this.state.listOfRides.map(option => (
-                            <MenuItem key={option.RideID} value={option.RideID}>
+                            <MenuItem disabled={option.NeedMaintenance > 0} key={option.RideID} value={option.RideID}>
                             {option.RideName}
                             </MenuItem>
                             )
