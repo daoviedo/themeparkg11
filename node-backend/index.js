@@ -30,6 +30,39 @@ app.get('/', (req, res, next) => {
     res.send("Server is live");
 });
 
+app.get('/getName', (req, res, next) => {
+    const {userID} = req.body;
+    const command = `SELECT FirstName, LastName FROM employee WHERE EmployeeID='${userID}'`;
+    connection.query(command, (err, result) => {
+        if(result.length === 0){
+            return res.json({
+                data: result
+            });
+        }
+    });
+});
+
+app.post('/changePassword', (req, res, next) => {
+    const {userID, password, newPassword} = req.body;
+    const command = `SELECT * FROM useraccount WHERE userID='${userID}' AND password='${password}'`;
+    connection.query(command, (err, result) => {
+        if(result.length === 0){
+            return res.json({
+                status: 0
+            });
+        }
+        else{
+            const updateCommand = `UPDATE useraccount SET password='${newPassword}' WHERE userID='${userID}' AND password='${password}'`;
+            connection.query(command, (err, result) => {
+            return res.json({
+                status: 1,
+            });
+        });
+      }
+    });
+});
+
+
 app.post('/login', (req, res, next) => {
     const {userID, password} = req.body;
     const command = `SELECT * FROM useraccount WHERE username='${userID}' AND password='${password}'`;
