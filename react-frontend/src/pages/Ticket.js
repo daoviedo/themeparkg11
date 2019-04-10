@@ -16,8 +16,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ErrorIcon from '@material-ui/icons/Error';
 
+import './css/PageStyles.css';
+
 const styles = theme => ({
     layout: {
+        paddingTop: '50px',
       width: 'auto',
       marginLeft: theme.spacing.unit * 2,
       marginRight: theme.spacing.unit * 2,
@@ -178,7 +181,7 @@ class Ticket extends Component {
 
         let countval = 1;
         return (
-            <React.Fragment>
+            <header className="header1">
                 <TopBar/>
                 <CssBaseline />
                 <main className={classes.layout}>
@@ -237,7 +240,7 @@ class Ticket extends Component {
                         </React.Fragment>
                     </Paper>
                 </main>
-            </React.Fragment>
+            </header>
         );
     }
 }

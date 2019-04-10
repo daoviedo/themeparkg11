@@ -10,7 +10,7 @@ import image3 from '../images/image1.jpg';
 export default class HomeCarousel extends Component {
     render() {
         return (
-            <div>
+            <div className="divclass">
                 <Carousel>
                     <Carousel.Item>
                         <img

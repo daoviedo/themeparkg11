@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
 import Concession from './components/Concession';
+import './css/PageStyles.css';
 
 class Dining extends Component {
     state = {
@@ -16,14 +17,10 @@ class Dining extends Component {
     }
     render() {
         return (
-            <React.Fragment>
+            <header className="header3">
                 <TopBar/>
-                <div style={{textAlign: "center"}}>
-                    <h1>This is The Dining Page</h1>
-                </div>
-                <br/>
                 <Concession list={this.state.concessionList}/>       
-            </React.Fragment>
+            </header>
         );
     }
 }

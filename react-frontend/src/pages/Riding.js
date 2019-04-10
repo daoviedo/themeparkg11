@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
-import RideGrid from './components/RideGrid'
+import RideGrid from './components/RideGrid';
+import './css/PageStyles.css';
 
 class Rides extends Component {
   state = {
@@ -16,14 +17,10 @@ class Rides extends Component {
 }
 render() {
     return (
-        <React.Fragment>
+        <header className="header2">
             <TopBar/>
-            <div style={{textAlign: "center"}}>
-                <h1>This is The Rides Page</h1>
-            </div>
-            <br/>
             <RideGrid list={this.state.rideList}/>       
-        </React.Fragment>
+        </header>
     );
 }
 }

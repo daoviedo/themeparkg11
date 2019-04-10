@@ -9,13 +9,17 @@ import InfoIcon from '@material-ui/icons/Info';
 
 const styles = theme => ({
   root: {
+    paddingTop: 70,
+    margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    backgroundColor: theme.palette.background.paper,
+    justifyContent: 'center',
   },
   gridList: {
-    width: 900,
+    margin: 'auto',
+    width: 800,
+    display: 'flex',
+    justifyContent: 'center',
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -27,9 +31,9 @@ function TitlebarGridList(props) {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={180} spacing={12} className={classes.gridList}>
+      <GridList cellHeight={180} spacing={20} className={classes.gridList}>
         {props.list.map(tile => (
-          <GridListTile key={tile.Stand_ID} style={{width: '300px'}}>
+          <GridListTile key={tile.Stand_ID} style={{width: '250px'}}>
             <img src="https://www.bodybuilding.com/images/2016/may/40-best-low-calorie-foods-header-v2-400x225.jpg" alt={tile.Stand_Name} />
             <GridListTileBar
               title={tile.Stand_Name}
