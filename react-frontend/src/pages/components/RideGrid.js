@@ -6,6 +6,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import '../css/MaintenanceTile.css';
 
 const styles = theme => ({
   root: {
@@ -35,6 +36,7 @@ function TitlebarGridList(props) {
         {props.list.map(tile => (
           <GridListTile key={tile.RideID} style={{width: '200px'}}>
             <img src="https://tribwttv.files.wordpress.com/2016/07/s064723236-300.jpg?quality=85&strip=all&w=400&h=225&crop=1" alt={tile.Stand_Name} />
+            <div className="underMaintenance" style={{display: tile.NeedMaintenance > 0 ? 'block': 'none'}}></div>
             <GridListTileBar
               title={tile.RideName}
               actionIcon={

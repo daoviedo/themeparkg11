@@ -2,8 +2,7 @@ import React from 'react';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 function RideAnalytics(props){
-      return (
-        
+      return (  
         <LineChart data={props.data} width={800}
         height={500}
         style={{margin: 'auto'}}
@@ -17,8 +16,6 @@ function RideAnalytics(props){
             <Line key={option.RideID} type="monotone" dataKey={option.RideName} stroke={'#'+Math.floor(Math.random()*16777215).toString(16)}/>
           ))}
         </LineChart>
-       
     );
-    
 }
 export default RideAnalytics;
