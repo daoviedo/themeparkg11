@@ -10,6 +10,7 @@ class Login extends Component{
           UserID: "",
           Password: "",
           output:"",
+          departmentID: ""
       };
       handleUserID = text =>{
           this.setState({ UserID: text.target.value });
@@ -18,6 +19,23 @@ class Login extends Component{
           this.setState({ Password: text.target.value });
       }
      
+      getDepartmentID(){
+         fetch('http://157.230.172.23:4000/getDepartmentID',{
+                 method: 'GET',
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                body:JSON.stringify({
+                    userID: this.state.UserID,
+                 })
+              }).then(res => res.json())
+             .then(result => {
+                 localStorage.setItem('departmentID',result.departmentID);
+                 this.setState({departmentID: result.departmentID});
+        })
+       .catch(err => console.log(err))
+      }
+
       Login(){
           
           fetch('http://157.230.172.23:4000/login',{
@@ -40,6 +58,9 @@ class Login extends Component{
       
       render() {
           if(this.state.output === 1){
+              if(this.state.departmentID === ""){
+                  this.getDepartmentID()
+              }
               window.location.replace('/');
           }else if(this.state.output === 0){
             return (

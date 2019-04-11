@@ -42,6 +42,16 @@ app.get('/getName', (req, res, next) => {
     });
 });
 
+app.post('/getDepartmentID', (req, res, next) => {
+    const {userID} = req.body;
+    const command =  `SELECT dID FROM department_employee WHERE eID='${userID}'`;
+    connection.query(command, (err, result) => {
+        return res.json({
+            departmentID: result[0].departmentID
+        })
+    })
+})
+
 app.post('/changePassword', (req, res, next) => {
     const {userID, password, newPassword} = req.body;
     const command = `SELECT * FROM useraccount WHERE userID='${userID}' AND password='${password}'`;
