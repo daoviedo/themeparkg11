@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 });
 
 connection.connect(err => {
-    if(err) {
+    if (err) {
         console.log(err);
         return err;
     } else {
@@ -31,10 +31,12 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/getName', (req, res, next) => {
-    const {userID} = req.body;
+    const {
+        userID
+    } = req.body;
     const command = `SELECT FirstName, LastName FROM employee WHERE EmployeeID='${userID}'`;
     connection.query(command, (err, result) => {
-        if(result.length === 0){
+        if (result.length === 0) {
             return res.json({
                 data: result
             });
@@ -43,8 +45,10 @@ app.get('/getName', (req, res, next) => {
 });
 
 app.post('/getDepartmentID', (req, res, next) => {
-    const {userID} = req.body;
-    const command =  `SELECT dID FROM department_employee WHERE eID='${userID}'`;
+    const {
+        userID
+    } = req.body;
+    const command = `SELECT dID FROM department_employee WHERE eID='${userID}'`;
     connection.query(command, (err, result) => {
         return res.json({
             departmentID: result[0].departmentID
@@ -53,36 +57,41 @@ app.post('/getDepartmentID', (req, res, next) => {
 })
 
 app.post('/changePassword', (req, res, next) => {
-    const {userID, password, newPassword} = req.body;
+    const {
+        userID,
+        password,
+        newPassword
+    } = req.body;
     const command = `SELECT * FROM useraccount WHERE userID='${userID}' AND password='${password}'`;
     connection.query(command, (err, result) => {
-        if(result.length === 0){
+        if (result.length === 0) {
             return res.json({
                 status: 0
             });
-        }
-        else{
+        } else {
             const updateCommand = `UPDATE useraccount SET password='${newPassword}' WHERE userID='${userID}' AND password='${password}'`;
             connection.query(command, (err, result) => {
-            return res.json({
-                status: 1,
+                return res.json({
+                    status: 1,
+                });
             });
-        });
-      }
+        }
     });
 });
 
 
 app.post('/login', (req, res, next) => {
-    const {userID, password} = req.body;
+    const {
+        userID,
+        password
+    } = req.body;
     const command = `SELECT * FROM useraccount WHERE username='${userID}' AND password='${password}'`;
     connection.query(command, (err, result) => {
-        if(result.length === 0){
+        if (result.length === 0) {
             return res.json({
                 status: 0
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: 1,
                 userID: result[0].userID
@@ -92,25 +101,27 @@ app.post('/login', (req, res, next) => {
 });
 
 app.post('/purchase', (req, res, next) => {
-    const { numberOfTickets, entryDate, email } = req.body;
+    const {
+        numberOfTickets,
+        entryDate,
+        email
+    } = req.body;
     const command = `INSERT INTO ticket VALUES ?`;
     let values = [];
-    for(var i = 0; i < numberOfTickets; i++){
+    for (var i = 0; i < numberOfTickets; i++) {
         let val = [null, 35, email, entryDate, null, null];
         values.push(val);
     }
     connection.query(command, [values], (err, result) => {
-        if(err){
+        if (err) {
             return res.send(err);
-        }
-        else{
+        } else {
             const idnumlookup = result.insertId - 1;
             const returnCommand = `SELECT Ticket_ID FROM ticket WHERE Ticket_ID > ${idnumlookup} && Purchase_Email = "${email}"`;
             connection.query(returnCommand, (err1, result2) => {
-                if(err1){
+                if (err1) {
                     return res.send(err1);
-                }
-                else{
+                } else {
                     return res.json({
                         results: result2
                     });
@@ -121,45 +132,48 @@ app.post('/purchase', (req, res, next) => {
 });
 
 app.patch('/entrance-scan', (req, res, next) => {
-    const { ticketID } = req.body;
-    let TDate = new Date().toLocaleString("fr-CA", {timeZone: "America/Chicago"}).split(" ")[0];
+    const {
+        ticketID
+    } = req.body;
+    let TDate = new Date().toLocaleString("fr-CA", {
+        timeZone: "America/Chicago"
+    }).split(" ")[0];
     initCommand = `SELECT Ticket_ID, Ticket_Valid_On, Entry_Time FROM ticket WHERE Ticket_ID=${ticketID}`;
     connection.query(initCommand, (retErr, retOutput) => {
         //let TicketDate = retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0];
-        if(retOutput.length === 0){
+        if (retOutput.length === 0) {
             return res.json({
                 error: retErr,
                 status: 0
             });
-        }
-        else if(retOutput[0].Entry_Time !== null){
+        } else if (retOutput[0].Entry_Time !== null) {
             return res.json({
                 error: retErr,
                 status: 2
             });
-        }
-        else if(retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0] !== TDate){
+        } else if (retOutput[0].Ticket_Valid_On.toLocaleString("fr-CA").split(" ")[0] !== TDate) {
             return res.json({
                 error: retErr,
                 status: 1
             });
-        }  
-        else{
-            let date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1];
+        } else {
+            let date = new Date().toLocaleString("en-US", {
+                timeZone: "America/Chicago"
+            }).split(", ")[1];
             let hour = parseInt(date.split(":")[0]);
-            if(date.includes("PM") && hour !== 12){
-                date = ((hour + 12) + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
-            }
-            else if(date.includes("AM") && hour === 12){
-                date = (00 + ":" + date.substring(date.indexOf(':')+1)).split(" ")[0];
-            }
-            else{
-                date = new Date().toLocaleString("en-US", {timeZone: "America/Chicago"}).split(", ")[1].split(" ")[0];
+            if (date.includes("PM") && hour !== 12) {
+                date = ((hour + 12) + ":" + date.substring(date.indexOf(':') + 1)).split(" ")[0];
+            } else if (date.includes("AM") && hour === 12) {
+                date = (00 + ":" + date.substring(date.indexOf(':') + 1)).split(" ")[0];
+            } else {
+                date = new Date().toLocaleString("en-US", {
+                    timeZone: "America/Chicago"
+                }).split(", ")[1].split(" ")[0];
             }
             const command = `UPDATE ticket SET Entry_Time='${date}' WHERE Ticket_ID=${ticketID}`;
             connection.query(command, (err, result) => {
                 return res.json({
-                    error: err, 
+                    error: err,
                     status: 3
                 });
             });
@@ -187,15 +201,18 @@ app.get('/ridelist', (req, res, next) => {
 });
 
 app.post('/new-ride', (req, res, next) => {
-    const {rideName, runsBeforeMaintenance, numSeats} = req.body;
+    const {
+        rideName,
+        runsBeforeMaintenance,
+        numSeats
+    } = req.body;
     const Qcommand = `INSERT INTO ride (RideName, Runsbeforemaintenance, NumSeats) VALUES('${rideName}', ${runsBeforeMaintenance}, ${numSeats})`;
     connection.query(Qcommand, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: err
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: 1
             });
@@ -204,15 +221,17 @@ app.post('/new-ride', (req, res, next) => {
 });
 
 app.post('/ridescan', (req, res, next) => {
-    const { rideID, ticketID } = req.body;
+    const {
+        rideID,
+        ticketID
+    } = req.body;
     const Qcommand = `INSERT INTO ticketscan (RideID, TicketID) VALUES(${rideID},${ticketID})`;
     connection.query(Qcommand, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: 0
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: 1
             });
@@ -230,15 +249,18 @@ app.get('/maintenance_needed', (req, res, next) => {
 });
 
 app.post('/newmaintenance', (req, res, next) => {
-    const { rideID, employeeID, description } = req.body;
+    const {
+        rideID,
+        employeeID,
+        description
+    } = req.body;
     const Qcommand = `INSERT INTO maintenance_order (OrderID, Rides_ID, Employee_ID, Maintenance_Desc) VALUES(null, ${rideID}, ${employeeID}, '${description}')`;
     connection.query(Qcommand, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: 0
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: 1
             });
@@ -247,15 +269,17 @@ app.post('/newmaintenance', (req, res, next) => {
 });
 
 app.patch('/fixmaintenance', (req, res, next) => {
-    const { orderID, completedBy } = req.body;
+    const {
+        orderID,
+        completedBy
+    } = req.body;
     const Qcommand = `UPDATE maintenance_order SET DateCompleted=CURRENT_TIMESTAMP, CompletedBy_ID=${completedBy} WHERE OrderID=${orderID}`;
     connection.query(Qcommand, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: 0
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: 1
             });
@@ -266,12 +290,11 @@ app.patch('/fixmaintenance', (req, res, next) => {
 app.get('/getallemp/:deptID', (req, res, next) => {
     const deptID = req.params.deptID;
     connection.query(`SELECT * FROM deptEmployeeInfo WHERE DeptID=${deptID}`, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: err
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: result
             });
@@ -280,12 +303,11 @@ app.get('/getallemp/:deptID', (req, res, next) => {
 });
 app.get('/getallemps', (req, res, next) => {
     connection.query(`SELECT * FROM deptEmployeeInfo`, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: err
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: result
             });
@@ -295,7 +317,7 @@ app.get('/getallemps', (req, res, next) => {
 
 app.get('/departmentlist', (req, res, next) => {
     const Qcommand = 'Select * FROM department';
-    connection.query(Qcommand, (err,result) => {
+    connection.query(Qcommand, (err, result) => {
         return res.json({
             dList: result
         });
@@ -303,7 +325,7 @@ app.get('/departmentlist', (req, res, next) => {
 });
 app.get('/emplist', (req, res, next) => {
     const Qcommand = 'Select * FROM deptEmployeeInfo';
-    connection.query(Qcommand, (err,result) => {
+    connection.query(Qcommand, (err, result) => {
         return res.json({
             employeeList: result
         });
@@ -311,15 +333,18 @@ app.get('/emplist', (req, res, next) => {
 });
 
 app.post('/newemployee', (req, res, next) => {
-    const{dept, firstname, lastname} = req.body;
+    const {
+        dept,
+        firstname,
+        lastname
+    } = req.body;
     const Qcommand = `CALL newEmployee(${dept}, '${firstname}', '${lastname}')`;
     connection.query(Qcommand, (err, result) => {
-        if(err){
+        if (err) {
             return res.json({
                 status: 0
             });
-        }
-        else{
+        } else {
             return res.json({
                 status: 1
             });
@@ -327,8 +352,8 @@ app.post('/newemployee', (req, res, next) => {
     })
 });
 
-app.get('/rainout', (req, res, next)=>{
-    const qcommand =`SELECT * FROM rainout WHERE rainoutDate=CURRENT_DATE`;
+app.get('/rainout', (req, res, next) => {
+    const qcommand = `SELECT * FROM rainout WHERE rainoutDate=CURRENT_DATE`;
     connection.query(qcommand, (err, result) => {
         return res.json({
             rainedOut: result.length
@@ -439,28 +464,17 @@ app.get('/rideanalytics/:year/:month', (req, res, next) => {
     });
 });
 
-app.get('/ridepivot', (req, res, next) => {
-    connection.query(`SELECT month, MONTH(RideTime) as MonthNumber, SUM(RideName='Big Twister')AS 'Big Twister', SUM(RideName='Zero Fall')AS 'Zero Fall', SUM(RideName='Big Ride')AS 'Big Ride' FROM ride_analytics GROUP BY month, Month(RideTime)
-    order by Month(RideTime) ASC` , (err, result) => {
-        return res.json({
-            data: result
-        });
-    });
-});
-
 app.get('/newridepivot', (req, res, next) => {
-    connection.query(`SELECT RideName FROM ride` , (err, result) => {
+    connection.query(`SELECT RideName FROM ride`, (err, result) => {
         let pivotCommand = `SELECT month, MONTH(RideTime) as MonthNumber,\n`;
         result.forEach((element) => {
             console.log(element);
-            pivotCommand +=  `SUM(RideName='${element.RideName}')AS '${element.RideName}',\n`
-          });
-          pivotCommand = pivotCommand.replace(/,\s*$/, "");
-          pivotCommand += `FROM
-              ride_analytics
-          GROUP BY month , MONTH(RideTime)
+            pivotCommand += `SUM(RideName='${element.RideName}')AS '${element.RideName}',\n`
+        });
+        pivotCommand = pivotCommand.replace(/,\s*$/, "");
+        pivotCommand += `FROM ride_analytics GROUP BY month , MONTH(RideTime)
           ORDER BY MONTH(RideTime) ASC`
-          connection.query(pivotCommand, (err, result) => {
+        connection.query(pivotCommand, (err, result) => {
             return res.json({
                 data: result
             });

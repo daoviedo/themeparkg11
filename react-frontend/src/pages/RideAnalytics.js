@@ -13,7 +13,7 @@ function RideAnalytics(props){
           <Tooltip />
           <Legend />
           {props.rides.map(option => (
-            <Line key={option.RideID} type="monotone" dataKey={option.RideName} stroke={'#'+Math.floor(Math.random()*16777215).toString(16)}/>
+            <Line key={option.RideID} type="monotone" dataKey={option.RideName} stroke={'#'+Math.floor(Math.random()*14540253).toString(16)}/>
           ))}
         </LineChart>
     );

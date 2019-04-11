@@ -24,7 +24,7 @@ class Analytics extends Component {
     }
 
     fetchPivot() {
-        fetch(`http://157.230.172.23:4000/ridepivot`, {
+        fetch(`http://157.230.172.23:4000/newridepivot`, {
             method: "GET",
         })
         .then(res => res.json())
