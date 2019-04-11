@@ -53,13 +53,7 @@ function UserBar(props) {
                     <Link to="/analytics" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <AnalyticsLogo style={{ color: "#2A2A31" }}/>
-                            <ListItemText primary='Ticket Sale Analytics' />
-                        </ListItem>
-                    </Link>
-                    <Link to="/rideanalytics" style={{ textDecoration: 'none' }}>
-                        <ListItem button>
-                            <AnalyticsLogo style={{ color: "#2A2A31" }}/>
-                            <ListItemText primary='Ride Analytics' />
+                            <ListItemText primary='Analytics' />
                         </ListItem>
                     </Link>
                     <Link to="/department" style={{ textDecoration: 'none' }}>

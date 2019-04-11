@@ -3,9 +3,13 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 're
 import TopBar from './components/TopBar';
 import {TextField, MenuItem} from '@material-ui/core';
 
+import RideAnalytics from './RideAnalytics';
+
 class Analytics extends Component {
     state = {
         data: [],
+        ridedata: [],
+        rideList: [],
         dataVal: "year",
         yearList: [],
         monthList: [],
@@ -15,6 +19,25 @@ class Analytics extends Component {
     componentDidMount(){
         this.fetchYearInfo();
         this.fetchYearList();
+        this.fetchPivot();
+        this.fetchRideList();
+    }
+
+    fetchPivot() {
+        fetch(`http://157.230.172.23:4000/ridepivot`, {
+            method: "GET",
+        })
+        .then(res => res.json())
+        .then(result => this.setState({ridedata: result.data}))
+    }
+    
+    fetchRideList() {
+        fetch(`http://157.230.172.23:4000/ridelist`, {
+            method: "GET",
+        })
+        .then(res => res.json())
+        .then(result => this.setState({rideList: result.rideList}))
+        .catch(err => console.log(err))
     }
 
     fetchYearInfo(){
@@ -90,8 +113,8 @@ class Analytics extends Component {
             <React.Fragment>
                 <TopBar/>
                 
-                <div style={{textAlign: "center"}}>
-                    <h1>This is The Analytics Page</h1>
+                <div style={{textAlign: "center", paddingBottom: 100}}>
+                    <h1>Ticket Sales Analytics</h1>
                     <br/>
                 <TextField select required label="Select a year" name="selectedyear" onChange={this.handleChange} value={this.state.selectedyear} style={{width: 200, marginBottom: 10}}>
                             <MenuItem value={0}>
@@ -129,6 +152,7 @@ class Analytics extends Component {
                 <Legend />
                 <Bar dataKey="tickets_sold" fill="#2F4F4F"/>
             </BarChart>
+            <RideAnalytics data={this.state.ridedata} rides={this.state.rideList}/>
                 </div>
             </React.Fragment>  
         );
