@@ -114,7 +114,7 @@ class Analytics extends Component {
                 <TopBar/>
                 
                 <div style={{textAlign: "center", paddingBottom: 100}}>
-                    <h1>Ticket Sales Analytics</h1>
+                    
                     <br/>
                 <TextField select required label="Select a year" name="selectedyear" onChange={this.handleChange} value={this.state.selectedyear} style={{width: 200, marginBottom: 10}}>
                             <MenuItem value={0}>
@@ -138,6 +138,7 @@ class Analytics extends Component {
                             )
                         )}
                 </TextField>
+                <h2>Ticket Sale Analytics</h2>
                     <BarChart
                 width={800}
                 height={500}
@@ -152,6 +153,7 @@ class Analytics extends Component {
                 <Legend />
                 <Bar dataKey="tickets_sold" fill="#2F4F4F"/>
             </BarChart>
+            <h2>Ride Analytics</h2>
             <RideAnalytics data={this.state.ridedata} rides={this.state.rideList}/>
                 </div>
             </React.Fragment>  
