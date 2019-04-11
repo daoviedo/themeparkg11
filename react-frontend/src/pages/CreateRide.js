@@ -84,12 +84,14 @@ class CreateRide extends Component {
           margin="normal"
       />
       </div>
-      <Button
-        disabled={!(this.state.name.length > 1)}
-        onClick={() => this.createRide()}
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Button
+      disabled={!(this.state.name.length > 1)}
+      onClick={() => this.createRide()}
       >
-        Submit
+      Submit
       </Button>
+      </div>
       </React.Fragment>
     )
   }

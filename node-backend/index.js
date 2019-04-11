@@ -466,13 +466,13 @@ app.get('/rideanalytics/:year/:month', (req, res, next) => {
 
 app.get('/newridepivot', (req, res, next) => {
     connection.query(`SELECT RideName FROM ride`, (err, result) => {
-        let pivotCommand = `SELECT month, MONTH(RideTime) as MonthNumber,\n`;
+        let pivotCommand = `SELECT year, month, MONTH(RideTime) as MonthNumber,\n`;
         result.forEach((element) => {
             console.log(element);
             pivotCommand += `SUM(RideName='${element.RideName}')AS '${element.RideName}',\n`
         });
         pivotCommand = pivotCommand.replace(/,\s*$/, "");
-        pivotCommand += `FROM ride_analytics GROUP BY month , MONTH(RideTime)
+        pivotCommand += `FROM ride_analytics GROUP BY year, month , MONTH(RideTime)
           ORDER BY MONTH(RideTime) ASC`
         connection.query(pivotCommand, (err, result) => {
             return res.json({
