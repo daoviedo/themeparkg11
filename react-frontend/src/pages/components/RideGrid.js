@@ -37,6 +37,7 @@ function TitlebarGridList(props) {
           <GridListTile key={tile.RideID} style={{width: '200px'}}>
             <img src="https://tribwttv.files.wordpress.com/2016/07/s064723236-300.jpg?quality=85&strip=all&w=400&h=225&crop=1" alt={tile.Stand_Name} />
             <div className="underMaintenance" style={{display: tile.NeedMaintenance > 0 ? 'block': 'none'}}></div>
+            <p style={{display: tile.NeedMaintenance > 0 ? 'block': 'none'}}>Under Maintenance</p>
             <GridListTileBar
               title={tile.RideName}
               actionIcon={
