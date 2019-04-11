@@ -448,6 +448,26 @@ app.get('/ridepivot', (req, res, next) => {
     });
 });
 
+app.get('/newridepivot', (req, res, next) => {
+    connection.query(`SELECT RideName FROM ride` , (err, result) => {
+        let pivotCommand = `SELECT month, MONTH(RideTime) as MonthNumber,\n`;
+        result.forEach((element) => {
+            console.log(element);
+            pivotCommand +=  `SUM(RideName='${element.RideName}')AS '${element.RideName}',\n`
+          });
+          pivotCommand = pivotCommand.replace(/,\s*$/, "");
+          pivotCommand += `FROM
+              ride_analytics
+          GROUP BY month , MONTH(RideTime)
+          ORDER BY MONTH(RideTime) ASC`
+          connection.query(pivotCommand, (err, result) => {
+            return res.json({
+                data: result
+            });
+        });
+    });
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
