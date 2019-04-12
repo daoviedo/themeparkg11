@@ -13,6 +13,7 @@ import Department from './pages/Department';
 import Login from './pages/Login';
 import Analytics from './pages/Analytics';
 import AccountSettings from './pages/AccountSettings';
+import ParkReport from './pages/ParkReport';
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
         <Route path="/riding" exact component={Rides}/>
         <Route path="/analytics" exact component={Analytics}/>
         <Route path="/AccountSettings" extact component={AccountSettings}/>
+        <Route path="/parkreport" extact component={ParkReport}/>
       </React.Fragment>
     );
   }
