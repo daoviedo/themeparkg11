@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
 import { Button, Paper} from '@material-ui/core';
+import AccIcon from '@material-ui/icons/AccountBox';
 
 class AccountSettings extends Component{
     state = {
@@ -45,6 +46,7 @@ render() {
           </div>
           <Paper style={{margin: 'auto', width: '300px'}}>
           <div style={{textAlign: "center", paddingTop: '50px', paddingBottom: '50px'}}>
+                <AccIcon style={{fontSize: '600%'}}/>
                  <center><b>First Name:</b> {this.state.fName}</center>
                  <center><b>Last Name:</b> {this.state.lName}</center>
                  <center><b>Department:</b> {this.state.depoName}</center>
