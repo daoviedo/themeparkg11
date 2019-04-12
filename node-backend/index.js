@@ -36,11 +36,9 @@ app.post('/getEmployeeInfo', (req, res, next) => {
     } = req.body;
     const command = `SELECT Name, FirstName, LastName FROM deptEmployeeInfo WHERE EmployeeID=${userID}`;
     connection.query(command, (err, result) => {
-        if (result.length === 0) {
             return res.json({
                 data: result
             });
-        }
     });
 });
 
