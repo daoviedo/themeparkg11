@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import InfoIcon from '@material-ui/icons/Info';
 import Slide from '@material-ui/core/Slide';
 import { Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/core';
@@ -60,10 +61,13 @@ class StandMenu extends React.Component {
           scroll='body'
           aria-labelledby="scroll-dialog-title"
         >
-          <DialogTitle id="scroll-dialog-title">
+          <DialogTitle id="scroll-dialog-title" align = "center">
           {`${this.state.stand.Stand_Name} Menu`}
           </DialogTitle>
           <DialogContent>
+            <DialogContentText align = "center">
+              {`${this.state.stand.Hours_of_operations}`}
+            </DialogContentText>
             <Table>
               <TableHead>
                 <TableCell>Item Name</TableCell>
