@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TopBar from './components/TopBar';
-import { Button} from '@material-ui/core';
+import { Button, Paper} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -71,10 +71,11 @@ class Login extends Component{
             return (
                 <div className= "Login">
                 <TopBar/>
-                <div>
-                   <header className = "Login-header">
-                       <center><h1 className="Login-title">Please login</h1></center>
-                   </header>
+                <div style={{textAlign: "center", paddingTop: 100}}>
+                <h2 style={{color: 'Black'}}>Account Information</h2>
+                </div>
+                 <Paper style={{margin: 'auto', width: '300px'}}>
+                    <div style={{textAlign: "center", paddingTop: '50px', paddingBottom: '50px'}}>
                       <center><FormControl margin="normal" required >
                         <InputLabel htmlFor="username" >Username</InputLabel>
                         <Input id="username" name="username" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.username}/>
@@ -86,6 +87,7 @@ class Login extends Component{
                   <center><Button onClick={()=>this.Login()}>Login </Button></center>
                   {this.output()}
                 </div>
+                </Paper>
                 </div>
            );
           
