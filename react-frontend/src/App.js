@@ -15,6 +15,7 @@ import Analytics from './pages/Analytics';
 import AccountSettings from './pages/AccountSettings';
 import ParkReport from './pages/ParkReport';
 import ManageStands from './pages/ManageStands';
+import ChangePassword from './pages/ChangePassword';
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
         <Route path="/AccountSettings" extact component={AccountSettings}/>
         <Route path="/parkreport" exact component={ParkReport}/>
         <Route path="/manage-stands" exact component={ManageStands}/>
+        <Route path="/ChangePassword" exact component={ChangePassword}/>
       </React.Fragment>
     );
   }
