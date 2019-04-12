@@ -450,7 +450,7 @@ app.get('/ridemonthinyear', (req, res, next) => {
         return res.json({
             data: result
         });
-    });
+    });``
 });
 
 // Gets total rides per attraction per month and day
