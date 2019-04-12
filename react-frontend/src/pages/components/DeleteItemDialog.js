@@ -18,7 +18,6 @@ function DeleteItemDialog(props){
                 open={props.val.openDeleteItem}
                 onClose={props.close}
                 TransitionComponent={Transition}
-                scroll='body'
                 aria-labelledby="scroll-dialog-title"
                 >
                 <DialogTitle id="scroll-dialog-title" align = "center">
