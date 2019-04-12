@@ -492,6 +492,38 @@ app.get('/standmenu/:sID', (req, res, next) => {
     })
 });
 
+app.get('/ridesbetween', (req, res, next) => {
+    connecttion.query(`SELECT * FROM themepark.ride_analytics WHERE RideTime BETWEEN '${start}' AND '${end};'` , (err, result) => {
+        return res.json({
+            ridesBetween: result
+        });
+    })
+});
+
+app.get('/ticketsbetween', (req, res, next) => {
+    connecttion.query(`SELECT * FROM themepark.analytics WHERE datetick BETWEEN '${start}' AND '${end};'` , (err, result) => {
+        return res.json({
+            ticketsBetween: result
+        });
+    })
+});
+
+app.get('/rainoutsbetween', (req, res, next) => {
+    connecttion.query(`SELECT * FROM themepark.rainout WHERE rainoutDate BETWEEN '${start}' AND '${end};'` , (err, result) => {
+        return res.json({
+            rainBetween: result
+        });
+    })
+});
+
+app.get('/maintenancebetween', (req, res, next) => {
+    connecttion.query(`SELECT * FROM themepark.maintenance_order WHERE DateCreated BETWEEN '${start}' AND '${end};'` , (err, result) => {
+        return res.json({
+            maintBetween: result
+        });
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });

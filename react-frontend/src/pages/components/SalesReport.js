@@ -250,7 +250,7 @@ class SalesReport extends Component {
               <TableCell>Ticket Sales</TableCell>
               <TableCell>Revenue</TableCell>
             </TableRow>
-                  {data.map(this.renderSales)}
+                  {data.map(this.renderYearSales)}
             <TableBody/>
           </Table>
         </Paper>

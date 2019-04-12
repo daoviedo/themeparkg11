@@ -4,17 +4,7 @@ import RideStatus from './components/RideStatus';
 import SalesReport from './components/SalesReport';
 
 class Report extends Component {
-  state = {
-    data: [],
-    totalRevenue: 0,
-    yearList: [],
-    monthList: [],
-    selectedyear: 0,
-    selectedmonth: 0
-  }
   
-  
-
   render() {
     return(
       <React.Fragment>
