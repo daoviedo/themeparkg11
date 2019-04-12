@@ -14,27 +14,27 @@ class Home extends Component {
 			</header>
 
 			<section id="banner">
-				<div class="inner">
+				<div className="inner">
 					<header>
 						<h1>Welcome to ThemePark G11</h1>
 					</header>
 
-					<div class="flex">
+					<div className="flex">
 
 						<div>
-							<span class="icon fa-users"></span>
+							<span className="icon fa-users"></span>
 							<h3>Family</h3>
 							<p>Experience it with the ones<br/>you love most</p>
 						</div>
 
 						<div>
-							<span class="icon fa-rocket"></span>
+							<span className="icon fa-rocket"></span>
 							<h3>Entertainment</h3>
 							<p>Enjoy unlimited rides<br/>and entertainment</p>
 						</div>
 
 						<div>
-							<span class="icon fa-cutlery"></span>
+							<span className="icon fa-cutlery"></span>
 							<h3>Dining</h3>
 							<p>Dine at our famous season<br/>choices and concessions</p>
 						</div>
@@ -42,18 +42,18 @@ class Home extends Component {
 					</div>
 
 					<footer>
-						<a href="/park-tickets" class="button">Buy Tickets</a>
+						<a href="/park-tickets" className="button">Buy Tickets</a>
 					</footer>
 				</div>
 			</section>
 
 
 	
-			<section id="three" class="wrapper align-center">
-				<div class="inner">
-					<div class="flex flex-2">
+			<section id="three" className="wrapper align-center">
+				<div className="inner">
+					<div className="flex flex-2">
 						<article>
-							<div class="image round">
+							<div className="image round">
 								<img src={Image1} alt="Pic 01" />
 							</div>
 							<header>
@@ -61,11 +61,11 @@ class Home extends Component {
 							</header>
 							<p>Make sure to visit all of our available rides!<br />You can see a list of available rides and<br />entertainment by clicking below.</p>
 							<footer>
-								<a href="/rides" class="button">View Rides</a>
+								<a href="/rides" className="button">View Rides</a>
 							</footer>
 						</article>
 						<article>
-							<div class="image round">
+							<div className="image round">
 								<img src={Image2} alt="Pic 02" />
 							</div>
 							<header>
@@ -73,7 +73,7 @@ class Home extends Component {
 							</header>
 							<p>Choose from our top-rated restaurants like<br />like Pizza Palace, or grab a snack at any<br />nearby concession stand!</p>
 							<footer>
-								<a href="/dining" class="button">View Diners</a>
+								<a href="/dining" className="button">View Diners</a>
 							</footer>
 						</article>
 					</div>
@@ -82,9 +82,9 @@ class Home extends Component {
 
 		
 			<footer id="footer">
-				<div class="inner">
-					<div class="copyright">
-						<a href>&copy; ThemeParkG11. Created By: Daniel Oviedo | Ricardo Useche | Nic Graves</a>.
+				<div className="inner">
+					<div className="copyright">
+						<a href="#c">&copy; ThemeParkG11. Created By: Daniel Oviedo | Ricardo Useche | Nic Graves</a>.
 					</div>
 				</div>
 			</footer>
