@@ -30,7 +30,7 @@ app.get('/', (req, res, next) => {
     res.send("Server is live");
 });
 
-app.get('/getEmployeeInfo', (req, res, next) => {
+app.post('/getEmployeeInfo', (req, res, next) => {
     const {
         userID
     } = req.body;

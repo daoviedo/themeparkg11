@@ -8,30 +8,31 @@ import InputLabel from '@material-ui/core/InputLabel';
 class Login extends Component{
       state = {
           UserID: "",
+          username: "",
           Password: "",
           output:"",
           departmentID: ""
       };
       handleUserID = text =>{
-          this.setState({ UserID: text.target.value });
+          this.setState({ username: text.target.value });
       }
       handlePassword = text =>{
           this.setState({ Password: text.target.value });
       }
      
-      getDepartmentID(){
+      getDepartmentID(id){
          fetch('http://157.230.172.23:4000/getDepartmentID',{
                  method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"
                 },
                 body:JSON.stringify({
-                    userID: this.state.UserID,
+                    userID: id,
                  })
               }).then(res => res.json())
              .then(result => {
-                 this.setState({departmentID: result.departmentID});
-                 localStorage.setItem('departmentID',result.departmentID);
+                 this.setState({departmentID: result.departmentID[0].dID});
+                 localStorage.setItem('departmentID',result.departmentID[0].dID);
         })
        .catch(err => console.log(err))
       }
@@ -44,13 +45,14 @@ class Login extends Component{
                     "Content-Type" : "application/json"
                 },
                 body:JSON.stringify({
-                    userID: this.state.UserID,
+                    userID: this.state.username,
                     password: this.state.Password
                 })
            }).then(res => res.json())
            .then(result => {
+                this.getDepartmentID(result.userID);
                 localStorage.setItem('userID',result.userID);
-                this.setState({output: result.status});
+                this.setState({UserID: result.userID, output: result.status});
         })
            .catch(err => console.log(err))
            
@@ -62,10 +64,8 @@ class Login extends Component{
       }
 
       render() {
+          console.log(this.state.departmentID)
           if(this.state.output === 1){
-              if(this.state.departmentID === ""){
-                  this.getDepartmentID()
-              }
               window.location.replace('/');
           }
             return (
@@ -76,8 +76,8 @@ class Login extends Component{
                        <center><h1 className="Login-title">Please login</h1></center>
                    </header>
                       <center><FormControl margin="normal" required >
-                        <InputLabel htmlFor="UserID" >Username</InputLabel>
-                        <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
+                        <InputLabel htmlFor="username" >Username</InputLabel>
+                        <Input id="username" name="username" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.username}/>
                       </FormControl></center>
                       <center><FormControl margin="normal" required >
                          <InputLabel htmlFor="Password">Password</InputLabel>

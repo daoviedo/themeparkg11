@@ -17,7 +17,7 @@ class AccountSettings extends Component{
     };
     componentDidMount(){
         fetch('http://157.230.172.23:4000/getEmployeeInfo',{
-                method: 'GET',
+                method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"
                 },
@@ -27,6 +27,7 @@ class AccountSettings extends Component{
            }).then(res => res.json())
            .then(result => {
                 this.setState({employeeInfoList: result.data});
+                console.log(result.data)
 
         })
            .catch(err => console.log(err))
@@ -87,7 +88,10 @@ render() {
           <TopBar/>
           <div>
              <header className = "AccountSettings-header">
-                 <center>name: {this.state.employeeInfoList[1]}</center>
+                 <center>First Name: {this.state.userID}</center>
+                 <center>Last Name: {this.state.userID}</center>
+                 <center>Department: {this.state.userID}</center>
+                 <center>User ID: {this.state.userID}</center>
              </header>
                 <center><FormControl margin="normal" required >
                   <InputLabel htmlFor="Password" >Old Password</InputLabel>
