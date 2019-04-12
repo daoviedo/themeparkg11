@@ -206,9 +206,7 @@ class SalesReport extends Component {
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
-              <TableRow>
-              <TableCell align="center" className={classes.header}>Ticket Sales</TableCell>
-              </TableRow>
+                <TableCell align="center" className={classes.header}>Ticket Sales</TableCell>
             </TableHead>
             <div style={{ textAlign: "center", paddingVertical: 100 }}>
               <TextField
