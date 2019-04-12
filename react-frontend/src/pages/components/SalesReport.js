@@ -43,12 +43,13 @@ class SalesReport extends Component {
     data: [],
     ridedata: [],
     rideList: [],
-    dataVal: "Year",
+    dataVal: "year",
     yearList: [],
     monthList: [],
     selectedyear: 0,
     selectedmonth: 0
   };
+  
   componentDidMount() {
     this.fetchYearInfo();
     this.fetchYearList();
@@ -78,7 +79,7 @@ class SalesReport extends Component {
       method: "GET"
     })
       .then(res => res.json())
-      .then(result => this.setState({ data: result.data, dataVal: "Year" }))
+      .then(result => this.setState({ data: result.data, dataVal: "year" }))
       .catch(err => console.log(err));
   }
 
@@ -87,7 +88,7 @@ class SalesReport extends Component {
       method: "GET"
     })
       .then(res => res.json())
-      .then(result => this.setState({ data: result.data, dataVal: "Month" }))
+      .then(result => this.setState({ data: result.data, dataVal: "month" }))
       .catch(err => console.log(err));
   }
 
@@ -101,7 +102,7 @@ class SalesReport extends Component {
       }
     )
       .then(res => res.json())
-      .then(result => this.setState({ data: result.data, dataVal: "Day" }))
+      .then(result => this.setState({ data: result.data, dataVal: "dayname" }))
       .catch(err => console.log(err));
   }
 
@@ -139,7 +140,8 @@ class SalesReport extends Component {
       this.fetchMonthInfo(event.target.value);
       this.fetchMonthList(event.target.value);
     }
-  };
+  }
+
   handleChangemon = event => {
     if (event.target.value === 0) {
       this.setState({ [event.target.name]: event.target.value });
@@ -148,7 +150,37 @@ class SalesReport extends Component {
       this.setState({ [event.target.name]: event.target.value });
       this.fetchDayInfo(event.target.value);
     }
-  };
+  }
+
+  renderSales = ({year, month, dayname, tickets_sold}) => {
+    if (this.state.dataVal === 'year') {
+      return (
+        <TableRow>
+          <TableCell>{this.state.data.year}</TableCell>
+          <TableCell>{this.state.data.tickets_sold}</TableCell>
+          <TableCell>{this.state.data.tickets_sold * 35}</TableCell>
+        </TableRow>
+      )
+    } 
+    else if (this.state.dataVal === 'month') {
+      return (
+        <TableRow>
+          <TableCell>{this.state.data.month}</TableCell>
+          <TableCell>{this.state.data.tickets_sold}</TableCell>
+          <TableCell>{this.state.data.tickets_sold * 35}</TableCell>
+        </TableRow>
+      )
+    }
+    else if (this.state.dataVal === 'dayname') {
+      return (
+        <TableRow>
+          <TableCell>{this.state.data.dayname}</TableCell>
+          <TableCell>{this.state.data.tickets_sold}</TableCell>
+          <TableCell>{this.state.data.tickets_sold * 35}</TableCell>
+        </TableRow>
+      )
+    }
+  }
 
   renderYearSales = ({ year, month, tickets_sold }) => (
     <TableRow>
@@ -156,7 +188,7 @@ class SalesReport extends Component {
       <TableCell>{tickets_sold}</TableCell>
       <TableCell>{tickets_sold * 35}</TableCell>
     </TableRow>
-  );
+  )
   
   renderMonthSales = ({ month, tickets_sold }) => (
     <TableRow>
@@ -164,15 +196,7 @@ class SalesReport extends Component {
       <TableCell>{tickets_sold}</TableCell>
       <TableCell>{tickets_sold * 35}</TableCell>
     </TableRow>
-  );
-
-  renderDaySales = ({ month, tickets_sold }) => (
-    <TableRow>
-      <TableCell>{month}</TableCell>
-      <TableCell>{tickets_sold}</TableCell>
-      <TableCell>{tickets_sold * 35}</TableCell>
-    </TableRow>
-  );
+  )
 
   render() {
     const { classes } = this.props;
@@ -226,8 +250,8 @@ class SalesReport extends Component {
               <TableCell>Ticket Sales</TableCell>
               <TableCell>Revenue</TableCell>
             </TableRow>
-            {this.state.dataVal === "year" ? data.map(this.renderYearSales) : data.map(this.renderMonthSales) }
-            <TableBody />
+                  {data.map(this.renderSales)}
+            <TableBody/>
           </Table>
         </Paper>
       </React.Fragment>
