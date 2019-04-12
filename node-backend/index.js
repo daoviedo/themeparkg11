@@ -532,6 +532,15 @@ app.get('/maintenancebetween/:from&:to', (req, res, next) => {
     })
 });
 
+app.get('/itemlist', (req, res, next) => {
+    const Qcommand = Select * concession_items
+    connection.query(Qcommand, (err, result) => {
+        return res.json({
+            itemList: result
+        });
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
