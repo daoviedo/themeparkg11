@@ -482,6 +482,16 @@ app.get('/newridepivot', (req, res, next) => {
     });
 });
 
+app.get('/standmenu/:sID', (req, res, next) => {
+    const id = req.params.sID
+    const Qcommand = `Select * FROM standMenu WHERE Stand_ID=${id}`
+    connection.query(Qcommand, (err, result) => {
+        return res.json({
+            itemList: result
+        });
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
