@@ -533,7 +533,7 @@ app.get('/maintenancebetween/:from&:to', (req, res, next) => {
 });
 
 app.get('/itemlist', (req, res, next) => {
-    const Qcommand = Select * concession_items
+    const Qcommand = `Select * concession_items`
     connection.query(Qcommand, (err, result) => {
         return res.json({
             itemList: result
