@@ -21,7 +21,7 @@ class Login extends Component{
      
       getDepartmentID(){
          fetch('http://157.230.172.23:4000/getDepartmentID',{
-                 method: 'GET',
+                 method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"
                 },
@@ -30,8 +30,8 @@ class Login extends Component{
                  })
               }).then(res => res.json())
              .then(result => {
-                 localStorage.setItem('departmentID',result.departmentID);
                  this.setState({departmentID: result.departmentID});
+                 localStorage.setItem('departmentID',result.departmentID);
         })
        .catch(err => console.log(err))
       }
@@ -55,14 +55,19 @@ class Login extends Component{
            .catch(err => console.log(err))
            
       }
-      
+      output(){
+        if(this.state.output === 0){
+            return <center><text><font color="red">Username or Password are incorrect</font></text></center>
+        }
+      }
+
       render() {
           if(this.state.output === 1){
               if(this.state.departmentID === ""){
                   this.getDepartmentID()
               }
               window.location.replace('/');
-          }else if(this.state.output === 0){
+          }
             return (
                 <div className= "Login">
                 <TopBar/>
@@ -79,32 +84,11 @@ class Login extends Component{
                           <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
                       </FormControl></center>
                   <center><Button onClick={()=>this.Login()}>Login </Button></center>
-                  <center><text><font color="red">Username or Password are incorrect</font></text></center>
+                  {this.output()}
                 </div>
                 </div>
            );
-          }
-          else{
-            return (
-                <div className= "Login">
-                <TopBar/>
-                <div>
-                   <header className = "Login-header">
-                       <center><h1 className="Login-title">Please login</h1></center>
-                   </header>
-                      <center><FormControl margin="normal" required >
-                        <InputLabel htmlFor="UserID" >Username</InputLabel>
-                        <Input id="UserID" name="UserID" autoComplete="User ID" autoFocus onChange={this.handleUserID} value={this.state.UserID}/>
-                      </FormControl></center>
-                      <center><FormControl margin="normal" required >
-                         <InputLabel htmlFor="Password">Password</InputLabel>
-                          <Input name="Password" type="Password" id="Password" onChange={this.handlePassword} value={this.state.Password}/>
-                      </FormControl></center>
-                  <center><Button onClick={()=>this.Login()}>Login </Button></center>
-                </div>
-                </div>
-           );
-          }
+          
           
       }
   }
