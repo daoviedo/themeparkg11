@@ -3,10 +3,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { TextField, MenuItem } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
@@ -15,16 +14,28 @@ function Transition(props) {
 function DeleteItemDialog(props){
     return(
         <div>
-            <IconButton onClick = {props.handleOpenDeleteItem} aria-label="Delete">
-                <DeleteIcon fontSize="small" />
-            </IconButton>
             <Dialog
                 open={props.val.openDeleteItem}
+                onClose={props.close}
                 TransitionComponent={Transition}
-                onClose={props.handleCloseDeleteItem}>
-                <DialogTitle>
-                    {`Are you sure you want to delete ${props.Item_Name}?`}
+                scroll='body'
+                aria-labelledby="scroll-dialog-title"
+                >
+                <DialogTitle id="scroll-dialog-title" align = "center">
+                    {`Are you sure you want to delete ${props.item.Item_Name}?`}
                 </DialogTitle>
+                <DialogContent>
+            <DialogContentText align = "center">
+            <Button variant="contained" color="secondary">
+              DELETE ITEM
+            </Button>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={props.close} color="primary">
+              Close
+            </Button>
+          </DialogActions>
             </Dialog>
         </div>
     );

@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import StandSettings from './components/StandSettings'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
   root: {
@@ -33,10 +34,11 @@ class ManageStands extends Component{
     state = {
         clist: [],
         items: [],
+        item:{},
         openDeleteItem: false,
     }
-    handleOpenDeleteItem = () => {
-        this.setState({ openDeleteItem: true });
+    handleOpenDeleteItem = (itemv) => {
+        this.setState({ item: itemv, openDeleteItem: true });
     };
     handleCloseDeleteItem = () => {
         this.setState({ openDeleteItem: false });
@@ -76,11 +78,9 @@ class ManageStands extends Component{
         </TableCell>
         <TableCell align="right">${Item_Price}.00</TableCell>
         <TableCell align="right">
-            <DeleteItemDialog 
-            item = {{Item_ID, Item_Name, Item_Price}} 
-            handleOpenDeleteItem = {this.handleOpenDeleteItem} 
-            handleCloseDeleteItem={this.handleCloseDeleteItem} 
-            val={this.state}/>
+        <IconButton onClick={()=>this.handleOpenDeleteItem({ Item_ID, Item_Name, Item_Price })}>
+                <DeleteIcon fontSize="small" />
+            </IconButton>
         </TableCell>
       </TableRow>
     
@@ -91,7 +91,6 @@ class ManageStands extends Component{
     render(){
         const {classes} = this.props
         const {clist} = this.state
-        const {items} = this.state
         return(
             <React.Fragment>
                 <TopBar/>
@@ -123,6 +122,7 @@ class ManageStands extends Component{
                             {this.state.items.map(this.renderItems)}
                         </TableBody>
                         </Table>
+                        <DeleteItemDialog val={this.state} item={this.state.item} close={this.handleCloseDeleteItem}/>
                         <br/>
                     </div>
                 </Paper>
