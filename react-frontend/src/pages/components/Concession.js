@@ -5,7 +5,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import StandMenu from './StandMenu';
 
 const styles = theme => ({
   root: {
@@ -39,8 +39,7 @@ function TitlebarGridList(props) {
               title={tile.Stand_Name}
               subtitle={<span>{tile.Hours_of_operations}</span>}
               actionIcon={
-                <IconButton className={classes.icon} style={{textTransform: 'none', outline: 0, border: 'none',}}>
-                  <InfoIcon/>
+                <IconButton component={StandMenu} stand ={tile}>
                 </IconButton>
               }
             />
