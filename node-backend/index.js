@@ -30,11 +30,11 @@ app.get('/', (req, res, next) => {
     res.send("Server is live");
 });
 
-app.get('/getName', (req, res, next) => {
+app.get('/getEmployeeInfo', (req, res, next) => {
     const {
         userID
     } = req.body;
-    const command = `SELECT FirstName, LastName FROM employee WHERE EmployeeID='${userID}'`;
+    const command = `SELECT Name, FirstName, LastName FROM deptEmployeeInfo WHERE EmployeeID=${userID}`;
     connection.query(command, (err, result) => {
         if (result.length === 0) {
             return res.json({
@@ -48,10 +48,10 @@ app.post('/getDepartmentID', (req, res, next) => {
     const {
         userID
     } = req.body;
-    const command = `SELECT dID FROM department_employee WHERE eID='${userID}'`;
+    const command = `SELECT dID FROM department_employee WHERE eID=${userID}`;
     connection.query(command, (err, result) => {
         return res.json({
-            departmentID: result[0].departmentID
+            departmentID: result
         })
     })
 })
@@ -62,15 +62,15 @@ app.post('/changePassword', (req, res, next) => {
         password,
         newPassword
     } = req.body;
-    const command = `SELECT * FROM useraccount WHERE userID='${userID}' AND password='${password}'`;
+    const command = `SELECT * FROM useraccount WHERE userID=${userID} AND password='${password}'`;
     connection.query(command, (err, result) => {
         if (result.length === 0) {
             return res.json({
                 status: 0
             });
         } else {
-            const updateCommand = `UPDATE useraccount SET password='${newPassword}' WHERE userID='${userID}' AND password='${password}'`;
-            connection.query(command, (err, result) => {
+            const updateCommand = `UPDATE useraccount SET password='${newPassword}' WHERE userID=${userID} AND password='${password}'`;
+            connection.query(updateCommand, (err, result) => {
                 return res.json({
                     status: 1,
                 });
@@ -450,7 +450,7 @@ app.get('/ridemonthinyear', (req, res, next) => {
         return res.json({
             data: result
         });
-    });``
+    });
 });
 
 // Gets total rides per attraction per month and day
@@ -488,6 +488,46 @@ app.get('/standmenu/:sID', (req, res, next) => {
     connection.query(Qcommand, (err, result) => {
         return res.json({
             itemList: result
+        });
+    })
+});
+
+app.get('/ridesbetween/:from&:to', (req, res, next) => {
+    const from = req.params.from;
+    const to = req.params.to;
+    connection.query(`SELECT * FROM themepark.ride_analytics WHERE RideTime BETWEEN '${from}' AND '${to}';` , (err, result) => {
+        return res.json({
+            ridesBetween: result
+        });
+    })
+});
+
+app.get('/ticketsbetween/:from&:to', (req, res, next) => {
+    const from = req.params.from;
+    const to = req.params.to;
+    connection.query(`SELECT * FROM themepark.analytics WHERE datetick BETWEEN '${from}' AND '${to}';` , (err, result) => {
+        return res.json({
+            ticketsBetween: result
+        });
+    })
+});
+
+app.get('/rainoutsbetween/:from&:to', (req, res, next) => {
+    const from = req.params.from;
+    const to = req.params.to;
+    connection.query(`SELECT * FROM themepark.rainout WHERE rainoutDate BETWEEN '${from}' AND '${to}';` , (err, result) => {
+        return res.json({
+            rainBetween: result
+        });
+    })
+});
+
+app.get('/maintenancebetween/:from&:to', (req, res, next) => {
+    const from = req.params.from;
+    const to = req.params.to;
+    connection.query(`SELECT * FROM themepark.maintenance_order WHERE DateCreated BETWEEN '${from}' AND '${to}';` , (err, result) => {
+        return res.json({
+            maintBetween: result
         });
     })
 });

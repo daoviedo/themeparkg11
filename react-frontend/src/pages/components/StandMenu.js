@@ -49,7 +49,7 @@ class StandMenu extends React.Component {
   render() {
     return (
       <div>
-        <IconButton onClick={this.handleClickOpen} style = {{textTransform: 'none', outline: 0, border: 'none',}}> 
+        <IconButton onClick={this.handleClickOpen} style = {{textTransform: 'none', outline: 0, border: 'none', color: "white", opacity: .6}}> 
           <InfoIcon/>
         </IconButton>
         <Dialog

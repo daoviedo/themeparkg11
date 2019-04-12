@@ -84,7 +84,7 @@ class Home extends Component {
 			<footer id="footer">
 				<div className="inner">
 					<div className="copyright">
-						<a href="#c">&copy; ThemeParkG11. Created By: Daniel Oviedo | Ricardo Useche | Nic Graves</a>.
+						<a href="#c">&copy; ThemeParkG11. Created By: Daniel Oviedo | Ricardo Useche | Nic Graves | Kelsey Hedges</a>.
 					</div>
 				</div>
 			</footer>
