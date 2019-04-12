@@ -15,42 +15,40 @@ function Transition(props) {
 
 class StandMenu extends React.Component {
   state = {
-    stand: {},
+    stand: this.props.stand,
     items: [],
     open: false,
   };
-  renderItems = ({ Stand_ID, Item_ID, Item_Name, Item_Price }) =>
+  renderItems = ({ Item_ID, Item_Name, Item_Price }) =>
     <TableRow key={Item_ID}>
       <TableCell component="th" scope="row">
           {Item_Name}
       </TableCell>
-      <TableCell align="right">{Item_Price}</TableCell>
+      <TableCell align="right">${Item_Price}.00</TableCell>
     </TableRow>
   
-  fetchmenu = sID => {
-    fetch(`http://157.230.172.23:4000/standmenu/${sID}`, {
+  fetchmenu(){
+    fetch(`http://157.230.172.23:4000/standmenu/${this.state.stand.Stand_ID}`, {
       method: "GET",
     })
       .then(res => res.json())
-      .then(result => console.log(`${result.itemList}`))
       .then(result => this.setState({ items: result.itemList }))
       .catch(err => console.log(err))
   }
 
-  handleClickOpen = scroll => () => {
-    this.setState({ open: true, scroll, stand: this.props.stand});
-    console.log(this.props.stand.Stand_ID)
-    this.fetchmenu(this.props.stand.Stand_ID);
+  handleClickOpen = _ => {
+    this.fetchmenu();
+    this.setState({ open: true});
+    
   };
 
   handleClose = () => {
     this.setState({ open: false });
   };
   render() {
-    const {items} = this.state
     return (
       <div>
-        <IconButton onClick={this.handleClickOpen('scroll')} style = {{textTransform: 'none', outline: 0, border: 'none',}}> 
+        <IconButton onClick={this.handleClickOpen} style = {{textTransform: 'none', outline: 0, border: 'none',}}> 
           <InfoIcon/>
         </IconButton>
         <Dialog
@@ -66,10 +64,13 @@ class StandMenu extends React.Component {
           <DialogContent>
             <Table>
               <TableHead>
+                <TableRow>
                 <TableCell>Item Name</TableCell>
                 <TableCell align = "right">Price</TableCell>
+                </TableRow>
               </TableHead>
               <TableBody>
+                {this.state.items.map(this.renderItems)}
               </TableBody>
             </Table>
           </DialogContent>
