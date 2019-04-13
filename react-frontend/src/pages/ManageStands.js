@@ -35,7 +35,25 @@ class ManageStands extends Component{
         clist: [],
         items: [],
         item: {},
+        stand: {},
+        openDeleteStand: false,
         openDeleteItem: false,
+    }
+    handleDeleteStand = (sid) =>{
+        fetch(`http://157.230.172.23:4000/deletestand`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: itemid,
+            }),
+        })
+        .then(()=>{
+            this.handleCloseDeleteStand();
+            this.fetchstands();
+        })
+        .catch(err => console.log(err))
     }
     handleDeleteItem = (itemid) =>{
         fetch(`http://157.230.172.23:4000/deleteitem`,{
@@ -53,6 +71,13 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
+    handleOpenDeleteStand = (standv) => {
+        this.setState({ stand: standv, openDeleteStand: true });
+    };
+    handleCloseDeleteStand = (standv) =>
+    {
+        this.setState({openDeleteStand: false})
+    };
     handleOpenDeleteItem = (itemv) => {
         this.setState({ item: itemv, openDeleteItem: true });
     };
