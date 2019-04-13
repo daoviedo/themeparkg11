@@ -8,6 +8,7 @@ class TopBar extends Component {
         super(props);
         this.state = {
             userID: localStorage.getItem('userID'),
+            depID: localStorage.getItem('departmentID'),
             openUserMenu: false
         }
     }
@@ -31,7 +32,7 @@ class TopBar extends Component {
                                 <Nav.Link href="/park-tickets">Buy Tickets</Nav.Link>
                                 <Nav.Link href="/rides" >Rides</Nav.Link>
                                 <Nav.Link href="/dining">Dining</Nav.Link>
-                                {loggedIn ? <UserBar openUserMenu={this.state.openUserMenu} openMenu={() => this.setState({openUserMenu: true})} closeMenu={() => this.setState({openUserMenu: false})} logOff={() => this.logOff()}/> : <Nav.Link href="/login">Login</Nav.Link>}
+                                {loggedIn ? <UserBar depID={this.state.depID} openUserMenu={this.state.openUserMenu} openMenu={() => this.setState({openUserMenu: true})} closeMenu={() => this.setState({openUserMenu: false})} logOff={() => this.logOff()}/> : <Nav.Link href="/login">Login</Nav.Link>}
                             </Nav>
                         </Navbar.Collapse>
                 </Navbar>
