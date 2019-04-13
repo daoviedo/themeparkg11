@@ -142,7 +142,7 @@ class BetweenReport extends Component {
               <TableRow>
                 <TableCell align="center">
                 <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                  <DatePicker
+                  <DatePicker style={{marginRight: 10}}
                   required
                   label="From:"
                   value={this.state.from}
@@ -150,14 +150,14 @@ class BetweenReport extends Component {
                   />
                 </MuiPickersUtilsProvider>
                 <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                  <DatePicker
+                  <DatePicker style={{marginRight: 10}}
                   required
                   label="To:"
                   value={this.state.to}
                   onChange={e => this.handleChange("to",e)}
                   />
                 </MuiPickersUtilsProvider>
-                <Button
+                <Button variant="contained" style={{marginTop: 5}}
                 onClick={() => this.buttonSubmit()}
                 >
                 Submit
