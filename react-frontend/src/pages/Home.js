@@ -71,7 +71,7 @@ class Home extends Component {
 							<header>
 								<h3>Restaurants and Concessions</h3>
 							</header>
-							<p>Choose from our top-rated restaurants like<br />like Pizza Palace, or grab a snack at any<br />nearby concession stand!</p>
+							<p>Choose from our top-rated restaurants like<br />Pizza Palace, or grab a snack at any<br />nearby concession stand!</p>
 							<footer>
 								<a href="/dining" className="button">View Diners</a>
 							</footer>

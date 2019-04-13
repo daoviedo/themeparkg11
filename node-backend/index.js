@@ -523,7 +523,8 @@ app.get('/rainoutsbetween/:from&:to', (req, res, next) => {
 app.get('/maintenancebetween/:from&:to', (req, res, next) => {
     const from = req.params.from;
     const to = req.params.to;
-    connection.query(`SELECT * FROM themepark.maintenance_order WHERE DateCreated BETWEEN '${from}' AND '${to}';` , (err, result) => {
+    connection.query(`SELECT RideName, Rides_ID, RideID, COUNT(OrderID) AS OrderCount FROM themepark.maintenance_order, ride
+    WHERE Rides_ID = RideID AND DateCreated BETWEEN  '${from}' AND '${to}' GROUP BY RideName , Rides_ID , RideID;` , (err, result) => {
         return res.json({
             maintBetween: result
         });

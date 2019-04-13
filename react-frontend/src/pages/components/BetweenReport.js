@@ -128,6 +128,13 @@ class BetweenReport extends Component {
     </TableRow>
   )
 
+  renderRainoutData = ({tickets_sold }) => (
+    <TableRow key={Math.random() * 100}>
+      <TableCell>{tickets_sold}</TableCell>
+      <TableCell align="right">${tickets_sold * 35}.00</TableCell>
+    </TableRow>
+  )
+
   render() {
     const { classes } = this.props;
     const { ticketData } = this.state;

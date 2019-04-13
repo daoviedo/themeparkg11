@@ -12,11 +12,11 @@ class Report extends Component {
       <header className="headerb">
         <TopBar/>
         <RideStatus/>
-        <div style={{height:50}}></div>
+        <div style={{height:10}}></div>
         <SalesReport/>
-        <div style={{height:50}}></div>
+        <div style={{height:10}}></div>
         <BetweenReport/>
-        <div style={{height:50}}></div>
+        <div style={{height:10}}></div>
       </header>
     );
   }
