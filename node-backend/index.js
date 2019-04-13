@@ -572,6 +572,38 @@ app.patch('/deletestand', (req, res, next) =>{
     })
 });
 
+app.post('/addstand', (req, res, next) => {
+    const{name, hours} = req.body
+    const Qcommand = `INSERT INTO concession_stand (Stand_ID, Stand_Name, Hours_of_operations) VALUES (NULL, '${name}', '${hours}')`
+    connection.query(Qcommand, (err, result) => {
+        if (err) {
+            return res.json({
+                status: 0
+            });
+        } else {
+            return res.json({
+                status: 1
+            });
+        }
+    })
+});
+
+app.post('/additem', (req, res, next) => {
+    const{name, price} = req.body
+    const Qcommand = `INSERT INTO concession_item_lookup (Item_ID, Item_Name, Item_Price) VALUES (NULL, '${name}', ${price})`
+    connection.query(Qcommand, (err, result) => {
+        if (err) {
+            return res.json({
+                status: 0
+            });
+        } else {
+            return res.json({
+                status: 1
+            });
+        }
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });

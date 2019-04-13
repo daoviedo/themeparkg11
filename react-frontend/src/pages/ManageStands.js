@@ -6,6 +6,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { Paper, Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/core';
 import DeleteItemDialog from './components/DeleteItemDialog';
+import AddStandDialog from './components/AddStandDialog';
 import DeleteStand from './components/DeleteStand';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -37,9 +38,52 @@ class ManageStands extends Component{
         items: [],
         item: {},
         stand: {},
+        itemname: "",
+        price: "",
+        standname: "",
+        hours: "",
+        openAddStand: false,
         openDeleteStand: false,
         openDeleteItem: false,
     }
+    handleChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+    submitItem = () =>{
+        fetch(`http://157.230.172.23:4000/additem`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: this.state.itemname,
+                price: this.state.price
+            }),
+        })
+        .then(()=>{
+            this.handleCloseAddItem();
+            this.fetchitems();
+        })
+        .catch(err => console.log(err))
+    }
+    submitStand = () =>{
+        fetch(`http://157.230.172.23:4000/addstand`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: this.state.standname,
+                hours: this.state.hours
+            }),
+        })
+        .then(()=>{
+            this.handleCloseAddStand();
+            this.fetchstands();
+        })
+        .catch(err => console.log(err))
+    }
+    
     handleDeleteStand = (sid) =>{
         fetch(`http://157.230.172.23:4000/deletestand`,{
             method: "PATCH",
@@ -72,6 +116,13 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
+    handleOpenAddStand = (standv) => {
+        this.setState({ openAddStand: true });
+    };
+    handleCloseAddStand = () =>
+    {
+        this.setState({openAddStand: false})
+    };
     handleOpenDeleteStand = (standv) => {
         this.setState({ stand: standv, openDeleteStand: true });
     };
@@ -148,9 +199,8 @@ class ManageStands extends Component{
                     {clist.map(this.renderclist)}
                 </Paper>
                 <br/>
-                <Fab size="medium" aria-label="Add-stand" className={classes.margin}>
-                    <AddIcon />
-                </Fab>
+                <AddStandDialog val = {this.state} handleCloseAddStand = {this.handleCloseAddStand} 
+                    handleCange ={this.handleChange} submitStand = {this.submitStand} open = {this.handleOpenAddStand}/>
                 </Grid>
                 <Grid item sm = {5}>
                 <Paper>
@@ -170,9 +220,8 @@ class ManageStands extends Component{
                     </div>
                 </Paper>
                 <br/>
-                <Fab size="medium" aria-label="Add-item" className={classes.margin}>
-                    <AddIcon />
-                </Fab>
+                <AddStandDialog val = {this.state} handleCloseAddStand = {this.handleCloseAddStand} 
+                    handleCange ={this.handleChange} submitStand = {this.submitStand} open = {this.handleOpenAddStand}/>
                 </Grid>
                 </Grid> 
                 </div>
