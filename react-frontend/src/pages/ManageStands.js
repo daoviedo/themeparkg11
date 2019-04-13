@@ -34,7 +34,7 @@ class ManageStands extends Component{
     state = {
         clist: [],
         items: [],
-        item:{},
+        item: {},
         openDeleteItem: false,
     }
     handleDeleteItem = (itemid) =>{
@@ -53,6 +53,24 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
+    handleDeleteStand(sid){
+        fetch(`http://157.230.172.23:4000/deletestand`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: sid,
+            }),
+        })
+        .then(()=>{
+            this.handleCloseDeleteItem();
+        })
+        .catch(err => console.log(err))
+    }
+    handleOpenDeleteStand = (stand) => {
+        this.setState({ item: {Item_ID: stand.Stand_ID, Item_Name: stand.Stand_Name}, openDeleteItem: true });
+    };
     handleOpenDeleteItem = (itemv) => {
         this.setState({ item: itemv, openDeleteItem: true });
     };
@@ -83,7 +101,7 @@ class ManageStands extends Component{
             <Typography className={this.props.classes.secondaryHeading}>{Hours_of_operations}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}}/>
+            <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}} openDelete = {this.handleOpenDeleteStand}/>
         </ExpansionPanelDetails>
     </ExpansionPanel>
 
