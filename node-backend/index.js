@@ -131,7 +131,7 @@ app.post('/purchase', (req, res, next) => {
                 } else {
                     const mailOptions = {
                         from: 'themeparkg11@gmail.com',
-                        to: {email},
+                        to: email,
                         subject: 'Purchase Confirmation',
                         text: 'That was easy!'
                     };
