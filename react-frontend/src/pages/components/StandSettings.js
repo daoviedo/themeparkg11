@@ -44,7 +44,7 @@ class StandSettings extends Component
       <TableCell component="th" scope="row">
           {Item_Name}
       </TableCell>
-      <TableCell align="right">${Item_Price}.00</TableCell>
+      <TableCell align="right">${Item_Price.toFixed(2)}</TableCell>
     </TableRow>
 
     render(){
