@@ -62,7 +62,7 @@ class RideStatus extends Component {
 
   renderRideStatus = ({ RideName, NeedMaintenance }) => (
   <ToolTip key={RideName} title={ NeedMaintenance > 0 ? "Maintenance Required" : "Operational"}>
-    <TableCell align="right">
+    <TableCell align="center">
         {NeedMaintenance > 0 ? (
             <Cancel
               style={{
