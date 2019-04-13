@@ -168,26 +168,74 @@ class BetweenReport extends Component {
           </Table>
           <div style={{maxHeight: 330, overflowY: 'auto'}}>
           <Table >
-          <TableHead>
-          </TableHead>
           <TableBody className={classes.table}>
             <TableRow>
-                <TableCell>Ticket Report</TableCell>
+                <TableCell style={{fontSize: 17}}>Ticket Report</TableCell>
               </TableRow>
-              <TableRow>
+          </TableBody>
+          </Table>
+          <Table>
+            <TableHead>
+            <TableRow>
                 <TableCell>Tickets Sold</TableCell>
                 <TableCell align='right'>Revenue</TableCell>
               </TableRow>
-                {ticketData.map(this.renderMonthSales)}
-              <TableRow>
-                <TableCell>Ride Report</TableCell>
+            </TableHead>
+            <TableBody>
+            {ticketData.map(this.renderMonthSales)}
+            </TableBody>
+          </Table>
+          <Table >
+          <TableBody className={classes.table}>
+            <TableRow>
+                <TableCell style={{fontSize: 17}}>Ride Report</TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell>Maintenance</TableCell>
+          </TableBody>
+          </Table>
+          <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>Ride</TableCell>
+                <TableCell align='right'># of Riders</TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell>Rainout</TableCell>
+            </TableHead>
+            <TableBody>
+            {ticketData.map(this.renderMonthSales)}
+            </TableBody>
+          </Table>
+          <Table >
+          <TableBody className={classes.table}>
+            <TableRow>
+                <TableCell style={{fontSize: 17}}>Maintenance Report</TableCell>
               </TableRow>
+          </TableBody>
+          </Table>
+          <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>Ride</TableCell>
+                <TableCell align='right'># Of Maintenances</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            {ticketData.map(this.renderMonthSales)}
+            </TableBody>
+          </Table>
+          <Table >
+          <TableBody className={classes.table}>
+            <TableRow>
+                <TableCell style={{fontSize: 17}}>Rainout Report</TableCell>
+              </TableRow>
+          </TableBody>
+          </Table>
+          <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            
             </TableBody>
           </Table>
           </div>
