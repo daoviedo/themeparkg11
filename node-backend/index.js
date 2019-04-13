@@ -129,7 +129,7 @@ app.post('/purchase', (req, res, next) => {
                 if (err1) {
                     return res.send(err1);
                 } else {
-                    const textbody = '';
+                    let textbody = '';
                     result2.map(({Ticket_ID}) =>{
                         textbody += Ticket_ID + '\n'
                     });
