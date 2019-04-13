@@ -129,11 +129,15 @@ app.post('/purchase', (req, res, next) => {
                 if (err1) {
                     return res.send(err1);
                 } else {
+                    const textbody = '' + result2.map(({Ticket_ID}) =>{
+                        Ticket_ID + '\n'
+                    });
+                    console.log(textbody);
                     const mailOptions = {
                         from: 'themeparkg11@gmail.com',
                         to: email,
                         subject: 'Purchase Confirmation',
-                        text: result2
+                        text: textbody
                     };
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
