@@ -6,6 +6,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { Paper, Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/core';
 import DeleteItemDialog from './components/DeleteItemDialog';
+import DeleteStand from './components/DeleteStand';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Fab from '@material-ui/core/Fab';
@@ -35,7 +36,25 @@ class ManageStands extends Component{
         clist: [],
         items: [],
         item: {},
+        stand: {},
+        openDeleteStand: false,
         openDeleteItem: false,
+    }
+    handleDeleteStand = (sid) =>{
+        fetch(`http://157.230.172.23:4000/deletestand`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: sid,
+            }),
+        })
+        .then(()=>{
+            this.handleCloseDeleteStand();
+            this.fetchstands();
+        })
+        .catch(err => console.log(err))
     }
     handleDeleteItem = (itemid) =>{
         fetch(`http://157.230.172.23:4000/deleteitem`,{
@@ -53,6 +72,13 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
+    handleOpenDeleteStand = (standv) => {
+        this.setState({ stand: standv, openDeleteStand: true });
+    };
+    handleCloseDeleteStand = () =>
+    {
+        this.setState({openDeleteStand: false})
+    };
     handleOpenDeleteItem = (itemv) => {
         this.setState({ item: itemv, openDeleteItem: true });
     };
@@ -83,7 +109,7 @@ class ManageStands extends Component{
             <Typography className={this.props.classes.secondaryHeading}>{Hours_of_operations}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}} val = {this.state} openDelete = {this.handleOpenDeleteStand}/>
+            <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}} val={this.state} openDelete={this.handleOpenDeleteStand}/>
         </ExpansionPanelDetails>
     </ExpansionPanel>
 
@@ -139,6 +165,7 @@ class ManageStands extends Component{
                         </TableBody>
                         </Table>
                         <DeleteItemDialog val={this.state} item={this.state.item} close={this.handleCloseDeleteItem} confirm={this.handleDeleteItem}/>
+                        <DeleteStand val={this.state} stand={this.state.stand} closeDelete={this.handleCloseDeleteStand} confirm={this.handleDeleteStand}/>
                         <br/>
                     </div>
                 </Paper>

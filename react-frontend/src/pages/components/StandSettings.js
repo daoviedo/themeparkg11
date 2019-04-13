@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import { Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import DeleteItemDialog from './DeleteItemDialog';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
@@ -71,7 +70,7 @@ class StandSettings extends Component
             <Button variant="outlined" color="primary">Edit Menu</Button>
             </Grid>
             <Grid item xs = {6}>
-            <Button variant="outlined" color="secondary">Remove Stand</Button>
+            <Button variant="outlined" color="secondary" onClick={()=>this.props.openDelete(this.state.stand)}>Remove Stand</Button>
             </Grid>
             </Grid>
             </div>
