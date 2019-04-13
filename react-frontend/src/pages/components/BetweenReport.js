@@ -141,6 +141,13 @@ class BetweenReport extends Component {
     </TableRow>
   )
 
+  renderRideData = ({RideName, RideCounts }) => (
+    <TableRow key={Math.random() * 100}>
+      <TableCell>{RideName}</TableCell>
+      <TableCell align="right">{RideCounts}</TableCell>
+    </TableRow>
+  )
+
   render() {
     const { classes } = this.props;
     const { ticketData } = this.state;
@@ -216,7 +223,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-            {ticketData.map(this.renderTicketData)}
+            {rideData.map(this.renderRideData)}
             </TableBody>
           </Table>
           <Table >
