@@ -133,7 +133,6 @@ app.post('/purchase', (req, res, next) => {
                     result2.map(({Ticket_ID}) =>{
                         textbody +='Ticket ID: ' + Ticket_ID + '\n'
                     });
-                    console.log(textbody);
                     const mailOptions = {
                         from: 'themeparkg11@gmail.com',
                         to: email,
@@ -141,11 +140,6 @@ app.post('/purchase', (req, res, next) => {
                         text: textbody
                     };
                     transporter.sendMail(mailOptions, function(error, info){
-                        if (error) {
-                          console.log(error);
-                        } else {
-                          console.log('Email sent: ' + info.response);
-                        }
                     });
                     return res.json({
                         results: result2
