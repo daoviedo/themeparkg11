@@ -539,6 +539,22 @@ app.get('/itemlist', (req, res, next) => {
     })
 });
 
+app.patch('/deleteitem', (req, res, next) =>{
+    const {id} = req.body
+    const Qcommand = `DELETE FROM concession_item_lookup WHERE Item_ID = ${id}`
+    connection.query(Qcommand, (err, result) => {
+        if (err) {
+            return res.json({
+                status: 0
+            });
+        } else {
+            return res.json({
+                status: 1
+            });
+        }
+    })
+
+});
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });
