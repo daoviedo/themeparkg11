@@ -71,10 +71,9 @@ class StandSettings extends Component
             <Button variant="outlined" color="primary">Edit Menu</Button>
             </Grid>
             <Grid item xs = {6}>
-            <Button onClick={this.props.openDelete(this.state.stand)} variant="outlined" color="secondary">Remove Stand</Button>
+            <Button variant="outlined" color="secondary">Remove Stand</Button>
             </Grid>
             </Grid>
-            <DeleteItemDialog val={this.props.val} item={this.state.item} close={this.handleCloseDeleteItem} confirm={this.handleDeleteItem}/>
             </div>
         </React.Fragment>
     );}
