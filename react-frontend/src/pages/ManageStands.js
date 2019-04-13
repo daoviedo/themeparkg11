@@ -7,13 +7,12 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import { Paper, Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/core';
 import DeleteItemDialog from './components/DeleteItemDialog';
 import AddStandDialog from './components/AddStandDialog';
+import AddItemDialog from './components/AddItemDialog';
 import DeleteStand from './components/DeleteStand';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
 import StandSettings from './components/StandSettings'
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -42,6 +41,7 @@ class ManageStands extends Component{
         price: "",
         standname: "",
         hours: "",
+        openAddItem: false,
         openAddStand: false,
         openDeleteStand: false,
         openDeleteItem: false,
@@ -83,7 +83,7 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
-    
+
     handleDeleteStand = (sid) =>{
         fetch(`http://157.230.172.23:4000/deletestand`,{
             method: "PATCH",
@@ -116,7 +116,14 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
-    handleOpenAddStand = (standv) => {
+    handleOpenAddItem = () => {
+        this.setState({ openAddItem: true });
+    };
+    handleCloseAddItem = () =>
+    {
+        this.setState({openAddItem: false})
+    };
+    handleOpenAddStand = () => {
         this.setState({ openAddStand: true });
     };
     handleCloseAddStand = () =>
@@ -200,7 +207,7 @@ class ManageStands extends Component{
                 </Paper>
                 <br/>
                 <AddStandDialog val = {this.state} handleCloseAddStand = {this.handleCloseAddStand} 
-                    handleCange ={this.handleChange} submitStand = {this.submitStand} open = {this.handleOpenAddStand}/>
+                    handleChange ={this.handleChange} submitStand = {this.submitStand} open = {this.handleOpenAddStand}/>
                 </Grid>
                 <Grid item sm = {5}>
                 <Paper>
@@ -220,8 +227,8 @@ class ManageStands extends Component{
                     </div>
                 </Paper>
                 <br/>
-                <AddStandDialog val = {this.state} handleCloseAddStand = {this.handleCloseAddStand} 
-                    handleCange ={this.handleChange} submitStand = {this.submitStand} open = {this.handleOpenAddStand}/>
+                <AddItemDialog val = {this.state} handleCloseAddItem = {this.handleCloseAddItem} 
+                    handleChange ={this.handleChange} submitItem = {this.submitItem} open = {this.handleOpenAddItem}/>
                 </Grid>
                 </Grid> 
                 </div>

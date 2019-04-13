@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import { TextField, MenuItem } from '@material-ui/core';
+import { TextField} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,7 +22,7 @@ function AddItemDialog(props) {
           open={props.val.openAddItem}
           TransitionComponent={Transition}
           keepMounted
-          onClose={props.handleCloseAddStand}
+          onClose={props.handleCloseAddItem}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
           style={{textAlign: "center"}}
@@ -34,13 +34,13 @@ function AddItemDialog(props) {
           <Grid container spacing={24}>
             <Grid item xs={12} md={6}>
               <TextField required id="itemname" label="Item Name" 
-              value={props.val.standname} 
-              onChange={e => props.handleChange('itemname', e.target.value)} fullWidth />
+              value={props.val.itemname} 
+              onChange={props.handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField required id="price" label="Item Price"
-               value={props.val.hours} 
-               onChange={e => props.handleChange('price', e.target.value)} fullWidth />
+               value={props.val.price} 
+               onChange={props.handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
             <Button onClick={props.handleCloseAddItem} variant = "outlined" color="secondary">
