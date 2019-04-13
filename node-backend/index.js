@@ -493,7 +493,9 @@ app.get('/standmenu/:sID', (req, res, next) => {
 app.get('/ridesbetween/:from&:to', (req, res, next) => {
     const from = req.params.from;
     const to = req.params.to;
-    connection.query(`SELECT * FROM themepark.ride_analytics WHERE RideTime BETWEEN '${from}' AND '${to}';` , (err, result) => {
+    const oldCommand = `SELECT RideName, SUM(RideCounts) as RideCounts FROM ride_analytics WHERE RideTime BETWEEN '${from}' AND '${to}' GROUP BY RideName;`;
+    const QCommand= `SELECT ride.RideName, SUM(RideCounts) RideCounts FROM ride_analytics RIGHT OUTER JOIN ride ON ride.RideID=ride_analytics.RideID WHERE RideTime BETWEEN '${from}' AND '${to}' OR RideTime IS NULL GROUP BY ride.RideName ORDER BY RideCounts DESC;`;
+    connection.query(QCommand, (err, result) => {
         return res.json({
             ridesBetween: result
         });

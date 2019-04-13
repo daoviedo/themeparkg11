@@ -121,23 +121,39 @@ class BetweenReport extends Component {
     this.fetchRideInfo();
   }
 
-  renderMonthSales = ({tickets_sold }) => (
+  renderTicketData = ({tickets_sold }) => (
     <TableRow key={Math.random() * 100}>
       <TableCell>{tickets_sold}</TableCell>
       <TableCell align="right">${tickets_sold * 35}.00</TableCell>
     </TableRow>
   )
 
-  renderRainoutData = ({tickets_sold }) => (
+  renderRainoutData = ({rainoutDate }) => (
     <TableRow key={Math.random() * 100}>
-      <TableCell>{tickets_sold}</TableCell>
-      <TableCell align="right">${tickets_sold * 35}.00</TableCell>
+      <TableCell>{rainoutDate}</TableCell>
+    </TableRow>
+  )
+
+  renderMaintData = ({RideName, OrderCount }) => (
+    <TableRow key={Math.random() * 100}>
+      <TableCell>{RideName}</TableCell>
+      <TableCell align="right">{OrderCount}</TableCell>
+    </TableRow>
+  )
+
+  renderRideData = ({RideName, RideCounts }) => (
+    <TableRow key={Math.random() * 100}>
+      <TableCell>{RideName}</TableCell>
+      <TableCell align="right">{RideCounts}</TableCell>
     </TableRow>
   )
 
   render() {
     const { classes } = this.props;
     const { ticketData } = this.state;
+    const { maintData } = this.state;
+    const { rideData } = this.state;
+    const { rainData } = this.state;
     return (
       <React.Fragment>
         <Paper className={classes.root}>
@@ -189,7 +205,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-            {ticketData.map(this.renderMonthSales)}
+            {ticketData.map(this.renderTicketData)}
             </TableBody>
           </Table>
           <Table >
@@ -207,7 +223,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-            {ticketData.map(this.renderMonthSales)}
+            {rideData.map(this.renderRideData)}
             </TableBody>
           </Table>
           <Table >
@@ -225,7 +241,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-            {ticketData.map(this.renderMonthSales)}
+            {maintData.map(this.renderMaintData)}
             </TableBody>
           </Table>
           <Table >
@@ -242,7 +258,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-            
+            {rainData.map(this.renderRainoutData)}
             </TableBody>
           </Table>
           </div>
