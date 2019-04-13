@@ -46,7 +46,7 @@ class ManageStands extends Component{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id: itemid,
+                id: sid,
             }),
         })
         .then(()=>{
