@@ -31,8 +31,9 @@ class Login extends Component{
                  })
               }).then(res => res.json())
              .then(result => {
-                 this.setState({departmentID: result.departmentID[0].dID});
-                 localStorage.setItem('departmentID',result.departmentID[0].dID);
+                localStorage.setItem('departmentID',result.departmentID[0].dID);
+                this.setState({departmentID: result.departmentID[0].dID});
+                 
         })
        .catch(err => console.log(err))
       }
