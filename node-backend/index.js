@@ -503,7 +503,7 @@ app.get('/ridesbetween/:from&:to', (req, res, next) => {
 app.get('/ticketsbetween/:from&:to', (req, res, next) => {
     const from = req.params.from;
     const to = req.params.to;
-    connection.query(`SELECT * FROM themepark.analytics WHERE datetick BETWEEN '${from}' AND '${to}';` , (err, result) => {
+    connection.query(`SELECT SUM(tickets_sold) tickets_sold FROM analytics WHERE datetick BETWEEN '${from}' AND '${to}'` , (err, result) => {
         return res.json({
             ticketsBetween: result
         });
