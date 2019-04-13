@@ -487,7 +487,7 @@ app.get('/newridepivot', (req, res, next) => {
     connection.query(`SELECT RideName FROM ride`, (err, result) => {
         let pivotCommand = `SELECT year, month, MONTH(RideTime) as MonthNumber,\n`;
         result.forEach((element) => {
-            console.log(element);
+            //console.log(element);
             pivotCommand += `SUM(RideName='${element.RideName}')AS '${element.RideName}',\n`
         });
         pivotCommand = pivotCommand.replace(/,\s*$/, "");
