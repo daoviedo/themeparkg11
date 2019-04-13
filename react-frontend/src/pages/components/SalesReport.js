@@ -12,7 +12,6 @@ const styles = theme => ({
     marginTop: 20,
     margin: "auto",
     overflowX: "auto",
-    overflowY: "auto"
   },
   table: {
     minWidth: 500
@@ -27,7 +26,8 @@ const styles = theme => ({
   header2: {
     position: "sticky",
     top: 0,
-    fontSize: 24
+    backgroundColor: "white",
+    fontSize: 17
   },
   button: {
     "&:hover": {
@@ -202,7 +202,7 @@ class SalesReport extends Component {
             </TableHead>
             <TableHead>
               <TableRow>
-                <TableCell align="center" className={classes.header2}>
+                <TableCell align="center">
               <TextField
                 select
                 required
@@ -240,18 +240,20 @@ class SalesReport extends Component {
               </TableRow>
             </TableHead>
           </Table>
+          <div style={{maxHeight: 330, overflowY: 'auto'}}>
           <Table className={classes.table}>
             <TableHead>
             <TableRow>
-              <TableCell>{this.state.dataVal}</TableCell>
-              <TableCell align="right">Tickets Sold</TableCell>
-              <TableCell align="right">Revenue</TableCell>
+              <TableCell className={classes.header2}>{this.state.dataVal}</TableCell>
+              <TableCell align="right" className={classes.header2}>Tickets Sold</TableCell>
+              <TableCell align="right" className={classes.header2}>Revenue</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
                   {data.map(this.renderSales)}
             </TableBody>
             </Table>
+            </div>
         </Paper>
       </React.Fragment>
     );
