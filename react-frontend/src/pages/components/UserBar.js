@@ -8,6 +8,10 @@ import EntLogo from '@material-ui/icons/ConfirmationNumber';
 import RideLogo from '@material-ui/icons/LocalPlay';
 import Dept from '@material-ui/icons/Work';
 import AnalyticsLogo from '@material-ui/icons/Equalizer';
+import AssignLogo from '@material-ui/icons/Assignment';
+import FoodLogo from '@material-ui/icons/Fastfood';
+import NewRideLogo from '@material-ui/icons/AirlineSeatReclineNormal';
+
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, Divider, IconButton} from "@material-ui/core";
 
@@ -56,10 +60,31 @@ function UserBar(props) {
                             <ListItemText primary='Analytics' />
                         </ListItem>
                     </Link>
+                    <Link to="/parkreport" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <AssignLogo style={{ color: "#2A2A31" }}/>
+                            <ListItemText primary='Reports' />
+                        </ListItem>
+                    </Link>
                     <Link to="/department" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <Dept style={{ color: "#2A2A31" }}/>
                             <ListItemText primary='Department' />
+                        </ListItem>
+                    </Link>
+                </List>
+                <Divider />
+                <List>
+                    <Link to="/manage-stands" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <FoodLogo style={{ color: "#2A2A31" }}/>
+                            <ListItemText primary='Manage Concessions' />
+                        </ListItem>
+                    </Link>
+                    <Link to="/new-ride" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <NewRideLogo style={{ color: "#2A2A31" }}/>
+                            <ListItemText primary='Create Ride' />
                         </ListItem>
                     </Link>
                 </List>
