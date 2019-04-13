@@ -61,7 +61,7 @@ class RideStatus extends Component {
   }
 
   renderRideStatus = ({ RideName, NeedMaintenance }) => (
-  <ToolTip title={ NeedMaintenance > 0 ? "Maintenance Required" : "Operational"}>
+  <ToolTip key={RideName} title={ NeedMaintenance > 0 ? "Maintenance Required" : "Operational"}>
     <TableCell align="right">
         {NeedMaintenance > 0 ? (
             <Cancel
@@ -82,7 +82,7 @@ class RideStatus extends Component {
               }}
             />
         )}
-        <span style={{ fontSize: 16, fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif;' }}>{RideName}</span>
+        <span style={{ fontSize: 16, fontFamily: 'Roboto, Helvetica, Arial, sans-serif' }}>{RideName}</span>
     </TableCell>
     </ToolTip>
   );
@@ -100,9 +100,11 @@ class RideStatus extends Component {
               </TableRow>
             </TableHead>
           </Table>
+          <Table className={classes.table}>
           <TableBody>
             <TableRow>{statusData.map(this.renderRideStatus)}</TableRow>
           </TableBody>
+          </Table>
         </Paper>
       </React.Fragment>
     );

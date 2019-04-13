@@ -3,45 +3,24 @@ import PropTypes from "prop-types";
 import { DatePicker, MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { withStyles } from "@material-ui/core/styles";
 import DateFnsUtils from '@date-io/date-fns';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@material-ui/core';
 
-const TealTheme = createMuiTheme({
-  palette: {
-    primary: {main: purple[900]},
-  },
-  overrides: {
-      MuiPickersDay: {
-        day: {
-          color: purple[900],
-        },
-        isSelected: {
-          backgroundColor: purple["900"],
-        },
-        current: {
-          color: purple["900"],
-        },
-      },
-      MuiPickersModal: {
-        dialogAction: {
-          color: purple["900"],
-        },
-      },
-    },
-});
 
 const styles = theme => ({
   root: {
-    width: "70%",
+    width: "40%",
     maxHeight: 500,
     marginTop: 20,
     margin: "auto",
-    overflowX: "auto",
-    overflowY: "auto"
+    
   },
   table: {
     minWidth: 500
+  },
+  table1: {
+    minWidth: 500,
+    overflowY: "auto",
+    overflowX: "auto"
   },
   header: {
     position: "sticky",
@@ -143,14 +122,13 @@ class BetweenReport extends Component {
   }
 
   renderMonthSales = ({tickets_sold }) => (
-    <TableRow>
+    <TableRow key={Math.random() * 100}>
       <TableCell>{tickets_sold}</TableCell>
-      <TableCell>{tickets_sold * 35}</TableCell>
+      <TableCell align="right">${tickets_sold * 35}.00</TableCell>
     </TableRow>
   )
 
   render() {
-    console.log(this.state);
     const { classes } = this.props;
     const { ticketData } = this.state;
     return (
@@ -162,8 +140,8 @@ class BetweenReport extends Component {
               <TableCell align="center" className={classes.header}>Report Generator</TableCell>
               </TableRow>
               <TableRow>
-              <div style={{ textAlign: "center", paddingVertical: 100 }}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
+                <TableCell align="center">
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
                   <DatePicker
                   required
                   label="From:"
@@ -171,7 +149,7 @@ class BetweenReport extends Component {
                   onChange={e => this.handleChange("from",e)}
                   />
                 </MuiPickersUtilsProvider>
-                <MuiPickersUtilsProvider utils={DateFnsUtils} theme={TealTheme}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
                   <DatePicker
                   required
                   label="To:"
@@ -184,12 +162,21 @@ class BetweenReport extends Component {
                 >
                 Submit
                 </Button>
-              </div>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
+            </TableHead>            
+          </Table>
+          <div style={{maxHeight: 330, overflowY: 'auto'}}>
+          <Table >
+          <TableHead>
+          </TableHead>
+          <TableBody className={classes.table}>
             <TableRow>
-                <TableCell>Ticket Sales</TableCell>
+                <TableCell>Ticket Report</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Tickets Sold</TableCell>
+                <TableCell align='right'>Revenue</TableCell>
               </TableRow>
                 {ticketData.map(this.renderMonthSales)}
               <TableRow>
@@ -202,8 +189,8 @@ class BetweenReport extends Component {
                 <TableCell>Rainout</TableCell>
               </TableRow>
             </TableBody>
-              
           </Table>
+          </div>
         </Paper>
       </React.Fragment>
     );

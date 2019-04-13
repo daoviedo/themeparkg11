@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
   root: {
-    width: "70%",
+    width: "40%",
     maxHeight: 500,
     marginTop: 20,
     margin: "auto",
@@ -22,6 +22,11 @@ const styles = theme => ({
     top: 0,
     backgroundColor: "#2F4F4F",
     color: "white",
+    fontSize: 24
+  },
+  header2: {
+    position: "sticky",
+    top: 0,
     fontSize: 24
   },
   button: {
@@ -151,52 +156,37 @@ class SalesReport extends Component {
       this.fetchDayInfo(event.target.value);
     }
   }
-
+  
   renderSales = ({year, month, dayname, tickets_sold}) => {
+    
     if (this.state.dataVal === 'year') {
       return (
-        <TableRow>
-          <TableCell>{this.state.data.year}</TableCell>
-          <TableCell>{this.state.data.tickets_sold}</TableCell>
-          <TableCell>{this.state.data.tickets_sold * 35}</TableCell>
+        <TableRow key={Math.random() * 100}>
+          <TableCell>{year}</TableCell>
+          <TableCell align="right">{tickets_sold}</TableCell>
+          <TableCell align="right">${tickets_sold * 35}.00</TableCell>
         </TableRow>
       )
     } 
     else if (this.state.dataVal === 'month') {
       return (
-        <TableRow>
-          <TableCell>{this.state.data.month}</TableCell>
-          <TableCell>{this.state.data.tickets_sold}</TableCell>
-          <TableCell>{this.state.data.tickets_sold * 35}</TableCell>
+        <TableRow key={Math.random() * 100}>
+          <TableCell>{month}</TableCell>
+          <TableCell align="right">{tickets_sold}</TableCell>
+          <TableCell align="right">${tickets_sold * 35}.00</TableCell>
         </TableRow>
       )
     }
     else if (this.state.dataVal === 'dayname') {
       return (
-        <TableRow>
-          <TableCell>{this.state.data.dayname}</TableCell>
-          <TableCell>{this.state.data.tickets_sold}</TableCell>
-          <TableCell>{this.state.data.tickets_sold * 35}</TableCell>
+        <TableRow key={Math.random() * 100}>
+          <TableCell>{dayname}</TableCell>
+          <TableCell align="right">{tickets_sold}</TableCell>
+          <TableCell align="right">${tickets_sold * 35}.00</TableCell>
         </TableRow>
       )
     }
   }
-
-  renderYearSales = ({ year, month, tickets_sold }) => (
-    <TableRow>
-      <TableCell>{year}</TableCell>
-      <TableCell>{tickets_sold}</TableCell>
-      <TableCell>{tickets_sold * 35}</TableCell>
-    </TableRow>
-  )
-  
-  renderMonthSales = ({ month, tickets_sold }) => (
-    <TableRow>
-      <TableCell>{month}</TableCell>
-      <TableCell>{tickets_sold}</TableCell>
-      <TableCell>{tickets_sold * 35}</TableCell>
-    </TableRow>
-  )
 
   render() {
     const { classes } = this.props;
@@ -210,7 +200,9 @@ class SalesReport extends Component {
                 <TableCell align="center" className={classes.header}>Ticket Sales</TableCell>
               </TableRow>
             </TableHead>
-            <div style={{ textAlign: "center", paddingVertical: 100 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell align="center" className={classes.header2}>
               <TextField
                 select
                 required
@@ -244,15 +236,22 @@ class SalesReport extends Component {
                   </MenuItem>
                 ))}
               </TextField>
-            </div>
+              </TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+          <Table className={classes.table}>
+            <TableHead>
             <TableRow>
               <TableCell>{this.state.dataVal}</TableCell>
-              <TableCell>Ticket Sales</TableCell>
-              <TableCell>Revenue</TableCell>
+              <TableCell align="right">Tickets Sold</TableCell>
+              <TableCell align="right">Revenue</TableCell>
             </TableRow>
-                  {data.map(this.renderYearSales)}
-            <TableBody/>
-          </Table>
+            </TableHead>
+            <TableBody>
+                  {data.map(this.renderSales)}
+            </TableBody>
+            </Table>
         </Paper>
       </React.Fragment>
     );

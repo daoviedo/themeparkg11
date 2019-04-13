@@ -15,6 +15,7 @@ class Report extends Component {
         <SalesReport/>
         <div style={{height:50}}></div>
         <BetweenReport/>
+        <div style={{height:50}}></div>
       </React.Fragment>
     );
   }
