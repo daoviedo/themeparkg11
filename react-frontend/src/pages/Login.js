@@ -11,7 +11,8 @@ class Login extends Component{
           username: "",
           Password: "",
           output:"",
-          departmentID: ""
+          departmentID: "",
+          depLoaded: false
       };
       handleUserID = text =>{
           this.setState({ username: text.target.value });
@@ -32,7 +33,7 @@ class Login extends Component{
               }).then(res => res.json())
              .then(result => {
                 localStorage.setItem('departmentID',result.departmentID[0].dID);
-                this.setState({departmentID: result.departmentID[0].dID});
+                this.setState({departmentID: result.departmentID[0].dID, depLoaded: true});
                  
         })
        .catch(err => console.log(err))
@@ -66,7 +67,7 @@ class Login extends Component{
 
       render() {
           console.log(this.state.departmentID)
-          if(this.state.output === 1){
+          if(this.state.output === 1 && this.state.depLoaded){
               window.location.replace('/');
           }
             return (
