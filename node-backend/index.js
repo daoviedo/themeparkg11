@@ -3,6 +3,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
 
 const app = express();
 
@@ -20,6 +21,14 @@ connection.connect(err => {
         return err;
     } else {
         console.log("Successfully connected to the database");
+    }
+});
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'themeparkg11@gmail.com',
+      pass: 'themeparkg11project'
     }
 });
 
@@ -120,6 +129,19 @@ app.post('/purchase', (req, res, next) => {
                 if (err1) {
                     return res.send(err1);
                 } else {
+                    const mailOptions = {
+                        from: 'themeparkg11@gmail.com',
+                        to: {email},
+                        subject: 'Purchase Confirmation',
+                        text: 'That was easy!'
+                    };
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log('Email sent: ' + info.response);
+                        }
+                    });
                     return res.json({
                         results: result2
                     });
