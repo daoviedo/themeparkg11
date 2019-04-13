@@ -30,7 +30,7 @@ function DeleteItemDialog(props){
             <Button onClick={props.close} variant="outlined" color="secondary">Cancel</Button>
             </Grid>
             <Grid item xs = {6}>
-            <Button onClick={props.confirm(props.item.Item_ID)} variant="outlined" color="primary">Confirm</Button>
+            <Button onClick={()=>props.confirm(props.item.Item_ID)} variant="outlined" color="primary">Confirm</Button>
             </Grid>
             </Grid>
             </DialogActions>

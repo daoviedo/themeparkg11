@@ -37,7 +37,7 @@ class ManageStands extends Component{
         item:{},
         openDeleteItem: false,
     }
-    handleDeleteItem(itemid){
+    handleDeleteItem = (itemid) =>{
         fetch(`http://157.230.172.23:4000/deleteitem`,{
             method: "PATCH",
             headers: {
@@ -47,8 +47,10 @@ class ManageStands extends Component{
                 id: itemid,
             }),
         })
-        .then(()=>this.fetchitems())
-        .then(()=>this.handleCloseDeleteItem())
+        .then(()=>{
+            this.handleCloseDeleteItem();
+            this.fetchitems();
+        })
         .catch(err => console.log(err))
     }
     handleOpenDeleteItem = (itemv) => {

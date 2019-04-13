@@ -4,7 +4,6 @@ import { Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/co
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import DeleteItemDialog from './DeleteItemDialog';
 
 const styles = theme => ({
     root: {
