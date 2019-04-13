@@ -133,7 +133,7 @@ app.post('/purchase', (req, res, next) => {
                         from: 'themeparkg11@gmail.com',
                         to: email,
                         subject: 'Purchase Confirmation',
-                        text: 'That was easy!'
+                        text: result2
                     };
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
