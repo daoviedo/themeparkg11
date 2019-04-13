@@ -34,11 +34,13 @@ function AddStandDialogue(props) {
           <Grid container spacing={24}>
             <Grid item xs={12} md={6}>
               <TextField required id="standname" label="Stand Name" 
+              name="standname"
               value={props.val.standname} 
               onChange={props.handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField required id="hours" label="Hours of Operation"
+              name="hours"
                value={props.val.hours} 
                onChange={props.handleChange} fullWidth />
             </Grid>

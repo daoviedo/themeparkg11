@@ -176,7 +176,7 @@ class ManageStands extends Component{
         <TableCell component="th" scope="row">
             {Item_Name}
         </TableCell>
-        <TableCell align="right">${Item_Price}.00</TableCell>
+        <TableCell align="right">${Item_Price.toFixed(2)}</TableCell>
         <TableCell align="right">
         <IconButton onClick={()=>this.handleOpenDeleteItem({ Item_ID, Item_Name, Item_Price })}>
                 <DeleteIcon fontSize="small" />
@@ -189,7 +189,6 @@ class ManageStands extends Component{
         this.fetchitems()
     }
     render(){
-        const {classes} = this.props
         const {clist} = this.state
         return(
             <React.Fragment>

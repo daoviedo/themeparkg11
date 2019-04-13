@@ -34,11 +34,13 @@ function AddItemDialog(props) {
           <Grid container spacing={24}>
             <Grid item xs={12} md={6}>
               <TextField required id="itemname" label="Item Name" 
+              name="itemname"
               value={props.val.itemname} 
               onChange={props.handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField required id="price" label="Item Price"
+              name="price"
                value={props.val.price} 
                onChange={props.handleChange} fullWidth />
             </Grid>
