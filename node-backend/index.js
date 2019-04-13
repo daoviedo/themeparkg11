@@ -129,9 +129,9 @@ app.post('/purchase', (req, res, next) => {
                 if (err1) {
                     return res.send(err1);
                 } else {
-                    let textbody = '';
+                    let textbody = 'Thank you for purchasing Tickets with us!\nYour Tickets Are Valid on '+ entryDate + '\n';
                     result2.map(({Ticket_ID}) =>{
-                        textbody += Ticket_ID + '\n'
+                        textbody +='Ticket ID: ' + Ticket_ID + '\n'
                     });
                     console.log(textbody);
                     const mailOptions = {
