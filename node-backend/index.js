@@ -553,8 +553,24 @@ app.patch('/deleteitem', (req, res, next) =>{
             });
         }
     })
-
 });
+
+app.patch('/deletestand', (req, res, next) =>{
+    const {id} = req.body
+    const Qcommand = `DELETE FROM concession_stand WHERE Stand_ID = ${id}`
+    connection.query(Qcommand, (err, result) => {
+        if (err) {
+            return res.json({
+                status: 0
+            });
+        } else {
+            return res.json({
+                status: 1
+            });
+        }
+    })
+});
+
 app.listen(4000, () => {
     console.log(`Server listening on port 4000`)
 });

@@ -37,6 +37,20 @@ class ManageStands extends Component{
         item:{},
         openDeleteItem: false,
     }
+    handleDeleteItem(itemid){
+        fetch(`http://157.230.172.23:4000/deleteitem`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: itemid,
+            }),
+        })
+        .then(()=>this.fetchitems())
+        .then(()=>this.handleCloseDeleteItem())
+        .catch(err => console.log(err))
+    }
     handleOpenDeleteItem = (itemv) => {
         this.setState({ item: itemv, openDeleteItem: true });
     };
@@ -80,7 +94,7 @@ class ManageStands extends Component{
         <TableCell align="right">
         <IconButton onClick={()=>this.handleOpenDeleteItem({ Item_ID, Item_Name, Item_Price })}>
                 <DeleteIcon fontSize="small" />
-            </IconButton>
+        </IconButton>
         </TableCell>
       </TableRow>
     
@@ -122,7 +136,7 @@ class ManageStands extends Component{
                             {this.state.items.map(this.renderItems)}
                         </TableBody>
                         </Table>
-                        <DeleteItemDialog val={this.state} item={this.state.item} close={this.handleCloseDeleteItem}/>
+                        <DeleteItemDialog val={this.state} item={this.state.item} close={this.handleCloseDeleteItem} confirm={this.handleDeleteItem}/>
                         <br/>
                     </div>
                 </Paper>

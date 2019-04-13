@@ -4,6 +4,7 @@ import { Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/co
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import DeleteItemDialog from './DeleteItemDialog';
 
 const styles = theme => ({
     root: {
@@ -24,8 +25,26 @@ class StandSettings extends Component
 {
     state ={
         stand: this.props.stand,
-        items: []
+        items: [],
+        item: "",
+        openDeleteItem: false,
     }
+    handleDeleteStand(sid){
+        fetch(`http://157.230.172.23:4000/deleteitem`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: sid,
+            }),
+        })
+        .then(()=>this.fetchitems())
+        .catch(err => console.log(err))
+    }
+    handleOpenDeleteStand = () => {
+        this.setState({ item: {Item_ID: this.state.stand.Stand_ID, Item_Name: this.state.stand.Stand_Name}, openDeleteItem: true });
+    };
     componentDidMount()
     {
         this.fetchmenu()
@@ -70,7 +89,7 @@ class StandSettings extends Component
             <Button variant="outlined" color="primary">Edit Menu</Button>
             </Grid>
             <Grid item xs = {6}>
-            <Button variant="outlined" color="secondary">Remove Stand</Button>
+            <Button onClick={this.handleOpenDelete}variant="outlined" color="secondary">Remove Stand</Button>
             </Grid>
             </Grid>
             </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
 import Slide from '@material-ui/core/Slide';
+import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 
 function Transition(props) {
@@ -24,17 +24,17 @@ function DeleteItemDialog(props){
                     {`Are you sure you want to delete ${props.item.Item_Name}?`}
                 </DialogTitle>
                 <DialogContent>
-            <DialogContentText align = "center">
-            <Button variant="contained" color="secondary">
-              DELETE ITEM
-            </Button>
-            </DialogContentText>
+            <DialogActions align = "center">
+            <Grid container spacing = {16} justify = "center">
+            <Grid item xs = {6}>
+            <Button onClick={props.close} variant="outlined" color="secondary">Cancel</Button>
+            </Grid>
+            <Grid item xs = {6}>
+            <Button onClick={props.confirm(props.item.Item_ID)} variant="outlined" color="primary">Confirm</Button>
+            </Grid>
+            </Grid>
+            </DialogActions>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={props.close} color="primary">
-              Close
-            </Button>
-          </DialogActions>
             </Dialog>
         </div>
     );
