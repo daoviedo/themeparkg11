@@ -3,12 +3,13 @@ import TopBar from './components/TopBar';
 import RideStatus from './components/RideStatus';
 import SalesReport from './components/SalesReport';
 import BetweenReport from './components/BetweenReport';
+import './css/backg.css';
 
 class Report extends Component {
   
   render() {
     return(
-      <React.Fragment>
+      <header className="headerb">
         <TopBar/>
         <RideStatus/>
         <div style={{height:50}}></div>
@@ -16,7 +17,7 @@ class Report extends Component {
         <div style={{height:50}}></div>
         <BetweenReport/>
         <div style={{height:50}}></div>
-      </React.Fragment>
+      </header>
     );
   }
 }

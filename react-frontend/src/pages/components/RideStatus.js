@@ -82,6 +82,7 @@ class RideStatus extends Component {
               }}
             />
         )}
+        <br/>
         <span style={{ fontSize: 16, fontFamily: 'Roboto, Helvetica, Arial, sans-serif' }}>{RideName}</span>
     </TableCell>
     </ToolTip>

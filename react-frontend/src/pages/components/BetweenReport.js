@@ -12,15 +12,15 @@ const styles = theme => ({
     maxHeight: 500,
     marginTop: 20,
     margin: "auto",
-    
+    overflowY: "auto",
+    overflowX: "auto"
   },
   table: {
     minWidth: 500
   },
   table1: {
     minWidth: 500,
-    overflowY: "auto",
-    overflowX: "auto"
+    
   },
   header: {
     position: "sticky",

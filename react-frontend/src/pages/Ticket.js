@@ -28,7 +28,7 @@ const purpleTheme = createMuiTheme({
 
 const styles = theme => ({
     layout: {
-        paddingTop: '50px',
+        paddingTop: '35px',
       width: 'auto',
       marginLeft: theme.spacing.unit * 2,
       marginRight: theme.spacing.unit * 2,
