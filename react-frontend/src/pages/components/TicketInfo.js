@@ -45,7 +45,7 @@ function TicketInfo(props) {
                         onChange={e => props.handleChange('numTickets', e.target.value)}
                         label="Number of Tickets"
                         type="number"
-                        helperText="$Tickets are 35.00 each"
+                        helperText="Tickets are $35.00 each"
                         margin="dense"
                         variant="outlined"
                         style={{marginTop: '16px'}}
