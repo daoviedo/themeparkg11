@@ -5,7 +5,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos'
 import IconButton from '@material-ui/core/IconButton'
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
