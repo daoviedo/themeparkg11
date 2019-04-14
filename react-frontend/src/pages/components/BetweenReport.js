@@ -12,8 +12,6 @@ const styles = theme => ({
     maxHeight: 500,
     marginTop: 20,
     margin: "auto",
-    overflowY: "auto",
-    overflowX: "auto"
   },
   table: {
     minWidth: 500
@@ -144,7 +142,7 @@ class BetweenReport extends Component {
   renderRideData = ({RideName, RideCounts }) => (
     <TableRow key={Math.random() * 100}>
       <TableCell>{RideName}</TableCell>
-      <TableCell align="right">{RideCounts}</TableCell>
+      <TableCell align="right">{RideCounts == null ? 0 : RideCounts}</TableCell>
     </TableRow>
   )
 
