@@ -60,7 +60,7 @@ function TicketInfo(props) {
                             label="Park Entry Date"
                             value={props.val.entryDate}
                             onChange={e => props.handleChangedate("entryDate", e)}
-                            style={{marginTop: '16px'}}
+                            style={{marginTop: '14px'}}
                         />
                     </MuiPickersUtilsProvider>
                 </MuiThemeProvider>
