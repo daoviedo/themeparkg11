@@ -4,6 +4,7 @@ import { Table, TableHead, TableRow, TableCell,TableBody } from '@material-ui/co
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import EditStandMenu from './EditStandMenu';
 
 const styles = theme => ({
     root: {
@@ -24,11 +25,30 @@ class StandSettings extends Component
 {
     state ={
         stand: this.props.stand,
+        openEditMenu: false,
         items: [],
+        other: [],
+        addselect: [],
+        remselect: [],
     }
+    handleOpenEditMenu = () => {
+      this.setState({openEditMenu: true });
+    };
+    handleCloseEditMenu = () =>
+    {
+      this.setState({openEditMenu: false, addselect: [], remselect: []})
+    };
     componentDidMount()
     {
         this.fetchmenu()
+    }
+    fetchother(){
+      fetch(`http://157.230.172.23:4000/notonmenu/${this.state.stand.Stand_ID}`, {
+        method: "GET",
+      })
+        .then(res => res.json())
+        .then(result => this.setState({ other: result.itemList }))
+        .catch(err => console.log(err))
     }
     fetchmenu(){
         fetch(`http://157.230.172.23:4000/standmenu/${this.state.stand.Stand_ID}`, {
@@ -67,12 +87,15 @@ class StandSettings extends Component
             <br/>
             <Grid container spacing = {16} justify = "center">
             <Grid item xs = {6}>
-            <Button variant="outlined" color="primary">Edit Menu</Button>
+            <Button variant="outlined" color="primary" 
+              onClick={() => this.handleOpenEditMenu()}>Edit Menu</Button>
             </Grid>
             <Grid item xs = {6}>
             <Button variant="outlined" color="secondary" onClick={()=>this.props.openDelete(this.state.stand)}>Remove Stand</Button>
             </Grid>
             </Grid>
+            <EditStandMenu val = {this.state} handleClose = {this.handleCloseEditMenu}
+                    handleChange={this.props.handleChange} renderItems={this.renderItems}/>
             </div>
         </React.Fragment>
     );}

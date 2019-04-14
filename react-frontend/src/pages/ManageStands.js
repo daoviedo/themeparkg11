@@ -49,6 +49,7 @@ class ManageStands extends Component{
     handleChange = event => {
         this.setState({[event.target.name]: event.target.value});
     };
+
     submitItem = () =>{
         fetch(`http://157.230.172.23:4000/additem`,{
             method: "POST",
@@ -83,7 +84,6 @@ class ManageStands extends Component{
         })
         .catch(err => console.log(err))
     }
-
     handleDeleteStand = (sid) =>{
         fetch(`http://157.230.172.23:4000/deletestand`,{
             method: "PATCH",
@@ -121,14 +121,14 @@ class ManageStands extends Component{
     };
     handleCloseAddItem = () =>
     {
-        this.setState({openAddItem: false})
+        this.setState({openAddItem: false, itemname: "", price: ""})
     };
     handleOpenAddStand = () => {
         this.setState({ openAddStand: true });
     };
     handleCloseAddStand = () =>
     {
-        this.setState({openAddStand: false})
+        this.setState({openAddStand: false, standname: "", hours: ""})
     };
     handleOpenDeleteStand = (standv) => {
         this.setState({ stand: standv, openDeleteStand: true });
@@ -167,7 +167,9 @@ class ManageStands extends Component{
             <Typography className={this.props.classes.secondaryHeading}>{Hours_of_operations}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-            <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}} val={this.state} openDelete={this.handleOpenDeleteStand}/>
+            <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}} 
+                val={this.state} openDelete={this.handleOpenDeleteStand}
+                 handleChange={this.handleChange}/>
         </ExpansionPanelDetails>
     </ExpansionPanel>
 
