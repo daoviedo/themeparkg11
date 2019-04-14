@@ -637,12 +637,12 @@ app.get('/notonmenu/:sID', (req, res, next) => {
     })
 });
 
-app.post('/addtomenu/:sID', (req, res, next) =>{
+app.post('/addtomenu', (req, res, next) =>{
     const {sid,list} = req.body;
     length = list.length;
     for(var i = 0; i < length;i++)
     {
-        const Qcommand = `INSERT INTO concession_items (Item_ID, Stand_ID) VALUES (${list[i].Item_ID}, ${sid})`
+        const Qcommand = `INSERT INTO concession_items (Item_ID, Stand_ID) VALUES (${list[i]}, ${sid})`
         connection.query(Qcommand, (err, result) => {
             if (err) {
                 return res.json({
@@ -657,12 +657,12 @@ app.post('/addtomenu/:sID', (req, res, next) =>{
     }
 });
 
-app.post('/removefrommenu/:sID', (req, res, next) =>{
+app.post('/removefrommenu', (req, res, next) =>{
     const {sid,list} = req.body;
     length = list.length;
     for(var i = 0; i < length;i++)
     {
-        const Qcommand = `DELETE FROM concession_items WHERE Stand_ID = ${sid} AND Item_ID = ${list[i].Item_ID})`
+        const Qcommand = `DELETE FROM concession_items WHERE Stand_ID = ${sid} AND Item_ID = ${list[i]})`
         connection.query(Qcommand, (err, result) => {
             if (err) {
                 return res.json({

@@ -49,7 +49,32 @@ class ManageStands extends Component{
     handleChange = event => {
         this.setState({[event.target.name]: event.target.value});
     };
-
+    addToMenu = (sid, items) =>{
+        fetch(`http://157.230.172.23:4000/addtomenu`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                sid: sid,
+                list: items
+            }),
+        })
+        .catch(err => console.log(err))
+    }
+    removeFromMenu = (sid, items) =>{
+        fetch(`http://157.230.172.23:4000/removefrommenu`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                sid: sid,
+                list: items
+            }),
+        })
+        .catch(err => console.log(err))
+    }
     submitItem = () =>{
         fetch(`http://157.230.172.23:4000/additem`,{
             method: "POST",
@@ -169,7 +194,7 @@ class ManageStands extends Component{
         <ExpansionPanelDetails>
             <StandSettings stand={{Stand_ID, Stand_Name,Hours_of_operations}} 
                 val={this.state} openDelete={this.handleOpenDeleteStand}
-                 handleChange={this.handleChange}/>
+                 handleChange={this.handleChange} additems={this.addToMenu} remitems={this.removeFromMenu}/>
         </ExpansionPanelDetails>
     </ExpansionPanel>
 

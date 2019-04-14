@@ -28,8 +28,16 @@ class StandSettings extends Component
         openEditMenu: false,
         items: [],
         other: [],
-        addselect: [],
-        remselect: [],
+    }
+    handleAddItems = (sid, items)=>{
+      this.props.additems(sid, items)
+      this.fetchmenu()
+      this.fetchother()
+    }
+    handleRemItems = (sid, items) =>{
+      this.props.remitems(sid, items)
+      this.fetchmenu()
+      this.fetchother()
     }
     handleOpenEditMenu = () => {
       this.setState({openEditMenu: true });
@@ -96,7 +104,8 @@ class StandSettings extends Component
             </Grid>
             </Grid>
             <EditStandMenu val = {this.state} handleClose = {this.handleCloseEditMenu}
-                    handleChange={this.props.handleChange} renderItems={this.renderItems}/>
+                    handleChange={this.props.handleChange} renderItems={this.renderItems}
+                    additems = {this.handleAddItems} remitems = {this.handleRemItems}/>
             </div>
         </React.Fragment>
     );}
