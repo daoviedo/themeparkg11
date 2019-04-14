@@ -681,7 +681,7 @@ app.post('/removefrommenu', (req, res, next) =>{
     length = list.length;
     for(var i = 0; i < length;i++)
     {
-        const Qcommand = `DELETE FROM concession_items WHERE Stand_ID = ${sid} AND Item_ID = ${list[i]})`
+        const Qcommand = `DELETE FROM concession_items WHERE Stand_ID = ${sid} AND Item_ID = ${list[i]}`
         connection.query(Qcommand, (err, result) => {
             if (err) {
                 return res.json({

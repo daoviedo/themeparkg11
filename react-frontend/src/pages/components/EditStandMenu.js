@@ -35,10 +35,12 @@ class EditStandMenu extends Component
     addselect: [],
   }
   handleClickAdd = () =>{
+    console.log(this.state.addselect)
     this.props.additems(this.props.val.stand.Stand_ID, this.state.addselect)
     this.setState({addselect:[]})
   }
   handleClickRemove = () =>{
+    console.log(this.state.remselect)
     this.props.remitems(this.props.val.stand.Stand_ID, this.state.remselect)
     this.setState({remselect:[]})
   }
@@ -132,12 +134,12 @@ class EditStandMenu extends Component
             </Grid>
             <Grid container item xs = {3} spacing={16} direction="column" justify = "center" alignItems="center">
             <Grid item xs={3}>
-            <IconButton onClick={()=>this.handleClickAdd}>
+            <IconButton onClick={()=>this.handleClickAdd()}>
               <ArrowBackIos color = "primary"/>
             </IconButton>
             </Grid>
             <Grid item xs={3}>
-            <IconButton onClick={()=>this.handleClickRemove}>
+            <IconButton onClick={()=>this.handleClickRemove()}>
               <ArrowForwardIos color = "primary"/>
             </IconButton>
             </Grid>
