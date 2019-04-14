@@ -41,6 +41,7 @@ class StandSettings extends Component
     componentDidMount()
     {
         this.fetchmenu()
+        this.fetchother()
     }
     fetchother(){
       fetch(`http://157.230.172.23:4000/notonmenu/${this.state.stand.Stand_ID}`, {
