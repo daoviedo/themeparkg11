@@ -45,6 +45,7 @@ function TicketInfo(props) {
                         onChange={e => props.handleChange('numTickets', e.target.value)}
                         label="Number of Tickets"
                         type="number"
+                        helperText="Tickets are $35.00 each"
                         margin="dense"
                         variant="outlined"
                         style={{marginTop: '16px'}}
@@ -59,7 +60,7 @@ function TicketInfo(props) {
                             label="Park Entry Date"
                             value={props.val.entryDate}
                             onChange={e => props.handleChangedate("entryDate", e)}
-                            style={{marginTop: '16px'}}
+                            style={{marginTop: '14px'}}
                         />
                     </MuiPickersUtilsProvider>
                 </MuiThemeProvider>
