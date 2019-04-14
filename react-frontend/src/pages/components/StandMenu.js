@@ -53,6 +53,7 @@ class StandMenu extends React.Component {
           <InfoIcon/>
         </IconButton>
         <Dialog
+
           open={this.state.open}
           onClose={this.handleClose}
           TransitionComponent = {Transition}
@@ -66,6 +67,7 @@ class StandMenu extends React.Component {
             <DialogContentText align = "center">
               {`${this.state.stand.Hours_of_operations}`}
             </DialogContentText>
+            <div style={{height: "70vh", overflowY: 'auto'}}>
             <Table>
               <TableHead>
                 <TableRow>
@@ -77,6 +79,7 @@ class StandMenu extends React.Component {
                 {this.state.items.map(this.renderItems)}
               </TableBody>
             </Table>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
