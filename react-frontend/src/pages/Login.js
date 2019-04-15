@@ -66,7 +66,6 @@ class Login extends Component{
       }
 
       render() {
-          console.log(this.state.departmentID)
           if(this.state.output === 1 && this.state.depLoaded){
               window.location.replace('/');
           }
