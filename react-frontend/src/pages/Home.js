@@ -57,7 +57,7 @@ class Home extends Component {
 								<img src={Image1} alt="Pic 01" />
 							</div>
 							<header>
-								<h3>Rides And Entertainment</h3>
+								<h3>Rides and Entertainment</h3>
 							</header>
 							<p>Make sure to visit all of our available rides!<br />You can see a list of available rides and<br />entertainment by clicking below.</p>
 							<footer>

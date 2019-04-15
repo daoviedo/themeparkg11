@@ -6,6 +6,10 @@
     text-decoration: none;
 }
 
+#basic-navbar-nav > div > a.nav-link {
+    text-decoration: none;
+}
+
 #brandDisappear {
     display: inline-block;
 }
