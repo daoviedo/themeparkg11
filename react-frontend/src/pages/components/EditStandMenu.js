@@ -125,7 +125,7 @@ class EditStandMenu extends Component
                           <TableCell component="th" scope="row" padding="none">
                             {item.Item_Name}
                           </TableCell>
-                          <TableCell align="right">{item.Item_Price}</TableCell>
+                          <TableCell align="right">${item.Item_Price.toFixed(2)}</TableCell>
                         </TableRow>
                       );
                     })}
@@ -169,7 +169,7 @@ class EditStandMenu extends Component
                           <TableCell component="th" scope="row" padding="none">
                             {item.Item_Name}
                           </TableCell>
-                          <TableCell align="right">{item.Item_Price}</TableCell>
+                          <TableCell align="right">${item.Item_Price.toFixed(2)}</TableCell>
                         </TableRow>
                       );
                     })}
