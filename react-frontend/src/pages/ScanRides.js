@@ -4,6 +4,7 @@ import { TextField, MenuItem, Button, Typography, Paper } from '@material-ui/cor
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
 import './css/PageStyles.css';
+import './css/otherfixes.css';
 
 class ScanRides extends Component {
     state = {
@@ -85,7 +86,7 @@ class ScanRides extends Component {
             <header className="header5">
                 <TopBar/>
                 <div style={{textAlign: "center", paddingTop: 100}}>
-                <h2 style={{color: 'white'}}>Scan Tickets for Rides</h2>
+                <h2 style={{color: 'white'}} className="scantitles">Scan Tickets for Rides</h2>
                 </div>
                 <Paper style={{margin: 'auto', width: '400px'}}>
                 <div style={{textAlign: "center", paddingTop: '50px', paddingBottom: '50px'}}>
