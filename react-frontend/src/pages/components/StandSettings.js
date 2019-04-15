@@ -28,9 +28,43 @@ class StandSettings extends Component
         openEditMenu: false,
         items: [],
         other: [],
-        addselect: [],
-        remselect: [],
     }
+  addToMenu = (sid, items) =>{
+      console.log(sid, items, 'stand settings');
+      fetch(`http://157.230.172.23:4000/addtomenu`,{
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              sid: sid,
+              list: items
+          }),
+      })
+      .then(()=>{
+        this.fetchmenu();
+        this.fetchother();
+      })
+      .catch(err => console.log(err))
+  }
+  removeFromMenu = (sid, items) =>{
+      console.log(sid, items, 'stand settings');
+      fetch(`http://157.230.172.23:4000/removefrommenu`,{
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              sid: sid,
+              list: items
+          }),
+      })
+      .then(()=>{
+        this.fetchmenu();
+        this.fetchother();
+    })
+      .catch(err => console.log(err))
+  }
     handleOpenEditMenu = () => {
       this.setState({openEditMenu: true });
     };
@@ -96,7 +130,8 @@ class StandSettings extends Component
             </Grid>
             </Grid>
             <EditStandMenu val = {this.state} handleClose = {this.handleCloseEditMenu}
-                    handleChange={this.props.handleChange} renderItems={this.renderItems}/>
+                    handleChange={this.props.handleChange} renderItems={this.renderItems}
+                    additems = {this.addToMenu} remitems = {this.removeFromMenu}/>
             </div>
         </React.Fragment>
     );}

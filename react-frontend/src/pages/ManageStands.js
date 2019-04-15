@@ -49,7 +49,6 @@ class ManageStands extends Component{
     handleChange = event => {
         this.setState({[event.target.name]: event.target.value});
     };
-
     submitItem = () =>{
         fetch(`http://157.230.172.23:4000/additem`,{
             method: "POST",
