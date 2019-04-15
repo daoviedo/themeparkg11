@@ -54,7 +54,7 @@ class Maintenance extends Component {
     }
 
     fetchMaintenance(){
-        fetch(`http://157.230.172.23:4000/maintenance_needed`, {
+        fetch(`http://api.themepark.ga/maintenance_needed`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -63,7 +63,7 @@ class Maintenance extends Component {
     }
 
     fetchRides(){
-        fetch(`http://157.230.172.23:4000/ridelist`, {
+        fetch(`http://api.themepark.ga/ridelist`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -72,7 +72,7 @@ class Maintenance extends Component {
     }
 
     fetchRainout(){
-        fetch(`http://157.230.172.23:4000/rainout`, {
+        fetch(`http://api.themepark.ga/rainout`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -81,7 +81,7 @@ class Maintenance extends Component {
     }
 
     rainoutPark(){
-        fetch(`http://157.230.172.23:4000/nrainout`, {
+        fetch(`http://api.themepark.ga/nrainout`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -90,7 +90,7 @@ class Maintenance extends Component {
     }
 
     completeOrder(order_id){
-        fetch(`http://157.230.172.23:4000/fixmaintenance`,{
+        fetch(`http://api.themepark.ga/fixmaintenance`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -121,7 +121,7 @@ class Maintenance extends Component {
     };
 
     submitForm = () => {
-        fetch(`http://157.230.172.23:4000/newmaintenance`,{
+        fetch(`http://api.themepark.ga/newmaintenance`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

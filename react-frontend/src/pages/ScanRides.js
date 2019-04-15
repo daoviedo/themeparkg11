@@ -19,7 +19,7 @@ class ScanRides extends Component {
     }
 
     fetchRideList(){
-        fetch(`http://157.230.172.23:4000/ridelist`, {
+        fetch(`http://api.themepark.ga/ridelist`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -27,7 +27,7 @@ class ScanRides extends Component {
             .catch(err => console.log(err))
     }
     fetchRainOut(){
-        fetch(`http://157.230.172.23:4000/rainout`, {
+        fetch(`http://api.themepark.ga/rainout`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -40,7 +40,7 @@ class ScanRides extends Component {
     }
 
     scanTicket = _ => {
-        fetch(`http://157.230.172.23:4000/ridescan`,{
+        fetch(`http://api.themepark.ga/ridescan`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

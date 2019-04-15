@@ -50,7 +50,7 @@ class ManageStands extends Component{
         this.setState({[event.target.name]: event.target.value});
     };
     submitItem = () =>{
-        fetch(`http://157.230.172.23:4000/additem`,{
+        fetch(`http://api.themepark.ga/additem`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -67,7 +67,7 @@ class ManageStands extends Component{
         .catch(err => console.log(err))
     }
     submitStand = () =>{
-        fetch(`http://157.230.172.23:4000/addstand`,{
+        fetch(`http://api.themepark.ga/addstand`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -84,7 +84,7 @@ class ManageStands extends Component{
         .catch(err => console.log(err))
     }
     handleDeleteStand = (sid) =>{
-        fetch(`http://157.230.172.23:4000/deletestand`,{
+        fetch(`http://api.themepark.ga/deletestand`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -100,7 +100,7 @@ class ManageStands extends Component{
         .catch(err => console.log(err))
     }
     handleDeleteItem = (itemid) =>{
-        fetch(`http://157.230.172.23:4000/deleteitem`,{
+        fetch(`http://api.themepark.ga/deleteitem`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -143,7 +143,7 @@ class ManageStands extends Component{
         this.setState({ openDeleteItem: false });
     };
     fetchitems(){
-        fetch(`http://157.230.172.23:4000/itemlist`, {
+        fetch(`http://api.themepark.ga/itemlist`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -151,7 +151,7 @@ class ManageStands extends Component{
             .catch(err => console.log(err))
     }
     fetchstands(){
-        fetch(`http://157.230.172.23:4000/concessionlist`, {
+        fetch(`http://api.themepark.ga/concessionlist`, {
             method: "GET",
         })
             .then(res => res.json())

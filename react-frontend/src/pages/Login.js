@@ -22,7 +22,7 @@ class Login extends Component{
       }
      
       getDepartmentID(id){
-         fetch('http://157.230.172.23:4000/getDepartmentID',{
+         fetch('http://api.themepark.ga/getDepartmentID',{
                  method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"
@@ -41,7 +41,7 @@ class Login extends Component{
 
       Login(){
           
-          fetch('http://157.230.172.23:4000/login',{
+          fetch('http://api.themepark.ga/login',{
                 method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"

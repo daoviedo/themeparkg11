@@ -31,7 +31,7 @@ class StandSettings extends Component
     }
   addToMenu = (sid, items) =>{
       console.log(sid, items, 'stand settings');
-      fetch(`http://157.230.172.23:4000/addtomenu`,{
+      fetch(`http://api.themepark.ga/addtomenu`,{
           method: "POST",
           headers: {
               "Content-Type": "application/json"
@@ -49,7 +49,7 @@ class StandSettings extends Component
   }
   removeFromMenu = (sid, items) =>{
       console.log(sid, items, 'stand settings');
-      fetch(`http://157.230.172.23:4000/removefrommenu`,{
+      fetch(`http://api.themepark.ga/removefrommenu`,{
           method: "POST",
           headers: {
               "Content-Type": "application/json"
@@ -78,7 +78,7 @@ class StandSettings extends Component
         this.fetchother()
     }
     fetchother(){
-      fetch(`http://157.230.172.23:4000/notonmenu/${this.state.stand.Stand_ID}`, {
+      fetch(`http://api.themepark.ga/notonmenu/${this.state.stand.Stand_ID}`, {
         method: "GET",
       })
         .then(res => res.json())
@@ -86,7 +86,7 @@ class StandSettings extends Component
         .catch(err => console.log(err))
     }
     fetchmenu(){
-        fetch(`http://157.230.172.23:4000/standmenu/${this.state.stand.Stand_ID}`, {
+        fetch(`http://api.themepark.ga/standmenu/${this.state.stand.Stand_ID}`, {
           method: "GET",
         })
           .then(res => res.json())

@@ -134,7 +134,7 @@ class Ticket extends Component {
         }
     }
     fetchRainout(){
-        fetch(`http://157.230.172.23:4000/rainout`, {
+        fetch(`http://api.themepark.ga/rainout`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -144,7 +144,7 @@ class Ticket extends Component {
     addTickets = () => {
         let LoadingDate = new Date(this.state.entryDate);
         LoadingDate = LoadingDate.getFullYear() + '-' + (this.fixMonth(LoadingDate)) + '-' + LoadingDate.getDate();
-        fetch(`http://157.230.172.23:4000/purchase`,{
+        fetch(`http://api.themepark.ga/purchase`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

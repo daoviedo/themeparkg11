@@ -16,7 +16,7 @@ class AccountSettings extends Component{
         correctpass: ""
     };
     componentDidMount(){
-        fetch('http://157.230.172.23:4000/getEmployeeInfo',{
+        fetch('http://api.themepark.ga/getEmployeeInfo',{
                 method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"

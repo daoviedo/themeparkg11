@@ -66,7 +66,7 @@ class BetweenReport extends Component {
     fromDate = fromDate.getFullYear() + '-' + (this.fixMonth(fromDate)) + '-' + fromDate.getDate();
     let toDate = this.state.to;
     toDate = toDate.getFullYear() + '-' + (this.fixMonth(toDate)) + '-' + toDate.getDate();
-    fetch(`http://157.230.172.23:4000/ridesbetween/${fromDate}&${toDate}`, {
+    fetch(`http://api.themepark.ga/ridesbetween/${fromDate}&${toDate}`, {
       method: "GET"
     })
     .then(res => res.json())
@@ -78,7 +78,7 @@ class BetweenReport extends Component {
     fromDate = fromDate.getFullYear() + '-' + (this.fixMonth(fromDate)) + '-' + fromDate.getDate();
     let toDate = this.state.to;
     toDate = toDate.getFullYear() + '-' + (this.fixMonth(toDate)) + '-' + toDate.getDate();
-    fetch(`http://157.230.172.23:4000/ticketsbetween/${fromDate}&${toDate}`, {
+    fetch(`http://api.themepark.ga/ticketsbetween/${fromDate}&${toDate}`, {
       method: "GET"
     })
     .then(res => res.json())
@@ -90,7 +90,7 @@ class BetweenReport extends Component {
     fromDate = fromDate.getFullYear() + '-' + (this.fixMonth(fromDate)) + '-' + fromDate.getDate();
     let toDate = this.state.to;
     toDate = toDate.getFullYear() + '-' + (this.fixMonth(toDate)) + '-' + toDate.getDate();
-    fetch(`http://157.230.172.23:4000/maintenancebetween/${fromDate}&${toDate}`, {
+    fetch(`http://api.themepark.ga/maintenancebetween/${fromDate}&${toDate}`, {
       method: "GET"
     })
     .then(res => res.json())
@@ -102,7 +102,7 @@ class BetweenReport extends Component {
     fromDate = fromDate.getFullYear() + '-' + (this.fixMonth(fromDate)) + '-' + fromDate.getDate();
     let toDate = this.state.to;
     toDate = toDate.getFullYear() + '-' + (this.fixMonth(toDate)) + '-' + toDate.getDate();
-    fetch(`http://157.230.172.23:4000/rainoutsbetween/${fromDate}&${toDate}`, {
+    fetch(`http://api.themepark.ga/rainoutsbetween/${fromDate}&${toDate}`, {
       method: "GET"
     })
     .then(res => res.json())

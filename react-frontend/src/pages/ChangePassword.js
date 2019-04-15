@@ -43,7 +43,7 @@ output(){
 }
 ChangePassword(){
 
-    fetch('http://157.230.172.23:4000/changePassword',{
+    fetch('http://api.themepark.ga/changePassword',{
                 method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"

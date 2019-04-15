@@ -31,7 +31,7 @@ class CreateRide extends Component {
     };
   
   createRide() {
-    fetch(`http://157.230.172.23:4000/new-ride`,{
+    fetch(`http://api.themepark.ga/new-ride`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

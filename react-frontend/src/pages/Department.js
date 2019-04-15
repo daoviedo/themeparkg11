@@ -55,7 +55,7 @@ class Department extends Component{
     };
     fetchEmployees(value){
         if(value === 0){
-            fetch(`http://157.230.172.23:4000/getallemps`, {
+            fetch(`http://api.themepark.ga/getallemps`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -63,7 +63,7 @@ class Department extends Component{
             .catch(err => console.log(err))
         }
         else{
-            fetch(`http://157.230.172.23:4000/getallemp/${value}`, {
+            fetch(`http://api.themepark.ga/getallemp/${value}`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -72,7 +72,7 @@ class Department extends Component{
         }
     }
     fetchDepartments(){
-        fetch(`http://157.230.172.23:4000/departmentlist`, {
+        fetch(`http://api.themepark.ga/departmentlist`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -83,7 +83,7 @@ class Department extends Component{
         return(this.state.firstname.length > 1 && this.state.lastname.length > 1)
     }
     submitForm = () => {
-        fetch(`http://157.230.172.23:4000/newemployee`,{
+        fetch(`http://api.themepark.ga/newemployee`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

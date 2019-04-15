@@ -8,7 +8,7 @@ class Dining extends Component {
         concessionList: []
     }
     componentDidMount(){
-        fetch(`http://157.230.172.23:4000/concessionlist`, {
+        fetch(`http://api.themepark.ga/concessionlist`, {
             method: "GET",
         })
             .then(res => res.json())

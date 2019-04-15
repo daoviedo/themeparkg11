@@ -13,7 +13,7 @@ class EntranceScan extends Component {
         rainout: 0,
     }
     componentDidMount(){
-        fetch(`http://157.230.172.23:4000/rainout`, {
+        fetch(`http://api.themepark.ga/rainout`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -24,7 +24,7 @@ class EntranceScan extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
     scanTicket = _ => {
-        fetch(`http://157.230.172.23:4000/entrance-scan`,{
+        fetch(`http://api.themepark.ga/entrance-scan`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
