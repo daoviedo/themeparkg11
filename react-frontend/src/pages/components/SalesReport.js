@@ -48,7 +48,7 @@ class SalesReport extends Component {
     data: [],
     ridedata: [],
     rideList: [],
-    dataVal: "year",
+    dataVal: "Year",
     yearList: [],
     monthList: [],
     selectedyear: 0,
@@ -84,7 +84,7 @@ class SalesReport extends Component {
       method: "GET"
     })
       .then(res => res.json())
-      .then(result => this.setState({ data: result.data, dataVal: "year" }))
+      .then(result => this.setState({ data: result.data, dataVal: "Year" }))
       .catch(err => console.log(err));
   }
 
@@ -93,7 +93,7 @@ class SalesReport extends Component {
       method: "GET"
     })
       .then(res => res.json())
-      .then(result => this.setState({ data: result.data, dataVal: "month" }))
+      .then(result => this.setState({ data: result.data, dataVal: "Month" }))
       .catch(err => console.log(err));
   }
 
@@ -107,7 +107,7 @@ class SalesReport extends Component {
       }
     )
       .then(res => res.json())
-      .then(result => this.setState({ data: result.data, dataVal: "dayname" }))
+      .then(result => this.setState({ data: result.data, dataVal: "Day" }))
       .catch(err => console.log(err));
   }
 
@@ -159,7 +159,7 @@ class SalesReport extends Component {
   
   renderSales = ({year, month, dayname, tickets_sold}) => {
     
-    if (this.state.dataVal === 'year') {
+    if (this.state.dataVal === 'Year') {
       return (
         <TableRow key={Math.random() * 100}>
           <TableCell>{year}</TableCell>
@@ -168,7 +168,7 @@ class SalesReport extends Component {
         </TableRow>
       )
     } 
-    else if (this.state.dataVal === 'month') {
+    else if (this.state.dataVal === 'Month') {
       return (
         <TableRow key={Math.random() * 100}>
           <TableCell>{month}</TableCell>
@@ -177,7 +177,7 @@ class SalesReport extends Component {
         </TableRow>
       )
     }
-    else if (this.state.dataVal === 'dayname') {
+    else if (this.state.dataVal === 'Day') {
       return (
         <TableRow key={Math.random() * 100}>
           <TableCell>{dayname}</TableCell>

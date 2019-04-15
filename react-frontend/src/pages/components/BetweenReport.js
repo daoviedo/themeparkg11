@@ -9,7 +9,6 @@ import { Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from 
 const styles = theme => ({
   root: {
     width: "40%",
-    maxHeight: 500,
     marginTop: 20,
     margin: "auto",
   },
@@ -128,7 +127,7 @@ class BetweenReport extends Component {
 
   renderRainoutData = ({rainoutDate }) => (
     <TableRow key={Math.random() * 100}>
-      <TableCell>{rainoutDate}</TableCell>
+      <TableCell>{rainoutDate.split('T')[0]}</TableCell>
     </TableRow>
   )
 
@@ -187,7 +186,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>            
           </Table>
-          <div style={{maxHeight: 330, overflowY: 'auto'}}>
+          <div style={{maxHeight: 700, overflowY: 'auto'}}>
           <Table >
           <TableBody className={classes.table}>
             <TableRow>
