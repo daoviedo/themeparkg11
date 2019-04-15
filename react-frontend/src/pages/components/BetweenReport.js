@@ -143,7 +143,7 @@ class BetweenReport extends Component {
   renderRideData = ({RideName, RideCounts }) => (
     <TableRow key={Math.random() * 100}>
       <TableCell>{RideName}</TableCell>
-      <TableCell align="right">{RideCounts}</TableCell>
+      <TableCell align="right">{RideCounts == null ? 0 : RideCounts}</TableCell>
     </TableRow>
   )
 
@@ -188,7 +188,7 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>            
           </Table>
-          <div style={{maxHeight: 700, overflowY: 'auto'}}>
+          <div style={{maxHeight: '100vh', overflowY: 'auto'}}>
           <Table >
           <TableBody className={classes.table}>
             <TableRow>
