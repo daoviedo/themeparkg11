@@ -3,6 +3,7 @@
     display: inline-block;
     line-height: inherit;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 #brandDisappear {
