@@ -26,7 +26,6 @@ class AccountSettings extends Component{
                 })
            }).then(res => res.json())
            .then(result => {
-               console.log(result)
                this.setState({fName: result.data[0].FirstName});
                this.setState({lName: result.data[0].LastName});
                 this.setState({depoName: result.data[0].Name});
