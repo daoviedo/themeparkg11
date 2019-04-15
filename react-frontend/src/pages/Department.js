@@ -125,7 +125,6 @@ class Department extends Component{
             <React.Fragment>
                 <TopBar/>
                 <div style={{textAlign: "center"}}>
-                    <h1>This is The Department Page</h1>
                     <TextField select label="Department" name="selectedDept" onChange={e=>this.handleChangeDept('selectedDept',e.target.value)} value={this.state.selectedDept} style={{width: 200}}>
                         <MenuItem value={0}>
                             All Employees

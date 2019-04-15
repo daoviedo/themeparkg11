@@ -171,7 +171,6 @@ class Maintenance extends Component {
             <React.Fragment>
                 <TopBar/>
                 <div style={{textAlign: "center"}}>
-                    <h1>Maintenance Page</h1>
                     <Paper className={classes.root}>
                         <Table className={classes.table}>
                             <TableHead>
