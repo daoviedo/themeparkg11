@@ -23,7 +23,7 @@ class Analytics extends Component {
     }
 
     fetchPivot() {
-        fetch(`http://157.230.172.23:4000/newridepivot`, {
+        fetch(`http://api.themepark.ga/newridepivot`, {
             method: "GET",
         })
         .then(res => res.json())
@@ -31,7 +31,7 @@ class Analytics extends Component {
     }
     
     fetchRideList() {
-        fetch(`http://157.230.172.23:4000/ridelist`, {
+        fetch(`http://api.themepark.ga/ridelist`, {
             method: "GET",
         })
         .then(res => res.json())
@@ -40,7 +40,7 @@ class Analytics extends Component {
     }
 
     fetchYearInfo(){
-        fetch(`http://157.230.172.23:4000/yearanalytics`, {
+        fetch(`http://api.themepark.ga/yearanalytics`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -49,7 +49,7 @@ class Analytics extends Component {
     }
 
     fetchMonthInfo(year){
-        fetch(`http://157.230.172.23:4000/monthanalytics/${year}`, {
+        fetch(`http://api.themepark.ga/monthanalytics/${year}`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -58,7 +58,7 @@ class Analytics extends Component {
     }
 
     fetchDayInfo(month){
-        fetch(`http://157.230.172.23:4000/dayanalytics/${this.state.selectedyear}/${month}`, {
+        fetch(`http://api.themepark.ga/dayanalytics/${this.state.selectedyear}/${month}`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -67,7 +67,7 @@ class Analytics extends Component {
     }
 
     fetchYearList(){
-        fetch(`http://157.230.172.23:4000/selyear`, {
+        fetch(`http://api.themepark.ga/selyear`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -76,7 +76,7 @@ class Analytics extends Component {
     }
 
     fetchMonthList(year){
-        fetch(`http://157.230.172.23:4000/selmonth/${year}`, {
+        fetch(`http://api.themepark.ga/selmonth/${year}`, {
             method: "GET",
         })
             .then(res => res.json())

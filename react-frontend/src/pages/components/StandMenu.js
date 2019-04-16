@@ -29,7 +29,7 @@ class StandMenu extends React.Component {
     </TableRow>
   
   fetchmenu(){
-    fetch(`http://157.230.172.23:4000/standmenu/${this.state.stand.Stand_ID}`, {
+    fetch(`http://api.themepark.ga/standmenu/${this.state.stand.Stand_ID}`, {
       method: "GET",
     })
       .then(res => res.json())

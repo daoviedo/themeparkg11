@@ -53,7 +53,7 @@ class RideStatus extends Component {
   }
 
   fetchRideList() {
-    fetch(`http://157.230.172.23:4000/ridelist`, {
+    fetch(`http://api.themepark.ga/ridelist`, {
       method: "GET"
     })
       .then(res => res.json())

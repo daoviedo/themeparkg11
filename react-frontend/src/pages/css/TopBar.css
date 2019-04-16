@@ -3,6 +3,11 @@
     display: inline-block;
     line-height: inherit;
     white-space: nowrap;
+    text-decoration: none;
+}
+
+#basic-navbar-nav > div > a.nav-link {
+    text-decoration: none;
 }
 
 #brandDisappear {

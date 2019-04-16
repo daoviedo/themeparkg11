@@ -16,7 +16,7 @@ class AccountSettings extends Component{
         correctpass: ""
     };
     componentDidMount(){
-        fetch('http://157.230.172.23:4000/getEmployeeInfo',{
+        fetch('http://api.themepark.ga/getEmployeeInfo',{
                 method: 'POST',
                 headers:{
                     "Content-Type" : "application/json"
@@ -26,7 +26,6 @@ class AccountSettings extends Component{
                 })
            }).then(res => res.json())
            .then(result => {
-               console.log(result)
                this.setState({fName: result.data[0].FirstName});
                this.setState({lName: result.data[0].LastName});
                 this.setState({depoName: result.data[0].Name});

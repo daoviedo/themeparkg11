@@ -4,6 +4,7 @@ import { TextField, MenuItem, Button, Typography, Paper } from '@material-ui/cor
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
 import './css/PageStyles.css';
+import './css/otherfixes.css';
 
 class ScanRides extends Component {
     state = {
@@ -19,7 +20,7 @@ class ScanRides extends Component {
     }
 
     fetchRideList(){
-        fetch(`http://157.230.172.23:4000/ridelist`, {
+        fetch(`http://api.themepark.ga/ridelist`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -27,7 +28,7 @@ class ScanRides extends Component {
             .catch(err => console.log(err))
     }
     fetchRainOut(){
-        fetch(`http://157.230.172.23:4000/rainout`, {
+        fetch(`http://api.themepark.ga/rainout`, {
             method: "GET",
         })
             .then(res => res.json())
@@ -40,7 +41,7 @@ class ScanRides extends Component {
     }
 
     scanTicket = _ => {
-        fetch(`http://157.230.172.23:4000/ridescan`,{
+        fetch(`http://api.themepark.ga/ridescan`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -85,7 +86,7 @@ class ScanRides extends Component {
             <header className="header5">
                 <TopBar/>
                 <div style={{textAlign: "center", paddingTop: 100}}>
-                <h2 style={{color: 'white'}}>Scan Tickets for Rides</h2>
+                <h2 style={{color: 'white'}} className="scantitles">Scan Tickets for Rides</h2>
                 </div>
                 <Paper style={{margin: 'auto', width: '400px'}}>
                 <div style={{textAlign: "center", paddingTop: '50px', paddingBottom: '50px'}}>
