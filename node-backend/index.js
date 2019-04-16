@@ -702,9 +702,9 @@ app.post('/removefrommenu', (req, res, next) =>{
 
 app.get("/ridemaintenancebetween", (req, res, next) =>{
   const {to, from, rideid} = req.body;
-  const Qcommand = `Select * from maintenance_order WHERE 1 = 1`;
+  const Qcommand = `Select * from maintenancebyride WHERE 1 = 1`;
   if(rideid !== 'all'){
-    Qcommand += ` AND Rides_ID = '${rideid}'`;
+    Qcommand += ` AND RideID = '${rideid}'`;
   }
   if(to !== 'none')
   {
