@@ -700,6 +700,17 @@ app.post('/removefrommenu', (req, res, next) =>{
     })
 });
 
+app.get("/ridemaintenancebetween", (req, res, next) =>{
+  const {to, from, rideid} = req.body;
+  const Qcommand = `Select * from maintenance_order WHERE Rides_ID = ${rideid} AND RideCAST(DateCreated AS DATE) BETWEEN '${from}' AND '${to}'`
+  connection.query(Qcommand, (err, result) =>{
+    return res.json({
+      maintlist: result
+    });
+  });
+});
+
+
 app.listen(4000, () => {
   console.log(`Server listening on port 4000`);
 });
