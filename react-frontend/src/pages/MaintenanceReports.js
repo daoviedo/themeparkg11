@@ -26,8 +26,6 @@ class MaintenanceReports extends Component{
         {
             this.fetchmaintenance(this.state.toDate,this.state.fromDate, this.state.selectedRide)
         });
-        console.log([event.target.name], event.target.value)
-        console.log(this.state.selectedRide)
     }
     componentDidMount(){
         this.fetchrides();
@@ -47,26 +45,11 @@ class MaintenanceReports extends Component{
         if(this.state.toDate !== null)
         {
             tdate = t.getFullYear()+"-"+this.fixMonth(t)+"-"+this.fixDate(t);
-            console.log(tdate)
         }
         if(this.state.fromDate !== null)
         {
             fdate = f.getFullYear()+"-"+this.fixMonth(f)+"-"+this.fixDate(f);
-            console.log(fdate)
         }
-        let Qcommand = `Select * from maintenancebyride WHERE 1 = 1`;
-        if(id !== 'all'){
-          Qcommand += ` AND RideID = ${id}`;
-        }
-        if(tdate !== null)
-        {
-          Qcommand += ` AND CAST(DateCreated AS DATE) < '${tdate}'`
-        }
-        if(fdate !== null)
-        {
-          Qcommand += ` AND CAST(DateCreated AS DATE) > '${fdate}'`
-        }
-        console.log(Qcommand)
         fetch(`http://api.themepark.ga/ridemaintenancebetween`,{
             method: "POST",
             headers: {
@@ -80,7 +63,6 @@ class MaintenanceReports extends Component{
         })
         .then(res => res.json())
         .then(result => this.setState({ mList: result.maintlist }))
-        .then(() => console.log(this.state.mList))
         .catch(err => console.log(err))
     }
     fetchrides()
