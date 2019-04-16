@@ -177,7 +177,7 @@ class MaintenanceReports extends Component{
         else if (DateCompleted === null)
         {
             return(
-            <TableRow key={OrderID}>
+            <TableRow key={OrderID} style={{backgroundColor: "#ffdbdb"}}>
                 <TableCell>{RideName}</TableCell>
                 <TableCell align="right">{DateCreated.split(".")[0]}</TableCell>
                 <TableCell align="right">N/A</TableCell>
@@ -211,7 +211,6 @@ class MaintenanceReports extends Component{
            <TopBar/>
             <div style={{textAlign: "center", paddingTop: 50}}>
                 <h2>Maintenance History</h2>
-                <br/>
                 <Grid container spacing = {32} justify = "center" alignItems = "center">
                 <TextField select label="Ride" name="selectedRide" onChange={this.handleChange} value={this.state.selectedRide} style={{width: 200}}>
                 <MenuItem key = {0} value = {'all'}/>
