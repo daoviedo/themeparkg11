@@ -708,11 +708,11 @@ app.post("/ridemaintenancebetween", (req, res, next) =>{
   }
   if(to !== null)
   {
-    Qcommand += ` AND CAST(DateCreated AS DATE) < '${to}'`
+    Qcommand += ` AND CAST(DateCreated AS DATE) <= '${to}'`
   }
   if(from !== null)
   {
-    Qcommand += ` AND CAST(DateCreated AS DATE) > '${from}'`
+    Qcommand += ` AND CAST(DateCreated AS DATE) >= '${from}'`
   }
    connection.query(Qcommand, (err, result) =>{
     return res.json({
