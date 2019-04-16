@@ -111,7 +111,7 @@ class MaintenanceReports extends Component{
             <div>
            <TopBar/>
             <div style={{textAlign: "center", paddingTop: 50}}>
-                <h2>Maintenance Reporting</h2>
+                <h2>Maintenance History</h2>
                 <br/>
                 <Grid container spacing = {32} justify = "center" alignItems = "center">
                 <TextField select label="Ride" name="selectedRide" onChange={this.handleChange} value={this.state.selectedRide} style={{width: 200}}>
