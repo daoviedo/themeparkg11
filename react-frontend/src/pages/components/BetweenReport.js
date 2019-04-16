@@ -188,11 +188,11 @@ class BetweenReport extends Component {
               </TableRow>
             </TableHead>            
           </Table>
-          <div style={{maxHeight: '100vh', overflowY: 'auto'}}>
+          <div style={{maxHeight: '70vh', overflowY: 'auto'}}>
           <Table >
           <TableBody className={classes.table}>
             <TableRow>
-                <TableCell style={{fontSize: 17, fontWeight: 700}}>Ticket Report</TableCell>
+                <TableCell align="center" style={{fontSize: 17, fontWeight: 700, background: '#DCDCDC'}}>Ticket Report</TableCell>
               </TableRow>
           </TableBody>
           </Table>
@@ -210,7 +210,7 @@ class BetweenReport extends Component {
           <Table >
           <TableBody className={classes.table}>
             <TableRow>
-                <TableCell style={{fontSize: 17, fontWeight: 700}}>Ride Report</TableCell>
+                <TableCell align="center" style={{fontSize: 17, fontWeight: 700, background: '#DCDCDC'}}>Ride Report</TableCell>
               </TableRow>
           </TableBody>
           </Table>
@@ -228,7 +228,7 @@ class BetweenReport extends Component {
           <Table >
           <TableBody className={classes.table}>
             <TableRow>
-                <TableCell style={{fontSize: 17, fontWeight: 700}}>Maintenance Report</TableCell>
+                <TableCell align="center" style={{fontSize: 17, fontWeight: 700, background: '#DCDCDC'}}>Maintenance Report</TableCell>
               </TableRow>
           </TableBody>
           </Table>
@@ -246,7 +246,7 @@ class BetweenReport extends Component {
           <Table >
           <TableBody className={classes.table}>
             <TableRow>
-                <TableCell style={{fontSize: 17, fontWeight: 700}}>Rainout Report</TableCell>
+                <TableCell align="center" style={{fontSize: 17, fontWeight: 700, background: '#DCDCDC'}}>Rainout Report</TableCell>
               </TableRow>
           </TableBody>
           </Table>
