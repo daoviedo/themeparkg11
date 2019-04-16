@@ -196,7 +196,7 @@ class ManageStands extends Component{
                 <TopBar/>
                 <br/>
                 <div style={{textAlign: "center", margin: 'auto'}}>
-                    <h1 >Manage Concessions</h1>
+                    <h2 style={{color: 'Black'}} className="scantitles">Manage Concessions</h2>
                 <br/>
                 <Grid container spacing = {32} justify = "center">
                 <Grid item sm = {5}>
