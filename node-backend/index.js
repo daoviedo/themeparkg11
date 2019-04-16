@@ -700,7 +700,7 @@ app.post('/removefrommenu', (req, res, next) =>{
     })
 });
 
-app.get("/ridemaintenancebetween", (req, res, next) =>{
+app.post("/ridemaintenancebetween", (req, res, next) =>{
   const {to, from, rideid} = req.body;
   const Qcommand = `Select * from maintenancebyride WHERE 1 = 1`;
   if(rideid !== 'all'){
