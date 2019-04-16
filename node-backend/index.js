@@ -702,8 +702,19 @@ app.post('/removefrommenu', (req, res, next) =>{
 
 app.get("/ridemaintenancebetween", (req, res, next) =>{
   const {to, from, rideid} = req.body;
-  const Qcommand = `Select * from maintenance_order WHERE Rides_ID = ${rideid} AND RideCAST(DateCreated AS DATE) BETWEEN '${from}' AND '${to}'`
-  connection.query(Qcommand, (err, result) =>{
+  const Qcommand = `Select * from maintenance_order WHERE 1 = 1`;
+  if(rideid !== 'all'){
+    Qcommand += ` AND Rides_ID = '${rideid}'`;
+  }
+  if(to !== 'none')
+  {
+    Qcommand += ` AND CAST(DateCreated AS DATE) < '${to}'`
+  }
+  if(from !== 'none')
+  {
+    Qcommand += ` AND CAST(DateCreated AS DATE) > '${from}'`
+  }
+   connection.query(Qcommand, (err, result) =>{
     return res.json({
       maintlist: result
     });
