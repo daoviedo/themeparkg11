@@ -11,6 +11,7 @@ import AnalyticsLogo from '@material-ui/icons/Equalizer';
 import AssignLogo from '@material-ui/icons/Assignment';
 import FoodLogo from '@material-ui/icons/Fastfood';
 import NewRideLogo from '@material-ui/icons/AirlineSeatReclineNormal';
+import MainHist from '@material-ui/icons/AssignmentLate';
 
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, Divider, IconButton} from "@material-ui/core";
@@ -56,7 +57,7 @@ function UserBar(props) {
                     </Link>
                     <Link to="/maintenancereports" style={{ textDecoration: 'none' }}>
                         <ListItem button>
-                            <AssignLogo style={{ color: "#2A2A31" }}/>
+                            <MainHist style={{ color: "#2A2A31" }}/>
                             <ListItemText primary='Maintenance History' />
                         </ListItem>
                     </Link>
