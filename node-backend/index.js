@@ -702,15 +702,15 @@ app.post('/removefrommenu', (req, res, next) =>{
 
 app.post("/ridemaintenancebetween", (req, res, next) =>{
   const {to, from, rideid} = req.body;
-  const Qcommand = `Select * from maintenancebyride WHERE 1 = 1`;
+  let Qcommand = `Select * from maintenancebyride WHERE 1 = 1`;
   if(rideid !== 'all'){
     Qcommand += ` AND RideID = ${rideid}`;
   }
-  if(to !== 'none')
+  if(to !== null)
   {
     Qcommand += ` AND CAST(DateCreated AS DATE) < '${to}'`
   }
-  if(from !== 'none')
+  if(from !== null)
   {
     Qcommand += ` AND CAST(DateCreated AS DATE) > '${from}'`
   }
