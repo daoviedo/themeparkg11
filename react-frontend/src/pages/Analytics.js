@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
 import TopBar from './components/TopBar';
 import {TextField, MenuItem} from '@material-ui/core';
-import RideAnalytics from './RideAnalytics';
+//import RideAnalytics from './RideAnalytics';
 
 class Analytics extends Component {
     state = {
