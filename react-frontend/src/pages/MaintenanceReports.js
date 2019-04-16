@@ -1,17 +1,103 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import TopBar from './components/TopBar';
 import { DatePicker, MuiPickersUtilsProvider } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Grid from '@material-ui/core/Grid';
-import { TextField, MenuItem, Paper, Table, TableHead, TableRow, TableCell, TableBody} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import { withStyles } from '@material-ui/core/styles';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import { TextField, MenuItem, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, TablePagination} from '@material-ui/core';
 
+const actionsStyles = theme => ({
+    root: {
+      flexShrink: 0,
+      color: theme.palette.text.secondary,
+      marginLeft: theme.spacing.unit * 2.5,
+    },
+  });
+
+class TablePaginationActions extends React.Component {
+    handleFirstPageButtonClick = event => {
+      this.props.onChangePage(event, 0);
+    };
+  
+    handleBackButtonClick = event => {
+      this.props.onChangePage(event, this.props.page - 1);
+    };
+  
+    handleNextButtonClick = event => {
+      this.props.onChangePage(event, this.props.page + 1);
+    };
+  
+    handleLastPageButtonClick = event => {
+      this.props.onChangePage(
+        event,
+        Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1),
+      );
+    };
+  
+    render() {
+      const { classes, count, page, rowsPerPage, theme } = this.props;
+  
+      return (
+        <div className={classes.root}>
+          <IconButton
+            onClick={this.handleFirstPageButtonClick}
+            disabled={page === 0}
+            aria-label="First Page"
+          >
+            {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+          </IconButton>
+          <IconButton
+            onClick={this.handleBackButtonClick}
+            disabled={page === 0}
+            aria-label="Previous Page"
+          >
+            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+          </IconButton>
+          <IconButton
+            onClick={this.handleNextButtonClick}
+            disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+            aria-label="Next Page"
+          >
+            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+          </IconButton>
+          <IconButton
+            onClick={this.handleLastPageButtonClick}
+            disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+            aria-label="Last Page"
+          >
+            {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+          </IconButton>
+        </div>
+      );
+    }
+  }
+  TablePaginationActions.propTypes = {
+    classes: PropTypes.object.isRequired,
+    count: PropTypes.number.isRequired,
+    onChangePage: PropTypes.func.isRequired,
+    page: PropTypes.number.isRequired,
+    rowsPerPage: PropTypes.number.isRequired,
+    theme: PropTypes.object.isRequired,
+  };
+  
+  const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
+    TablePaginationActions,
+  );
 class MaintenanceReports extends Component{
     state={
         toDate: null,
         fromDate: null,
         rideList: [],
         mList: [],
-        selectedRide: "all"
+        selectedRide: "all",
+        page: 0,
+        rowsPerPage: 20,
     }
     fixDate(date){
         if(date.getDate() < 10){
@@ -102,11 +188,24 @@ class MaintenanceReports extends Component{
             )
         }
     }
+    clearDates=()=>{
+        this.setState({toDate: null, fromDate: null}, () => {
+            this.fetchmaintenance(this.state.toDate, this.state.fromDate, this.state.selectedRide)
+        })
+    }
     handleChangeDate= (name,event) => {
         this.setState({[name] : event}, () => {
             this.fetchmaintenance(this.state.toDate,this.state.fromDate, this.state.selectedRide)
     })}
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+      };
+    
+      handleChangeRowsPerPage = event => {
+        this.setState({ page: 0, rowsPerPage: event.target.value });
+      };
     render(){
+        const{mList, page, rowsPerPage} = this.state
         return(
             <div>
            <TopBar/>
@@ -139,25 +238,43 @@ class MaintenanceReports extends Component{
                   onChange={e => this.handleChangeDate("toDate",e)}
                   />
                 </MuiPickersUtilsProvider>
+                <Button variant = "outlined" onClick={this.clearDates}>Clear Dates</Button>
                 </Grid>
                 <br/>
                 <Paper style={{width:'90%', margin: 'auto'}}>
                     <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Ride Name</TableCell>
-                                <TableCell align = "right">Date Issued</TableCell>
-                                <TableCell align = "right">Date Completed</TableCell>
-                                <TableCell align = "right">Issued By</TableCell>
-                                <TableCell align = "right">Completed By</TableCell>
-                                <TableCell align = "right">Description</TableCell>
+                        <TableHead style={{backgroundColor: "#2F4F4F"}}>
+                            <TableRow style={{color: "white"}}>
+                                <TableCell style={{color: "white", fontSize: 15}}>Ride Name</TableCell>
+                                <TableCell style={{color: "white", fontSize: 15}} align = "right">Date Issued</TableCell>
+                                <TableCell style={{color: "white", fontSize: 15}} align = "right">Date Completed</TableCell>
+                                <TableCell style={{color: "white", fontSize: 15}} align = "right">Issued By</TableCell>
+                                <TableCell style={{color: "white", fontSize: 15}} align = "right">Completed By</TableCell>
+                                <TableCell style={{color: "white", fontSize: 15}} align = "right">Description</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.mList.map(this.renderlist)}
+                            {mList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(this.renderlist)}
                         </TableBody>
                     </Table>
+                    <TablePagination
+                    rowsPerPageOptions={[10, 20, 50]}
+                    component="div"
+                    count={this.state.mList.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                        'aria-label': 'Previous Page',
+                    }}
+                    nextIconButtonProps={{
+                        'aria-label': 'Next Page',
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActionsWrapped}
+                    />
                 </Paper>
+                <br/>
             </div>
             </div>
         )
