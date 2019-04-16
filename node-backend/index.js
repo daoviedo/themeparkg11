@@ -704,7 +704,7 @@ app.post("/ridemaintenancebetween", (req, res, next) =>{
   const {to, from, rideid} = req.body;
   const Qcommand = `Select * from maintenancebyride WHERE 1 = 1`;
   if(rideid !== 'all'){
-    Qcommand += ` AND RideID = '${rideid}'`;
+    Qcommand += ` AND RideID = ${rideid}`;
   }
   if(to !== 'none')
   {
