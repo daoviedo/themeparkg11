@@ -152,7 +152,6 @@ class Analytics extends Component {
                 <Legend />
                 <Bar dataKey="tickets_sold" fill="#2F4F4F"/>
             </BarChart>
-            <h2>Ride Analytics</h2>
                 </div>
             </React.Fragment>  
         );
