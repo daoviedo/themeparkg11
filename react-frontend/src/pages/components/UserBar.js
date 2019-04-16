@@ -51,7 +51,13 @@ function UserBar(props) {
                     <Link to="/maintenance" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <Warning style={{ color: "#2A2A31" }}/>
-                            <ListItemText primary='Maintenance' />
+                            <ListItemText primary='Park Maintenance' />
+                        </ListItem>
+                    </Link>
+                    <Link to="/maintenancereports" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <AssignLogo style={{ color: "#2A2A31" }}/>
+                            <ListItemText primary='Maintenance History' />
                         </ListItem>
                     </Link>
                     <Link to="/analytics" style={{ textDecoration: 'none' }}>
