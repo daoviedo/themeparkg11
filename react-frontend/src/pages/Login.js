@@ -52,9 +52,11 @@ class Login extends Component{
                 })
            }).then(res => res.json())
            .then(result => {
+               if(result.userID !== null && result.userID !== undefined){
                 this.getDepartmentID(result.userID);
                 localStorage.setItem('userID',result.userID);
                 this.setState({UserID: result.userID, output: result.status});
+           }
         })
            .catch(err => console.log(err))
            
