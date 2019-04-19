@@ -12,7 +12,7 @@ class Login extends Component{
           Password: "",
           output:"",
           departmentID: "",
-          depLoaded: false
+          depLoaded: false,
       };
       handleUserID = text =>{
           this.setState({ username: text.target.value });
@@ -33,6 +33,12 @@ class Login extends Component{
               }).then(res => res.json())
              .then(result => {
                 localStorage.setItem('departmentID',result.departmentID[0].DeptID);
+                if(this.state.UserID === result.departmentID[0].ManagerID){
+                    localStorage.setItem('isManager', true);
+                }
+                else{
+                    localStorage.setItem('isManager', false);
+                }
                 this.setState({departmentID: result.departmentID[0].DeptID, depLoaded: true});
                  
         })
