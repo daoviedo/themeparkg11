@@ -1,6 +1,7 @@
 # themeparkg11
 Open [http://www.themepark.ga](http://www.themepark.ga) to view it in the browser.
 
+## Login Accounts
 Admin/Manager Login<br>
 username:   jon0001<br>
 password:   pass<br>
@@ -16,9 +17,9 @@ password:   pass<br>
 Maintenance Employee<br>
 username:   Charly0037<br>
 password:   pass<br>
-<br>
+
 ## Created By
-Daniel Oviedo
-Ricardo Useche
-Nic Graves
+Daniel Oviedo<br>
+Ricardo Useche<br>
+Nic Graves<br>
 Kelsey Hedges
