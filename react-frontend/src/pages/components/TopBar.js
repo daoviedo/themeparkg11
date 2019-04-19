@@ -21,7 +21,6 @@ class TopBar extends Component {
 
     render() {
         const loggedIn = !(this.state.userID === null);
-        
         return (
             <React.Fragment>
                 <Navbar id="navHelper" variant="dark" expand="lg" style={{backgroundColor: "#2A2A31"}}>

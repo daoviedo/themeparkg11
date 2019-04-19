@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, Divider, IconButton} from "@material-ui/core";
 
 function UserBar(props) {
+    const isManager = props.isManager==='true';
     return (
         <React.Fragment>
         <IconButton onClick={props.openMenu} style={{textTransform: 'none', outline: 0, border: 'none', color: 'white', marginTop: -3}}>
@@ -73,12 +74,13 @@ function UserBar(props) {
                             <ListItemText primary='Reports' />
                         </ListItem>
                     </Link>
-                    <Link to="/department" style={{ textDecoration: 'none' }}>
+                    {isManager ? (<Link to="/department" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <Dept style={{ color: "#2A2A31" }}/>
                             <ListItemText primary='Department' />
                         </ListItem>
-                    </Link>
+                    </Link>):(<div/>)}
+                    
                 </List>
                 <Divider />
                 <List>
