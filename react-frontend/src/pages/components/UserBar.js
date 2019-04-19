@@ -17,7 +17,9 @@ import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, Divider, IconButton} from "@material-ui/core";
 
 function UserBar(props) {
-    const isManager = props.isManager==='true';
+    const isManager = props.isManager ==='true';
+    const depID = props.depID;
+    console.log(depID)
     return (
         <React.Fragment>
         <IconButton onClick={props.openMenu} style={{textTransform: 'none', outline: 0, border: 'none', color: 'white', marginTop: -3}}>
@@ -34,7 +36,7 @@ function UserBar(props) {
                     </Link>
                 </List>
                 <Divider />
-                <List>
+                {depID === '0001' || isManager ? (<List>
                     <Link to="/entrance-scan" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <EntLogo style={{ color: "#2A2A31" }}/>
@@ -47,9 +49,10 @@ function UserBar(props) {
                             <ListItemText primary='Ride Ticken Scan' />
                         </ListItem>
                     </Link>
-                </List>
                 <Divider />
-                <List>
+                </List>) : (<div/>)}
+
+                {depID === '0003' || isManager ? (<List>
                     <Link to="/maintenance" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <Warning style={{ color: "#2A2A31" }}/>
@@ -62,6 +65,10 @@ function UserBar(props) {
                             <ListItemText primary='Maintenance History' />
                         </ListItem>
                     </Link>
+                    <Divider/>
+                </List>) : (<div/>) }
+                
+                {isManager ? (<List>
                     <Link to="/analytics" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <AnalyticsLogo style={{ color: "#2A2A31" }}/>
@@ -80,10 +87,10 @@ function UserBar(props) {
                             <ListItemText primary='Department' />
                         </ListItem>
                     </Link>):(<div/>)}
-                    
-                </List>
                 <Divider />
-                <List>
+                </List>) : (<div/>)}
+                
+                {depID === '0002' || isManager ? (<List>
                     <Link to="/manage-stands" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <FoodLogo style={{ color: "#2A2A31" }}/>
@@ -96,8 +103,9 @@ function UserBar(props) {
                             <ListItemText primary='Create Ride' />
                         </ListItem>
                     </Link>
-                </List>
                 <Divider />
+                </List>) : (<div/>)}
+                
                 <List>
                 <Link to="/AccountSettings" style={{ textDecoration: 'none' }}>
                         <ListItem button>
