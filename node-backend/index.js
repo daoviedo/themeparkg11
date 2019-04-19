@@ -51,7 +51,7 @@ app.post("/getEmployeeInfo", (req, res, next) => {
 
 app.post("/getDepartmentID", (req, res, next) => {
   const { userID } = req.body;
-  const command = `SELECT dID FROM department_employee WHERE eID=${userID}`;
+  const command = `SELECT DeptID,ManagerID FROM deptEmployeeInfo WHERE EmployeeID=${userID}`;
   connection.query(command, (err, result) => {
     return res.json({
       departmentID: result
