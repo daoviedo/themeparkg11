@@ -2,7 +2,7 @@
 Open [http://www.themepark.ga](http://www.themepark.ga) to view it in the browser.
 
 ## Project/File Details
-All front-end files were made with react, html, css and can be found in the /react-frontend/src folder<br>
+All front-end files were made with react, html, css and can be found in the [/react-frontend/src] folder<br>
 MySQL connection and Queries can all be found on the Rest API in the /node-backend/index.js file<br>
 
 ## Login Accounts
